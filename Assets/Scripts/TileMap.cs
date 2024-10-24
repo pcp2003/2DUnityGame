@@ -8,18 +8,21 @@ public class TerrainGenerator2D : MonoBehaviour
     public TileBase[] waterTiles;     // Water tile + Water and rocks
     public TileBase[] grassTiles;     // Simple grass tiles
     public TileBase[] grassWithWater; // Parts of land next to the sea or lakes
+    public TileBase[] treeTiles;      // Tree tiles
+    public TileBase[] bushesAndRocksTiles; // Bush + Rock tiles
     public int size = 100;            // Tamanho do TileMap
     public float noiseScale = 0.1f;   // Escala do Perlin Noise
     public float waterLevel = 0.4f;   // Nível da água
     public int seed = 0;              // Seed do mapa gerado 
-
+    public float treeSpawnChance;     // Chance to spawn a tree
+    public float bushesAndRocksSpawnChance; // Chance to spawn rocks and bushes
     Cell[,] grid;                     // Grid
 
     void Start()
     {
         UnityEngine.Random.InitState(seed);  // Inicializa o gerador com a seed
 
-        float[,] noiseMap = GenerateNoiseMap();
+        float[,] noiseMap = GenerateNoiseMap(noiseScale);
         float[,] falloffMap = GenerateFalloffmap();
 
         GenerateGrid(noiseMap, falloffMap);
@@ -43,9 +46,17 @@ public class TerrainGenerator2D : MonoBehaviour
 
                     tilemap.SetTile(new Vector3Int(x, y, 0), SelectTile(x,y,countAdjWater));
 
+                    GenerateAssetsOnTerrain(x,y,treeSpawnChance,treeTiles);
+
+                    GenerateAssetsOnTerrain(x,y,bushesAndRocksSpawnChance,bushesAndRocksTiles);
                 }
             }
         }
+    }
+
+    void GenerateAssetsOnTerrain (int x, int y, float spawnChance, TileBase[] tiles){
+        float randomValue = UnityEngine.Random.Range(0f, 1f);
+        if (randomValue <= spawnChance ) tilemap.SetTile(new Vector3Int(x,y,1), tiles[UnityEngine.Random.Range(0, tiles.Length)]);
     }
 
     int CountAdjacentWater(int x, int y)
@@ -129,7 +140,7 @@ public class TerrainGenerator2D : MonoBehaviour
         return x >= 0 && x < size && y >= 0 && y < size;
     }
 
-    float[,] GenerateNoiseMap()
+    float[,] GenerateNoiseMap(float noiseScale)
     {
         float[,] noiseMap = new float[size, size];
         (float xOffset, float yOffset) = (UnityEngine.Random.Range(-10000f, 10000f), UnityEngine.Random.Range(-10000f, 10000f));

@@ -843,10 +843,17 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b434c6b7edc1a2c46acc421913d675b9, type: 2}
   - {fileID: 11400000, guid: eaf73818dcdeab647a82cf02c790fff3, type: 2}
   - {fileID: 11400000, guid: 993a92fef57cab944b02f10f0c8c836a, type: 2}
+  treeTiles:
+  - {fileID: 0}
+  bushesAndRocksTiles:
+  - {fileID: 11400000, guid: 8df182136b8305d4199030c0941af99f, type: 2}
+  - {fileID: 11400000, guid: c0258b0958f2f5a40bace7f5fcf4840d, type: 2}
   size: 100
   noiseScale: 0.05
   waterLevel: 0.2
   seed: 1
+  treeSpawnChance: 0.05
+  bushesAndRocksSpawnChance: 0.05
 --- !u!483693784 &1916435128
 TilemapRenderer:
   m_ObjectHideFlags: 0
