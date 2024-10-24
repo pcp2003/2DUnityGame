@@ -250,7 +250,7 @@ Transform:
   m_GameObject: {fileID: 238399096}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 50, y: 50, z: -167}
+  m_LocalPosition: {x: 50, y: 50, z: -70}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -569,8 +569,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tilemap: {fileID: 1916435129}
-  waterTile: {fileID: 11400000, guid: 53cac22257e2b5d4a9024fe61e04ce47, type: 2}
-  landTile: {fileID: 11400000, guid: fdc9b846a1ab17344bb05d55bbafa3f8, type: 2}
+  waterTiles:
+  - {fileID: 11400000, guid: 51a04e635ba857143bd9b2ccf1be77ac, type: 2}
+  - {fileID: 11400000, guid: 278ad9c55ef6e5448baa37403e211e21, type: 2}
+  - {fileID: 11400000, guid: 48a0bfac37caebd4a9617c2025b3d413, type: 2}
+  - {fileID: 11400000, guid: beee5010e1a973140a016ed9528ba8ae, type: 2}
+  - {fileID: 11400000, guid: 7a24eb5af1aa7a44da74266461cce145, type: 2}
+  - {fileID: 11400000, guid: 2efb996f87fee7940949f8e95e1598a3, type: 2}
+  - {fileID: 11400000, guid: ae701865ff7fe0c47b634bada3c8a224, type: 2}
+  - {fileID: 11400000, guid: 7d57962785435f54891c68ebce00ebcb, type: 2}
+  - {fileID: 11400000, guid: 97540dcd00516c241bb39fede5a5bd47, type: 2}
+  - {fileID: 11400000, guid: e42e460b5f0381346ab5827ff500d249, type: 2}
+  grassTiles:
+  - {fileID: 11400000, guid: fdc9b846a1ab17344bb05d55bbafa3f8, type: 2}
+  - {fileID: 11400000, guid: 8d90b831c0b1c6b4593b1f02e349eaf6, type: 2}
+  - {fileID: 11400000, guid: 8ab88c518d463504cb2b8810d4d11a5a, type: 2}
+  - {fileID: 11400000, guid: af2a3a28bf8addf4b8620c0546831d50, type: 2}
   size: 100
   noiseScale: 0.05
   waterLevel: 0.2
