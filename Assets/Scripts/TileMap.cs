@@ -62,10 +62,15 @@ public class TerrainGenerator2D : MonoBehaviour
 
     TileBase SelectTile(int x, int y, int waterCount)
     {
-        bool up = grid[x, y + 1].isWater;
-        bool down = grid[x, y - 1].isWater;
-        bool left = grid[x - 1, y].isWater;
-        bool right = grid[x + 1, y].isWater;
+        bool up = IsWithinBounds(x, y + 1);
+        bool down = IsWithinBounds(x, y - 1); 
+        bool left = IsWithinBounds(x - 1, y);
+        bool right = IsWithinBounds(x + 1, y);
+
+        if (up) up = grid[x, y + 1].isWater;
+        if (down) down = grid[x, y - 1].isWater;
+        if (left) left = grid[x - 1, y].isWater;
+        if (right) right = grid[x + 1, y].isWater;
 
         if (waterCount == 4) return grassWithWater[25];
 
@@ -103,8 +108,25 @@ public class TerrainGenerator2D : MonoBehaviour
             else if (right) return grassWithWater[UnityEngine.Random.Range(6, 8)];
         }
 
+        if (IsWithinBounds(x - 1, y + 1)) 
+            if (grid[x - 1, y + 1].isWater) return grassWithWater[26];
+
+        else if (IsWithinBounds(x + 1, y + 1))
+            if (grid[x + 1, y + 1].isWater) return grassWithWater[27];
+
+        else if (IsWithinBounds(x + 1, y - 1))
+            if (grid[x + 1, y - 1].isWater) return grassWithWater[28];
+
+        else if (IsWithinBounds(x - 1, y - 1))
+            if (grid[x - 1, y - 1].isWater) return grassWithWater[29];
+            
         return grassTiles[UnityEngine.Random.Range(0, grassTiles.Length)];
 
+    }
+
+    bool IsWithinBounds(int x, int y)
+    {
+        return x >= 0 && x < size && y >= 0 && y < size;
     }
 
     float[,] GenerateNoiseMap()

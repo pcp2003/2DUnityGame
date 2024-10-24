@@ -387,7 +387,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 50, y: 50, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -534,6 +534,7 @@ GameObject:
   - component: {fileID: 1916435129}
   - component: {fileID: 1916435128}
   - component: {fileID: 1916435127}
+  - component: {fileID: 1916435130}
   m_Layer: 0
   m_Name: TileMap
   m_TagString: Untagged
@@ -585,6 +586,37 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8d90b831c0b1c6b4593b1f02e349eaf6, type: 2}
   - {fileID: 11400000, guid: 8ab88c518d463504cb2b8810d4d11a5a, type: 2}
   - {fileID: 11400000, guid: af2a3a28bf8addf4b8620c0546831d50, type: 2}
+  grassWithWater:
+  - {fileID: 11400000, guid: 90850d720623a87468693f01505f2a57, type: 2}
+  - {fileID: 11400000, guid: 88554a010145c04458594e26d9dcd51d, type: 2}
+  - {fileID: 11400000, guid: 677fe99ed52611b42850335af74319ab, type: 2}
+  - {fileID: 11400000, guid: e4bf0796062fd4f44ae6d6755a3aeadf, type: 2}
+  - {fileID: 11400000, guid: 43c050b868559de4a9d77e9c65832d32, type: 2}
+  - {fileID: 11400000, guid: eaeebc5f4b9dec948960e44987ec485e, type: 2}
+  - {fileID: 11400000, guid: 63fcb90a987b0d64d81ccf79b06d383a, type: 2}
+  - {fileID: 11400000, guid: 5775931222f9a874d94e3c3b17fd1b64, type: 2}
+  - {fileID: 11400000, guid: 8fb1d5cc0ee4b2d44ab8490cfc0b6da4, type: 2}
+  - {fileID: 11400000, guid: fa95a35871835b24490edc7bf8dfa0b7, type: 2}
+  - {fileID: 11400000, guid: 3c3a27ba3be9b5e4f93abed79322b763, type: 2}
+  - {fileID: 11400000, guid: f93b0d35caafc864296a67ec3ee5b63e, type: 2}
+  - {fileID: 11400000, guid: e02059e4b529a8c4ca06ac0f034d2da3, type: 2}
+  - {fileID: 11400000, guid: 17cd2512a400f4a42a4afec0f5522194, type: 2}
+  - {fileID: 11400000, guid: cc139c7569c1696449fd18855ff5e49a, type: 2}
+  - {fileID: 11400000, guid: a18a5ad104041bd459137d3ebf923018, type: 2}
+  - {fileID: 11400000, guid: aa6298aceb13be949806f5a874cdb9a7, type: 2}
+  - {fileID: 11400000, guid: 9a9aaccb1ddc42548bd304b1abb16eea, type: 2}
+  - {fileID: 11400000, guid: 62de15fbca6390842b664005ad3eadda, type: 2}
+  - {fileID: 11400000, guid: 49775e0d771d49f4da4ee8bfdaba617e, type: 2}
+  - {fileID: 11400000, guid: cf6f1cf9e7832e34b95ced0f9937a060, type: 2}
+  - {fileID: 11400000, guid: 5caf32ca0d1e31b468c04068ad040a0d, type: 2}
+  - {fileID: 11400000, guid: ac2400397bdbe5e4a9b0147e4e740ac1, type: 2}
+  - {fileID: 11400000, guid: 651c7a1efa09d394bb81b249ea009a0b, type: 2}
+  - {fileID: 11400000, guid: 5caf32ca0d1e31b468c04068ad040a0d, type: 2}
+  - {fileID: 11400000, guid: ddf830a0d626dba4d9630f7c3bf22c32, type: 2}
+  - {fileID: 11400000, guid: 6cf9179b5a32d324ab3a1c756556a2c9, type: 2}
+  - {fileID: 11400000, guid: b434c6b7edc1a2c46acc421913d675b9, type: 2}
+  - {fileID: 11400000, guid: eaf73818dcdeab647a82cf02c790fff3, type: 2}
+  - {fileID: 11400000, guid: 993a92fef57cab944b02f10f0c8c836a, type: 2}
   size: 100
   noiseScale: 0.05
   waterLevel: 0.2
@@ -703,6 +735,44 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!19719996 &1916435130
+TilemapCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1916435125}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_MaximumTileChangeCount: 1000
+  m_ExtrusionFactor: 0
+  m_UseDelaunayMesh: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
