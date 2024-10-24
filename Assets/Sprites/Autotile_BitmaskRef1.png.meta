@@ -160,7 +160,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Autotile_BitmaskRef1_0: -807114270192370549
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

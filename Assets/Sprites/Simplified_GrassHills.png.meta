@@ -360,7 +360,16 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Simplified_GrassHills_0: 8533445824972092519
+      Simplified_GrassHills_1: 8643881107243144863
+      Simplified_GrassHills_2: -966985784526550464
+      Simplified_GrassHills_3: -2394543733262552593
+      Simplified_GrassHills_4: 3041285448422407830
+      Simplified_GrassHills_5: 5020625652882651059
+      Simplified_GrassHills_6: -1312231302400055886
+      Simplified_GrassHills_7: 723566124391627014
+      Simplified_GrassHills_8: -2081281304298227154
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
