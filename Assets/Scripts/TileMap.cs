@@ -11,7 +11,7 @@ public class TerrainGenerator2D : MonoBehaviour
     public TileBase[] waterTiles;               // Conjunto de tiles para água
     public TileBase[] grassTiles;               // Conjunto de tiles para grama
     public TileBase[] grassWithWater;           // Tiles de borda de grama próxima à água
-    public TileBase[] treeTiles;                // Tiles de árvores
+    public GameObject[] treeObjects;                // Tiles de árvores
     public TileBase[] bushesAndRocksTiles;      // Tiles de arbustos e pedras
     public int size = 100;                      // Tamanho do mapa
     public float noiseScale = 0.1f;             // Escala do Perlin Noise para geração do terreno
@@ -70,7 +70,7 @@ public class TerrainGenerator2D : MonoBehaviour
 
     
 
-    // Gera ativos como árvores, arbustos ou pedras no layer especificado
+    // Gera ativos como arbustos ou pedras no layer especificado
     void GenerateObjectOnLayerSpecified(int x, int y, float density, TileBase[] tiles)
     {
         float randomValue = UnityEngine.Random.Range(0f, 1f);
@@ -89,7 +89,8 @@ public class TerrainGenerator2D : MonoBehaviour
         for (int x = 0; x != size; x++){
             for (int y = 0; y != size; y++){
                 if (!grid[x,y].isOccupied && !grid[x,y].isWater && noiseMap[x,y] < UnityEngine.Random.Range(0f, treeDensity)){
-                    tilemap.SetTile(new Vector3Int(x,y,1), treeTiles[UnityEngine.Random.Range(0, treeTiles.Length)]);
+                    GameObject newTree = Instantiate(treeObjects[UnityEngine.Random.Range(0, treeObjects.Length)], new Vector3Int(x,y,1), new Quaternion());
+                    newTree.transform.localScale = Vector3.one * UnityEngine.Random.Range(.8f, 1.2f);
                     grid[x,y].setIsOccupied(true);
                 }
             }
