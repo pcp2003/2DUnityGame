@@ -129,7 +129,6 @@ GameObject:
   m_Component:
   - component: {fileID: 238399100}
   - component: {fileID: 238399099}
-  - component: {fileID: 238399098}
   - component: {fileID: 238399097}
   m_Layer: 0
   m_Name: MapCamera
@@ -137,7 +136,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &238399097
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -182,14 +181,6 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
---- !u!81 &238399098
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 238399096}
-  m_Enabled: 1
 --- !u!20 &238399099
 Camera:
   m_ObjectHideFlags: 0
@@ -268,13 +259,14 @@ GameObject:
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
   - component: {fileID: 519420030}
+  - component: {fileID: 519420033}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!81 &519420029
 AudioListener:
   m_ObjectHideFlags: 0
@@ -393,6 +385,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &519420033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7fba7246e596eb43a88baf6afc00b8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 952620473}
+  smoothSpeed: 0.125
+  offset: {x: 0, y: 0, z: -10}
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -510,7 +517,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 5
-  speed: 10
+  speed: 5
   MoveAction:
     m_Name: Move
     m_Type: 0
@@ -625,7 +632,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 50, y: 50, z: 0}
-  m_LocalScale: {x: 0.68096656, y: 0.68096656, z: 0.68096656}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -666,7 +673,7 @@ BoxCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: -2.7088995}
   m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
+    border: {x: 0, y: 0, z: 1.11, w: 2.24}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 6.07, y: 8.11}
     newSize: {x: 6.07, y: 8.11}
@@ -844,7 +851,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: eaf73818dcdeab647a82cf02c790fff3, type: 2}
   - {fileID: 11400000, guid: 993a92fef57cab944b02f10f0c8c836a, type: 2}
   treeTiles:
-  - {fileID: 0}
+  - {fileID: 11400000, guid: f083af83e0ea3134d9cda37f22f4c49f, type: 2}
+  - {fileID: 11400000, guid: fae1199b0ce9f9c43be4edd573cabf88, type: 2}
   bushesAndRocksTiles:
   - {fileID: 11400000, guid: 8df182136b8305d4199030c0941af99f, type: 2}
   - {fileID: 11400000, guid: c0258b0958f2f5a40bace7f5fcf4840d, type: 2}
@@ -852,8 +860,10 @@ MonoBehaviour:
   noiseScale: 0.05
   waterLevel: 0.2
   seed: 1
-  treeSpawnChance: 0.05
-  bushesAndRocksSpawnChance: 0.05
+  treeNoiseScale: 0.8
+  treeDensity: 0.1
+  bushesAndRocksDensity: 0.01
+  rocksInWaterDensity: 0.02
 --- !u!483693784 &1916435128
 TilemapRenderer:
   m_ObjectHideFlags: 0
@@ -919,36 +929,58 @@ Tilemap:
   m_TileAssetArray:
   - m_RefCount: 0
     m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   m_TileSpriteArray:
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
   m_TileMatrixArray:
   - m_RefCount: 0
     m_Data:
-      e00: 7.2343096e-33
+      e00: 6.56249e+17
+      e01: 4.9e-44
+      e02: -2.4809283e-14
+      e03: 0
+      e10: 2.44e-43
+      e11: 6.9e-44
+      e12: 4.5911e-41
+      e13: 0
+      e20: 6.2481e-41
+      e21: 0
+      e22: 6.562479e+17
+      e23: 0
+      e30: 0
+      e31: 7.34684e-40
+      e32: 2.44e-43
+      e33: 1
+  - m_RefCount: 0
+    m_Data:
+      e00: 3.6232e-41
       e01: 0
       e02: 1e-45
-      e03: 2.0328811e-19
-      e10: 4.5912e-41
+      e03: -3.7500038
+      e10: 1e-45
       e11: 0
       e12: 0
-      e13: 6.47e-43
-      e20: 6.9556e-33
-      e21: 2.0328811e-19
-      e22: -0.040629268
-      e23: -2.4096696e-27
-      e30: 4.5912e-41
-      e31: 6.47e-43
-      e32: 6.47e-43
-      e33: 6.47e-43
+      e13: 9.6e-43
+      e20: -2.4809283e-14
+      e21: -3.7500038
+      e22: 2.612914e-29
+      e23: 8.350878e-18
+      e30: 4.5911e-41
+      e31: 9.6e-43
+      e32: 9.64e-43
+      e33: 9.61e-43
   m_TileColorArray:
   - m_RefCount: 0
-    m_Data: {r: -2.409662e-27, g: -2.409662e-27, b: -2.409662e-27, a: -2.409662e-27}
+    m_Data: {r: 6.2481e-41, g: 6.2481e-41, b: 6.2481e-41, a: 6.2481e-41}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Origin: {x: 0, y: 0, z: 0}
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 39, y: 54, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
   m_TileOrientation: 0
   m_TileOrientationMatrix:
