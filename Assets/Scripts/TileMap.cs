@@ -69,7 +69,7 @@ public class TerrainGenerator2D : MonoBehaviour
                         
                     }
 
-                    // Gera pedra e arbustos.
+                    // Gera pedra e arbustos em locais que não sejam borda do mapa.
                     if (countAdjWater == 0 )
                         GenerateObjectOnLayerSpecified(x,y, bushesAndRocksDensity, bushesAndRocks);
 
@@ -94,6 +94,11 @@ public class TerrainGenerator2D : MonoBehaviour
             // Definindo uma escala aleatória para o tamanho de x e y entre 1 e 5
             float randomScale = UnityEngine.Random.Range(1f, 3f);
             prefab.transform.localScale = new Vector3(randomScale, randomScale, prefab.transform.localScale.z);
+
+            if(!(prefab.name == "Bush")) {
+                BoxCollider2D prefabCollider = prefab.GetComponent<BoxCollider2D>();
+                prefabCollider.size = new Vector2(randomScale*0.12f, randomScale*0.12f);
+            }
 
             grid[x,y].setIsOccupied(true);
 
