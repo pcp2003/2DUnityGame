@@ -11,8 +11,8 @@ public class TerrainGenerator2D : MonoBehaviour
     public TileBase[] waterTiles;               // Conjunto de tiles para água
     public TileBase[] grassTiles;               // Conjunto de tiles para grama
     public TileBase[] grassWithWater;           // Tiles de borda de grama próxima à água
-    public GameObject[] treeObjects;                // Tiles de árvores
-    public TileBase[] bushesAndRocksTiles;      // Tiles de arbustos e pedras
+    public GameObject[] treePrefabs;            // Prefab de árvores
+    public GameObject[] bushesAndRocks;      // Tiles de arbustos e pedras
     public int size = 100;                      // Tamanho do mapa
     public float noiseScale = 0.1f;             // Escala do Perlin Noise para geração do terreno
     public float waterLevel = 0.4f;             // Nível de água
@@ -21,6 +21,7 @@ public class TerrainGenerator2D : MonoBehaviour
     public float treeDensity = .5f;             // Densidade de árvores
     public float bushesAndRocksDensity = 0.01f; // Chance de gerar pedras e arbustos
     public float rocksInWaterDensity = 0.02f;   // Chance de gerar pedras na água
+    
 
     Cell[,] grid;                               // Matriz para representar o terreno e características de cada célula
 
@@ -41,7 +42,11 @@ public class TerrainGenerator2D : MonoBehaviour
             for (int x = 0; x < size; x++)
             {
                 float noiseValue = noiseMap[x, y] - falloffMap[x, y];
-                grid[x, y] = new Cell(noiseValue < waterLevel, false);
+
+                // isOcuppied não permite a geração de texturas em terrenos a volta da agua
+                bool isOcuppied = noiseValue < waterLevel + 0.1f;
+
+                grid[x, y] = new Cell(noiseValue < waterLevel, isOcuppied);
             }
         }
     }
@@ -60,9 +65,14 @@ public class TerrainGenerator2D : MonoBehaviour
                 {
                     int countAdjWater = CountAdjacentWater(x, y); // Conta tiles adjacentes de água
                     tilemap.SetTile(new Vector3Int(x, y, 0), SelectTile(x, y, countAdjWater)); // Define tiles de grama ou borda
+                    {
+                        
+                    }
 
                     // Gera pedra e arbustos.
-                    GenerateObjectOnLayerSpecified(x,y, bushesAndRocksDensity, bushesAndRocksTiles);
+                    if (countAdjWater == 0 )
+                        GenerateObjectOnLayerSpecified(x,y, bushesAndRocksDensity, bushesAndRocks);
+
                 }
             }
         }
@@ -71,31 +81,51 @@ public class TerrainGenerator2D : MonoBehaviour
     
 
     // Gera ativos como arbustos ou pedras no layer especificado
-    void GenerateObjectOnLayerSpecified(int x, int y, float density, TileBase[] tiles)
+    void GenerateObjectOnLayerSpecified(int x, int y, float density, GameObject[] prefabs)
     {
         float randomValue = UnityEngine.Random.Range(0f, 1f);
 
-        if (randomValue < density && !grid[x,y].isOccupied)
+        if (randomValue < density && !grid[x,y].isOccupied){
         
-            tilemap.SetTile(new Vector3Int(x, y, 1), tiles[UnityEngine.Random.Range(0, tiles.Length)]);
+            GameObject prefab = prefabs[UnityEngine.Random.Range(0, prefabs.Length)];
+            Instantiate(prefab, transform);
+            prefab.transform.position = new Vector3(x, y, 0) + new Vector3(0.5f, 0.5f, 0);
+
+            // Definindo uma escala aleatória para o tamanho de x e y entre 1 e 5
+            float randomScale = UnityEngine.Random.Range(1f, 3f);
+            prefab.transform.localScale = new Vector3(randomScale, randomScale, prefab.transform.localScale.z);
+
+            grid[x,y].setIsOccupied(true);
+
+        }
         
     }
 
     // Gera árvores a partir de um parâmetro treeNoiseScale e um parâmetro treeDensity
-    void GenerateTrees (float treeNoiseScale, float treeDensity) {
-        
-        float [,] noiseMap = GenerateNoiseMap(treeNoiseScale);
+    void GenerateTrees(float treeNoiseScale, float treeDensity) {
 
-        for (int x = 0; x != size; x++){
-            for (int y = 0; y != size; y++){
-                if (!grid[x,y].isOccupied && !grid[x,y].isWater && noiseMap[x,y] < UnityEngine.Random.Range(0f, treeDensity)){
-                    GameObject newTree = Instantiate(treeObjects[UnityEngine.Random.Range(0, treeObjects.Length)], new Vector3Int(x,y,1), new Quaternion());
-                    newTree.transform.localScale = Vector3.one * UnityEngine.Random.Range(.8f, 1.2f);
-                    grid[x,y].setIsOccupied(true);
+        float[,] noiseMap = GenerateNoiseMap(treeNoiseScale);
+
+        for (int x = 0; x != size; x++) {
+            for (int y = 0; y != size; y++) {
+                if (!grid[x, y].isOccupied && !grid[x, y].isWater && noiseMap[x, y] < UnityEngine.Random.Range(0f, treeDensity)) {
+
+                    GameObject prefab = treePrefabs[UnityEngine.Random.Range(0, treePrefabs.Length)];
+                    GameObject tree = Instantiate(prefab, transform);
+                    
+                    // Ajuste da posição para o centro do tile
+                    tree.transform.position = new Vector3(x, y, 0) + new Vector3(0.5f, 0.5f, 0);
+
+                    // Definindo uma escala aleatória para o tamanho de x e y entre 1 e 5
+                    float randomScale = UnityEngine.Random.Range(3f, 6f);
+                    tree.transform.localScale = new Vector3(randomScale, randomScale, tree.transform.localScale.z);
+
+                    grid[x, y].setIsOccupied(true);
                 }
             }
         }
     }
+
 
     // Gera um mapa de ruído usando Perlin Noise
     float[,] GenerateNoiseMap(float noiseScale)
