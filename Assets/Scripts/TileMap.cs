@@ -1,4 +1,5 @@
 using System;
+using Unity.Burst.Intrinsics;
 using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
@@ -91,13 +92,20 @@ public class TerrainGenerator2D : MonoBehaviour
             Instantiate(prefab, transform);
             prefab.transform.position = new Vector3(x, y, 0) + new Vector3(0.5f, 0.5f, 0);
 
+                                // Ajusta o BoxCollider2D relativo ao tamanho da árvore
+            BoxCollider2D prefabCollider = prefab.GetComponent<BoxCollider2D>();
+
+            Vector2 originalSize = new Vector2(0,0);
+
+            if (prefabCollider != null)
+                originalSize = prefabCollider.size; // Obtém o tamanho original do collider
+
             // Definindo uma escala aleatória para o tamanho de x e y entre 1 e 5
             float randomScale = UnityEngine.Random.Range(1f, 3f);
             prefab.transform.localScale = new Vector3(randomScale, randomScale, prefab.transform.localScale.z);
 
             if(!(prefab.name == "Bush")) {
-                BoxCollider2D prefabCollider = prefab.GetComponent<BoxCollider2D>();
-                prefabCollider.size = new Vector2(randomScale*0.12f, randomScale*0.12f);
+                prefabCollider.size = new Vector2(originalSize.x, originalSize.y);
             }
 
             grid[x,y].setIsOccupied(true);
@@ -117,6 +125,12 @@ public class TerrainGenerator2D : MonoBehaviour
 
                     GameObject prefab = treePrefabs[UnityEngine.Random.Range(0, treePrefabs.Length)];
                     GameObject tree = Instantiate(prefab, transform);
+
+                    // Ajusta o BoxCollider2D relativo ao tamanho da árvore
+                    BoxCollider2D collider = tree.GetComponent<BoxCollider2D>();
+
+                    // Ajusta o tamanho do collider baseado na escala da árvore
+                    Vector2 originalSize = collider.size; // Obtém o tamanho original do collider
                     
                     // Ajuste da posição para o centro do tile
                     tree.transform.position = new Vector3(x, y, 0) + new Vector3(0.5f, 0.5f, 0);
@@ -124,6 +138,12 @@ public class TerrainGenerator2D : MonoBehaviour
                     // Definindo uma escala aleatória para o tamanho de x e y entre 1 e 5
                     float randomScale = UnityEngine.Random.Range(3f, 6f);
                     tree.transform.localScale = new Vector3(randomScale, randomScale, tree.transform.localScale.z);
+
+                    collider.size = new Vector2(originalSize.x, originalSize.y);
+
+                    // Ajusta o offset do collider para acompanhar o centro do tile
+                    collider.offset = new Vector2(0, collider.size.y / 2f);
+                
 
                     grid[x, y].setIsOccupied(true);
                 }
