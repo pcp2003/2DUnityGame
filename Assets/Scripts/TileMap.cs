@@ -25,6 +25,7 @@ public class TerrainGenerator2D : MonoBehaviour
     
 
     Cell[,] grid;                               // Matriz para representar o terreno e características de cada célula
+    
 
     void Start()
     {
