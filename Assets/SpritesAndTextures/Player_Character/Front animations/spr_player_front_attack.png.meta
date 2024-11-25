@@ -156,12 +156,12 @@ TextureImporter:
       name: spr_player_front_attack_0
       rect:
         serializedVersion: 2
-        x: 14
-        y: 28
-        width: 12
-        height: 13
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 15
+        y: 29
+        width: 10
+        height: 11
+      alignment: 9
+      pivot: {x: 0.5, y: -0.1}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -178,12 +178,12 @@ TextureImporter:
       name: spr_player_front_attack_1
       rect:
         serializedVersion: 2
-        x: 23
-        y: 17
-        width: 17
-        height: 27
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 24
+        y: 18
+        width: 15
+        height: 25
+      alignment: 9
+      pivot: {x: 0.5, y: -0.1}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -200,12 +200,12 @@ TextureImporter:
       name: spr_player_front_attack_2
       rect:
         serializedVersion: 2
-        x: 73
-        y: 7
-        width: 37
-        height: 35
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 74
+        y: 8
+        width: 35
+        height: 33
+      alignment: 9
+      pivot: {x: 0.5, y: -0.1}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -222,12 +222,12 @@ TextureImporter:
       name: spr_player_front_attack_3
       rect:
         serializedVersion: 2
-        x: 151
-        y: 7
-        width: 24
-        height: 34
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 152
+        y: 8
+        width: 22
+        height: 32
+      alignment: 9
+      pivot: {x: 0.5, y: -0.1}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -244,12 +244,12 @@ TextureImporter:
       name: spr_player_front_attack_4
       rect:
         serializedVersion: 2
-        x: 203
-        y: 12
-        width: 30
-        height: 30
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 204
+        y: 13
+        width: 28
+        height: 28
+      alignment: 9
+      pivot: {x: 0.5, y: -0.1}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -266,12 +266,12 @@ TextureImporter:
       name: spr_player_front_attack_5
       rect:
         serializedVersion: 2
-        x: 279
-        y: 13
-        width: 23
-        height: 30
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 280
+        y: 14
+        width: 21
+        height: 28
+      alignment: 9
+      pivot: {x: 0.5, y: -0.1}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -288,12 +288,12 @@ TextureImporter:
       name: spr_player_front_attack_6
       rect:
         serializedVersion: 2
-        x: 343
-        y: 17
-        width: 17
-        height: 26
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 344
+        y: 18
+        width: 15
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: -0.1}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -310,12 +310,12 @@ TextureImporter:
       name: spr_player_front_attack_7
       rect:
         serializedVersion: 2
-        x: 407
-        y: 17
-        width: 17
-        height: 26
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 408
+        y: 18
+        width: 15
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: -0.1}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -332,12 +332,12 @@ TextureImporter:
       name: spr_player_front_attack_8
       rect:
         serializedVersion: 2
-        x: 139
-        y: 12
-        width: 8
-        height: 9
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 140
+        y: 13
+        width: 6
+        height: 7
+      alignment: 9
+      pivot: {x: 0.5, y: -0.1}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -354,12 +354,12 @@ TextureImporter:
       name: spr_player_front_attack_9
       rect:
         serializedVersion: 2
-        x: 233
-        y: 8
-        width: 6
-        height: 9
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 234
+        y: 9
+        width: 4
+        height: 7
+      alignment: 9
+      pivot: {x: 0.5, y: -0.1}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -376,7 +376,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: b7d7496fe3589444a80147e2289b10a4
     internalID: 0
     vertices: []
     indices: 

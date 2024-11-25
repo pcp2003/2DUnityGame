@@ -64,7 +64,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -102,7 +102,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -156,12 +156,12 @@ TextureImporter:
       name: spr_player_back_attack_0
       rect:
         serializedVersion: 2
-        x: 78
-        y: 16
-        width: 39
-        height: 36
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 79
+        y: 17
+        width: 37
+        height: 34
+      alignment: 9
+      pivot: {x: 0.5, y: -0.1}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -178,12 +178,12 @@ TextureImporter:
       name: spr_player_back_attack_1
       rect:
         serializedVersion: 2
-        x: 140
-        y: 29
-        width: 12
-        height: 21
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 141
+        y: 30
+        width: 10
+        height: 19
+      alignment: 9
+      pivot: {x: 0.5, y: -0.1}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -200,12 +200,12 @@ TextureImporter:
       name: spr_player_back_attack_2
       rect:
         serializedVersion: 2
-        x: 150
-        y: 45
-        width: 22
-        height: 8
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 151
+        y: 46
+        width: 20
+        height: 6
+      alignment: 9
+      pivot: {x: 0.5, y: -0.1}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -222,12 +222,12 @@ TextureImporter:
       name: spr_player_back_attack_3
       rect:
         serializedVersion: 2
-        x: 204
-        y: 34
-        width: 6
-        height: 11
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 211
+        y: 18
+        width: 22
+        height: 34
+      alignment: 9
+      pivot: {x: 0.5, y: -0.1}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -244,12 +244,12 @@ TextureImporter:
       name: spr_player_back_attack_4
       rect:
         serializedVersion: 2
-        x: 210
-        y: 17
-        width: 24
-        height: 36
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 23
+        y: 12
+        width: 26
+        height: 29
+      alignment: 9
+      pivot: {x: 0.5, y: -0.1}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -266,12 +266,12 @@ TextureImporter:
       name: spr_player_back_attack_5
       rect:
         serializedVersion: 2
-        x: 22
-        y: 11
-        width: 28
-        height: 31
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 152
+        y: 18
+        width: 16
+        height: 25
+      alignment: 9
+      pivot: {x: 0.5, y: -0.1}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -288,12 +288,12 @@ TextureImporter:
       name: spr_player_back_attack_6
       rect:
         serializedVersion: 2
-        x: 151
-        y: 17
-        width: 18
-        height: 27
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 205
+        y: 35
+        width: 4
+        height: 9
+      alignment: 9
+      pivot: {x: 0.5, y: -0.1}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -310,12 +310,12 @@ TextureImporter:
       name: spr_player_back_attack_7
       rect:
         serializedVersion: 2
-        x: 268
-        y: 17
-        width: 28
-        height: 26
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 269
+        y: 18
+        width: 26
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: -0.1}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -332,12 +332,12 @@ TextureImporter:
       name: spr_player_back_attack_8
       rect:
         serializedVersion: 2
-        x: 343
-        y: 17
-        width: 17
-        height: 26
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 344
+        y: 18
+        width: 15
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: -0.1}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -354,12 +354,12 @@ TextureImporter:
       name: spr_player_back_attack_9
       rect:
         serializedVersion: 2
-        x: 407
-        y: 17
-        width: 17
-        height: 26
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 408
+        y: 18
+        width: 15
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5, y: -0.1}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -376,7 +376,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: a352b1a4ae1e1a14593392a3d124f552
     internalID: 0
     vertices: []
     indices: 
@@ -385,7 +385,17 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      spr_player_back_attack_0: -2739144099652383219
+      spr_player_back_attack_1: -66121892046745379
+      spr_player_back_attack_2: 8745858836929788135
+      spr_player_back_attack_3: 808616812485154074
+      spr_player_back_attack_4: -1921905986977400520
+      spr_player_back_attack_5: 5480662582869872202
+      spr_player_back_attack_6: -6094063191590801531
+      spr_player_back_attack_7: -6958365423518652803
+      spr_player_back_attack_8: 3880692770218787225
+      spr_player_back_attack_9: 8596339822315675905
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
