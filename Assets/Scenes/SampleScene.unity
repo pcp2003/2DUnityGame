@@ -428,8 +428,14 @@ MonoBehaviour:
   player: {fileID: 1372937819}
   objectToSpawn: {fileID: 625795682398405883, guid: 7e14b0f29d3bc4d40aee3d23cf0b21d8, type: 3}
   spawnDistance: 10
+  grassTiles:
+  - {fileID: 11400000, guid: fdc9b846a1ab17344bb05d55bbafa3f8, type: 2}
+  - {fileID: 11400000, guid: 8d90b831c0b1c6b4593b1f02e349eaf6, type: 2}
+  - {fileID: 11400000, guid: 8ab88c518d463504cb2b8810d4d11a5a, type: 2}
+  - {fileID: 11400000, guid: af2a3a28bf8addf4b8620c0546831d50, type: 2}
+  spawnTilemap: {fileID: 1916435129}
   spawnDirections: []
-  timeBetweenSpawns: 60
+  timeBetweenSpawns: 10
   lambda: 3
 --- !u!4 &1054582556
 Transform:
