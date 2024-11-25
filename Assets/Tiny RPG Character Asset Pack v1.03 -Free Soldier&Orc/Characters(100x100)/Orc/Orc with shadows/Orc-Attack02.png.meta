@@ -52,7 +52,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -90,7 +90,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -144,12 +144,12 @@ TextureImporter:
       name: Orc-Attack02_0
       rect:
         serializedVersion: 2
-        x: 42
-        y: 39
-        width: 25
-        height: 20
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 43
+        y: 40
+        width: 23
+        height: 18
+      alignment: 9
+      pivot: {x: 0.3, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -166,12 +166,12 @@ TextureImporter:
       name: Orc-Attack02_1
       rect:
         serializedVersion: 2
-        x: 135
-        y: 39
-        width: 24
-        height: 29
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 136
+        y: 40
+        width: 22
+        height: 27
+      alignment: 9
+      pivot: {x: 0.3, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -188,12 +188,12 @@ TextureImporter:
       name: Orc-Attack02_2
       rect:
         serializedVersion: 2
-        x: 235
-        y: 39
-        width: 24
-        height: 28
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 236
+        y: 40
+        width: 22
+        height: 26
+      alignment: 9
+      pivot: {x: 0.3, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -210,12 +210,12 @@ TextureImporter:
       name: Orc-Attack02_3
       rect:
         serializedVersion: 2
-        x: 343
-        y: 33
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 344
+        y: 34
+        width: 30
+        height: 30
+      alignment: 9
+      pivot: {x: 0.3, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -232,12 +232,12 @@ TextureImporter:
       name: Orc-Attack02_4
       rect:
         serializedVersion: 2
-        x: 443
-        y: 33
-        width: 25
-        height: 27
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 444
+        y: 34
+        width: 23
+        height: 25
+      alignment: 9
+      pivot: {x: 0.3, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -254,12 +254,12 @@ TextureImporter:
       name: Orc-Attack02_5
       rect:
         serializedVersion: 2
-        x: 542
-        y: 36
-        width: 21
-        height: 22
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 543
+        y: 37
+        width: 19
+        height: 20
+      alignment: 9
+      pivot: {x: 0.3, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -276,7 +276,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 8b6815dc4735d484abcd99148003f05d
     internalID: 0
     vertices: []
     indices: 
@@ -285,7 +285,13 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Orc-Attack02_0: -4382410341179087744
+      Orc-Attack02_1: -310342334101882945
+      Orc-Attack02_2: -4543947773319253168
+      Orc-Attack02_3: 2843740054133409696
+      Orc-Attack02_4: -3675442374903467389
+      Orc-Attack02_5: 7525977105156993497
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

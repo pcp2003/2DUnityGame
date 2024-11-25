@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
     public int attackDamage = 1;     // Dano do ataque
     public LayerMask enemyLayer;     // Camada dos inimigos
     public Transform attackPoint;    // Ponto de origem do ataque (crie um objeto vazio na frente do jogador)
-    public float attackCooldown = 0.7f; // Duração do ataque (igual ao HasExitTime)
+    public float attackCooldown = 1.0f; // Duração do ataque (igual ao HasExitTime)
 
     private bool isAttacking = false; // Controle se o jogador está atacando
 
