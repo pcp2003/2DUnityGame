@@ -14,7 +14,7 @@ public class Spawner : MonoBehaviour
     public Tilemap spawnTilemap;
     public Vector2[] spawnDirections; // Direções específicas de spawn (opcional)
     private float timer = 0.0f;
-    public float timeBetweenSpawns= 60.0f; // 1 minuto
+    public float timeBetweenSpawns= 60.0f*10; // 1 minuto
     public int lambda = 3;
     
     //quando começa o jogo

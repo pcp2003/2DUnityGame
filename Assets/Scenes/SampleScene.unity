@@ -280,15 +280,15 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c88f5cead0c0b2a4eb05b5900433f8d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_ComponentVersion: 1
-  m_AssetsPPU: 100
-  m_RefResolutionX: 320
-  m_RefResolutionY: 180
+  m_AssetsPPU: 40
+  m_RefResolutionX: 1920
+  m_RefResolutionY: 1080
   m_CropFrame: 0
   m_GridSnapping: 0
   m_FilterMode: 0
@@ -843,7 +843,7 @@ MonoBehaviour:
   bushesAndRocks:
   - {fileID: 3342791119182116425, guid: 3e045048389684540894b3a87247bcd8, type: 3}
   - {fileID: 6269274457917925183, guid: a049e941ce10eb54a8b7c4e2e9475b6c, type: 3}
-  size: 100
+  size: 200
   noiseScale: 0.05
   waterLevel: 0.2
   seed: 1
