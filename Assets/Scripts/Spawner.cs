@@ -29,7 +29,7 @@ public class Spawner : MonoBehaviour
         timer+=Time.deltaTime;
         if (timer >= timeBetweenSpawns)
         {
-            Debug.Log("Spawnei mais inemigos");
+            Debug.Log("Spawnei mais arcas");
             timer = 0.0f;
             SpawnObjectsAtDistance();
         }
@@ -57,6 +57,7 @@ public class Spawner : MonoBehaviour
             // Calcula a posição de spawn
             Vector2 spawnPosition = playerPosition + spawnDirection * spawnDistance;
 
+            
             // Instancia o objeto no local calculado
             Instantiate(objectToSpawn, spawnPosition, Quaternion.identity);
         }
