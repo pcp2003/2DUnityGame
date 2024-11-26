@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
 
     //Variaveis de vida/comida
     public int maxHealth = 5;
-    int currentHealth;
+    public int currentHealth;
     
     
     // Variables related to temporary invincibility
@@ -38,6 +38,7 @@ public class PlayerController : MonoBehaviour
         MoveAction.Enable();
         rigidbody2d = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        currentHealth = maxHealth;
     }
 
     void Update()
@@ -106,9 +107,10 @@ public class PlayerController : MonoBehaviour
             animator.SetTrigger("Hit");
         }
 
-
+        
         currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
-     //   UIHandler2.instance.SetHealthValue(currentHealth / (float)maxHealth);
+        Debug.Log(currentHealth);
+        UIHandler.instance.SetHealthValue(currentHealth / (float)maxHealth);
     }
     
     

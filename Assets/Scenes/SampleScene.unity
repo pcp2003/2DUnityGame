@@ -473,6 +473,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1655460052}
   - component: {fileID: 1655460051}
+  - component: {fileID: 1655460053}
   m_Layer: 5
   m_Name: UIDocument
   m_TagString: Untagged
@@ -514,6 +515,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1655460053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1655460050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76ff9d5d257e80241872848c232c344f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1916435125
 GameObject:
   m_ObjectHideFlags: 0
@@ -956,6 +969,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Goblin
       objectReference: {fileID: 0}
+    - target: {fileID: 5454368705706707002, guid: 3de45d18be259e1409f67453b05ac580, type: 3}
+      propertyPath: m_Size.x
+      value: 0.24635819
+      objectReference: {fileID: 0}
+    - target: {fileID: 5454368705706707002, guid: 3de45d18be259e1409f67453b05ac580, type: 3}
+      propertyPath: m_Size.y
+      value: 0.20768099
+      objectReference: {fileID: 0}
+    - target: {fileID: 5454368705706707002, guid: 3de45d18be259e1409f67453b05ac580, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.045287684
+      objectReference: {fileID: 0}
+    - target: {fileID: 5454368705706707002, guid: 3de45d18be259e1409f67453b05ac580, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.10484605
+      objectReference: {fileID: 0}
     - target: {fileID: 6244673799130719638, guid: 3de45d18be259e1409f67453b05ac580, type: 3}
       propertyPath: m_Mass
       value: 100
@@ -1040,6 +1069,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4655999801733390474, guid: 9a8b1cb847b21b14596add0df58b5666, type: 3}
+      propertyPath: currentHealth
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5781258781115171214, guid: 9a8b1cb847b21b14596add0df58b5666, type: 3}
       propertyPath: m_LocalPosition.x
       value: 50.505

@@ -80,4 +80,20 @@ public class Goblin : MonoBehaviour
     {
         animator.SetTrigger("Attack");
     }
+    
+    //teste de ataque
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        Debug.Log("Goblin teriou vida ao jogador");
+        PlayerController player = other.gameObject.GetComponent<PlayerController>();
+        if (player != null)
+        {
+            player.ChangeHealth(-1);
+        }
+
+    }
+    
+    
+    
+    
 }
