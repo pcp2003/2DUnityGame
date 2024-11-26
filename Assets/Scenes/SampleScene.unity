@@ -487,7 +487,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: af2a3a28bf8addf4b8620c0546831d50, type: 2}
   spawnTilemap: {fileID: 1916435129}
   spawnDirections: []
-  timeBetweenSpawns: 10
   lambda: 3
 --- !u!4 &1054582556
 Transform:
