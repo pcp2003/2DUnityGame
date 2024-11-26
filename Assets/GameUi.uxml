@@ -1,0 +1,8 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <engine:VisualElement name="HealthBarBackground" style="flex-grow: 0; background-image: url(&quot;project://database/Assets/SpritesAndTextures/UIHealthFrame.png?fileID=2800000&amp;guid=eda913417e466894588ef437c54776b6&amp;type=3#UIHealthFrame&quot;); width: 402px; height: 230px; -unity-background-scale-mode: scale-to-fit;">
+        <engine:VisualElement style="flex-grow: 1; background-image: url(&quot;project://database/Assets/SpritesAndTextures/Player_Character/Front%20animations/spr_player_front_attack.png?fileID=-8375189769194019409&amp;guid=11a18862f7e815f4a9d6a37c86bf7694&amp;type=3#spr_player_front_attack_1&quot;); -unity-background-scale-mode: scale-to-fit; height: 191px; width: 149px; position: absolute; top: 10px; left: 17px;" />
+    </engine:VisualElement>
+    <engine:VisualElement name="HealthBarContainer" style="flex-grow: 1;">
+        <engine:VisualElement name="HealthBar" style="flex-grow: 1; background-image: none;" />
+    </engine:VisualElement>
+</engine:UXML>

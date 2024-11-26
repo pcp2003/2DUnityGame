@@ -235,7 +235,11 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Soldier-Shadow_death_0: -6947405640139729143
+      Soldier-Shadow_death_1: 359901643681571809
+      Soldier-Shadow_death_2: 2257250250645868444
+      Soldier-Shadow_death_3: 4450727295261284586
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

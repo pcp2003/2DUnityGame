@@ -15,13 +15,24 @@ public class PlayerController : MonoBehaviour
     public int attackDamage = 1;     // Dano do ataque
     public LayerMask enemyLayer;     // Camada dos inimigos
     public Transform attackPoint;    // Ponto de origem do ataque (crie um objeto vazio na frente do jogador)
-    public float attackCooldown = 1.0f; // Duração do ataque (igual ao HasExitTime)
+    public float attackCooldown = 0.7f; // Duração do ataque (igual ao HasExitTime)
 
     private bool isAttacking = false; // Controle se o jogador está atacando
 
     Animator animator;
     Vector2 moveDirection = new Vector2(0, 0);
 
+    //Variaveis de vida/comida
+    public int maxHealth = 5;
+    int currentHealth;
+    
+    
+    // Variables related to temporary invincibility
+    public float timeInvincible = 1.0f;   // 1 segundo invincivel
+    bool isInvincible;
+    float damageCooldown;
+    
+    public int health { get { return currentHealth; } }
     void Start()
     {
         MoveAction.Enable();
@@ -49,6 +60,15 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Mouse Left Button Pressed");
             Attack();
         }
+        
+        if (isInvincible)
+        {
+            damageCooldown -= Time.deltaTime;
+            if (damageCooldown < 0)
+                isInvincible = false;
+        }
+        
+        
     }
 
     void FixedUpdate()
@@ -72,4 +92,25 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(attackCooldown); // Tempo do HasExitTime
         isAttacking = false; // Permite um novo ataque
     }
+    
+    
+    public void ChangeHealth(int amount)
+    {
+        if (amount < 0)
+        {
+            if (isInvincible)
+                return;
+
+            isInvincible = true;
+            damageCooldown = timeInvincible;
+            animator.SetTrigger("Hit");
+        }
+
+
+        currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
+     //   UIHandler2.instance.SetHealthValue(currentHealth / (float)maxHealth);
+    }
+    
+    
+    
 }

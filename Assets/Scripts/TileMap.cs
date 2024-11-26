@@ -27,7 +27,7 @@ public class TerrainGenerator2D : MonoBehaviour
     Cell[,] grid;                               // Matriz para representar o terreno e características de cada célula
     
 
-    void Start()
+    void Awake()
     {
         UnityEngine.Random.InitState(seed);                                             // Inicializa o gerador com a seed para repetibilidade
         GenerateGrid(GenerateNoiseMap(noiseScale), GenerateFalloffMap());               // Preenche o grid com dados do terreno

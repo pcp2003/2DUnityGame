@@ -381,6 +381,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &756080980 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8990721182965277990, guid: 9a8b1cb847b21b14596add0df58b5666, type: 3}
+  m_PrefabInstance: {fileID: 4225326475574820962}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &952620473 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5781258781115171214, guid: 9a8b1cb847b21b14596add0df58b5666, type: 3}
@@ -458,6 +463,57 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!1 &1655460050
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1655460052}
+  - component: {fileID: 1655460051}
+  m_Layer: 5
+  m_Name: UIDocument
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1655460051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1655460050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PanelSettings: {fileID: 11400000, guid: ec001b5b24945e4448d649d6c51911a0, type: 2}
+  m_ParentUI: {fileID: 0}
+  sourceAsset: {fileID: 9197481963319205126, guid: bf5e19d0c19b5894ba274226eb50c7a7, type: 3}
+  m_SortingOrder: 0
+  m_WorldSpaceSizeMode: 1
+  m_WorldSpaceWidth: 1920
+  m_WorldSpaceHeight: 1080
+--- !u!4 &1655460052
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1655460050}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1916435125
 GameObject:
   m_ObjectHideFlags: 0
@@ -817,6 +873,61 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!1 &2007663263
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2007663265}
+  - component: {fileID: 2007663264}
+  m_Layer: 0
+  m_Name: Spawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2007663264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2007663263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dcac570b87d0b6498bb4b5912db0232, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 756080980}
+  objectToSpawn: {fileID: 625795682398405883, guid: 7e14b0f29d3bc4d40aee3d23cf0b21d8, type: 3}
+  spawnDistance: 10
+  grassTiles:
+  - {fileID: 11400000, guid: fdc9b846a1ab17344bb05d55bbafa3f8, type: 2}
+  - {fileID: 11400000, guid: 8d90b831c0b1c6b4593b1f02e349eaf6, type: 2}
+  - {fileID: 11400000, guid: 8ab88c518d463504cb2b8810d4d11a5a, type: 2}
+  - {fileID: 11400000, guid: af2a3a28bf8addf4b8620c0546831d50, type: 2}
+  spawnTilemap: {fileID: 1916435129}
+  spawnDirections: []
+  lambda: 3
+--- !u!4 &2007663265
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2007663263}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 50.34792, y: 50.551743, z: -8.359984}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &366961405835258898
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -987,3 +1098,5 @@ SceneRoots:
   - {fileID: 1308748816}
   - {fileID: 4225326475574820962}
   - {fileID: 366961405835258898}
+  - {fileID: 1655460052}
+  - {fileID: 2007663265}

@@ -10,10 +10,11 @@ public class Spawner : MonoBehaviour
     public GameObject player; // Referência ao jogador n sei se é preciso mudar
     public GameObject objectToSpawn; // Prefab do objeto (inimigos, etc.)
     public float spawnDistance = 10.0f; // Distância do jogador onde os objetos serão criados
-   // public int numberOfObjects = 3; // Número de objetos para spawnar
+    public TileBase[] grassTiles;   // tiles validas para spawnar     
+    public Tilemap spawnTilemap;
     public Vector2[] spawnDirections; // Direções específicas de spawn (opcional)
     private float timer = 0.0f;
-    public float timeBetweenSpawns= 60.0f; // 1 minuto
+    private float timeBetweenSpawns= 60.0f*10; // 1 minuto
     public int lambda = 3;
     
     //quando começa o jogo
@@ -29,7 +30,7 @@ public class Spawner : MonoBehaviour
         timer+=Time.deltaTime;
         if (timer >= timeBetweenSpawns)
         {
-            Debug.Log("Spawnei mais inemigos");
+            Debug.Log("Spawnei mais arcas");
             timer = 0.0f;
             SpawnObjectsAtDistance();
         }
@@ -38,27 +39,44 @@ public class Spawner : MonoBehaviour
     
     void SpawnObjectsAtDistance()
     {
-        if (player == null || objectToSpawn == null)
+        if (player == null || objectToSpawn == null || grassTiles == null || spawnTilemap == null )
         {
             Debug.LogError("Spawner: Player or ObjectToSpawn not assigned.");
             return;
         }
 
-        Vector2 playerPosition = player.transform.position;
+        Vector3 playerPosition = player.transform.position;
         int numberOfObjects = GeneratePoisson(lambda);
+       
         Debug.Log("Numero de objetos: " +numberOfObjects);
-        for (int i = 0; i < numberOfObjects; i++)
+       
+        int spawnedObjects = 0;
+       
+        // enquanto n tiver encontardo uma possissão valida continua a tentar
+        while (spawnedObjects < numberOfObjects)
         {
-            // Escolhe uma direção aleatória (ou específica, se fornecido)
             Vector2 spawnDirection = spawnDirections.Length > 0
-                ? spawnDirections[i % spawnDirections.Length]
+                ? spawnDirections[spawnedObjects % spawnDirections.Length]
                 : Random.insideUnitCircle.normalized;
 
-            // Calcula a posição de spawn
-            Vector2 spawnPosition = playerPosition + spawnDirection * spawnDistance;
+            Vector3 spawnPosition = playerPosition + (Vector3)spawnDirection * spawnDistance;
 
-            // Instancia o objeto no local calculado
-            Instantiate(objectToSpawn, spawnPosition, Quaternion.identity);
+
+            Vector3Int cellPosition = spawnTilemap.WorldToCell(spawnPosition);
+            Debug.unityLogger.Log(cellPosition.ToString());
+            TileBase tile = spawnTilemap.GetTile(cellPosition);
+            if (IsGrassTile(tile))
+            {
+                // Converte de volta para posição no mundo para instanciar
+                Vector3 finalPosition = spawnTilemap.CellToWorld(cellPosition) + spawnTilemap.tileAnchor;
+
+                // Instancia o objeto
+                Instantiate(objectToSpawn, finalPosition, Quaternion.identity);
+                Debug.Log($"Objeto spawnado em {finalPosition}");
+                spawnedObjects++;
+            }
+
+            
         }
     }
 
@@ -84,5 +102,17 @@ public class Spawner : MonoBehaviour
 
         return k - 1;
     }
+    
+    bool IsGrassTile(TileBase tile)
+    {
+        foreach (TileBase grassTile in grassTiles)
+        {
+            if (tile == grassTile)
+                return true;
+        }
+        return false;
+    }
+    
+    
     
 }
