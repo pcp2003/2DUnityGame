@@ -10,12 +10,14 @@ public class PlayerController : MonoBehaviour
     Vector2 move;
     public float speed = 3.0f;
 
+    public int health = 3; // Vida do Player
+
     // Variáveis relacionadas ao ataque
+    public GameObject attackPoint;
     public float attackRange = 1.0f; // Alcance do ataque
     public int attackDamage = 1;     // Dano do ataque
     public LayerMask enemyLayer;     // Camada dos inimigos
-    public Transform attackPoint;    // Ponto de origem do ataque (crie um objeto vazio na frente do jogador)
-    public float attackCooldown = 1.0f; // Duração do ataque (igual ao HasExitTime)
+    private float attackCooldown = 1.0f; // Duração do ataque (igual ao HasExitTime)
 
     private bool isAttacking = false; // Controle se o jogador está atacando
 
@@ -27,10 +29,14 @@ public class PlayerController : MonoBehaviour
         MoveAction.Enable();
         rigidbody2d = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        gameObject.GetComponent<Animator>().SetBool("isDead", false);
     }
 
     void Update()
     {
+
+        if (gameObject.GetComponent<Animator>().GetBool("isDead")) return;
+
         // Leitura do movimento
         move = MoveAction.ReadValue<Vector2>();
         if (!Mathf.Approximately(move.magnitude, 0.0f) && !isAttacking) // Permite mudar de direção somente fora do ataque
@@ -49,20 +55,65 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Mouse Left Button Pressed");
             Attack();
         }
+
+
     }
 
     void FixedUpdate()
     {
+        if (gameObject.GetComponent<Animator>().GetBool("isDead")) return;
         Vector2 position = (Vector2)rigidbody2d.position + move * speed * Time.deltaTime;
         rigidbody2d.MovePosition(position);
     }
 
     void Attack()
     {
-        isAttacking = true; // Impede que outros ataques sejam iniciados
+        isAttacking = true; // Impede que outros ataques sejam iniciados durante a animação
         animator.SetTrigger("Attack");
 
-        // Opcional: Chamar método para detectar e aplicar dano aqui
+        // Determina a posição do ponto de ataque com base na direção de movimento
+        Vector3 newAttackPointPosition = attackPoint.transform.localPosition;
+
+        if (moveDirection.x > 0) // Indo para a direita
+        {
+            newAttackPointPosition = new Vector3(0.15f, 0.14f, 0f);
+        }
+        else if (moveDirection.x < 0) // Indo para a esquerda
+        {
+            newAttackPointPosition = new Vector3(-0.15f, 0.14f, 0f);
+        }
+        else if (moveDirection.y > 0) // Indo para cima
+        {
+            newAttackPointPosition = new Vector3(0f, 0.3f, 0f);
+        }
+        else if (moveDirection.y < 0) // Indo para baixo
+        {
+            newAttackPointPosition = new Vector3(0f, 0f, 0f);
+        }
+
+        // Atualiza a posição do ponto de ataque
+        attackPoint.transform.localPosition = newAttackPointPosition;
+
+        // Detecta inimigos na área de ataque
+        Collider2D[] enemiesColliders = Physics2D.OverlapCircleAll(attackPoint.transform.position, attackRange, enemyLayer);
+
+        if (enemiesColliders != null)
+        {
+            // Aplica dano aos inimigos detectados
+
+            foreach (Collider2D enemyCollider in enemiesColliders)
+            {
+                Health enemyHealth = enemyCollider.GetComponent<Health>();
+                if (enemyHealth != null)
+                {
+                    enemyHealth.TakeDamage(attackDamage);
+
+                    enemyCollider.GetComponent<Animator>().SetTrigger("Hit");
+                }
+            }
+        }
+
+
 
         StartCoroutine(ResetAttackState()); // Espera o cooldown antes de permitir outro ataque
     }
@@ -71,5 +122,10 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(attackCooldown); // Tempo do HasExitTime
         isAttacking = false; // Permite um novo ataque
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(attackPoint.transform.position, attackRange);
     }
 }

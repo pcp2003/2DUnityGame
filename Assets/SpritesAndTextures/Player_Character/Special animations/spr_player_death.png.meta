@@ -58,7 +58,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -96,7 +96,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -150,12 +150,12 @@ TextureImporter:
       name: spr_player_death_0
       rect:
         serializedVersion: 2
-        x: 22
-        y: 17
-        width: 19
-        height: 29
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 23
+        y: 18
+        width: 17
+        height: 27
+      alignment: 9
+      pivot: {x: 0.5, y: -0.1}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -172,12 +172,12 @@ TextureImporter:
       name: spr_player_death_1
       rect:
         serializedVersion: 2
-        x: 88
-        y: 17
-        width: 25
-        height: 20
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 89
+        y: 18
+        width: 23
+        height: 18
+      alignment: 9
+      pivot: {x: 0.5, y: -0.1}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -194,12 +194,12 @@ TextureImporter:
       name: spr_player_death_2
       rect:
         serializedVersion: 2
-        x: 153
-        y: 17
-        width: 24
-        height: 18
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 154
+        y: 18
+        width: 22
+        height: 16
+      alignment: 9
+      pivot: {x: 0.5, y: -0.1}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -216,12 +216,12 @@ TextureImporter:
       name: spr_player_death_3
       rect:
         serializedVersion: 2
-        x: 217
-        y: 17
-        width: 24
-        height: 17
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 218
+        y: 18
+        width: 22
+        height: 15
+      alignment: 9
+      pivot: {x: 0.5, y: -0.1}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -238,12 +238,12 @@ TextureImporter:
       name: spr_player_death_4
       rect:
         serializedVersion: 2
-        x: 281
-        y: 17
-        width: 23
-        height: 15
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 282
+        y: 18
+        width: 21
+        height: 13
+      alignment: 9
+      pivot: {x: 0.5, y: -0.1}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -260,12 +260,12 @@ TextureImporter:
       name: spr_player_death_5
       rect:
         serializedVersion: 2
-        x: 345
-        y: 17
-        width: 23
-        height: 14
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 346
+        y: 18
+        width: 21
+        height: 12
+      alignment: 9
+      pivot: {x: 0.5, y: -0.1}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -282,12 +282,12 @@ TextureImporter:
       name: spr_player_death_6
       rect:
         serializedVersion: 2
-        x: 409
-        y: 17
-        width: 23
-        height: 14
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 410
+        y: 18
+        width: 21
+        height: 12
+      alignment: 9
+      pivot: {x: 0.5, y: -0.1}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -304,12 +304,12 @@ TextureImporter:
       name: spr_player_death_7
       rect:
         serializedVersion: 2
-        x: 473
-        y: 17
-        width: 23
-        height: 14
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 474
+        y: 18
+        width: 21
+        height: 12
+      alignment: 9
+      pivot: {x: 0.5, y: -0.1}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -326,7 +326,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 75b0e7ffeda910e47a7ccdb2cbdf4001
     internalID: 0
     vertices: []
     indices: 
@@ -335,7 +335,15 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      spr_player_death_0: 6069461575021410573
+      spr_player_death_1: 854212482046795643
+      spr_player_death_2: -6159084308269865550
+      spr_player_death_3: -4999062145569849225
+      spr_player_death_4: -2948033175646041947
+      spr_player_death_5: 7672826193148651999
+      spr_player_death_6: -8789077112541283084
+      spr_player_death_7: -4248400897512548133
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

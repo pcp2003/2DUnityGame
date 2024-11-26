@@ -1,11 +1,21 @@
 using UnityEngine;
+using System.Collections;
 
 public class Goblin : MonoBehaviour
 {
-    public Transform player; // Referência ao jogador
-    public float speed = 2.0f; // Velocidade de movimento do Goblin
-    public float attackRange = 1.0f; // Distância de ataque
-    public float attackInterval = 1.0f; // Intervalo entre ataques
+    public Transform player;
+    public float speed = 2.0f;
+    public float attackDistance = 1.0f;
+    public float attackRange = 1.0f;
+    public float attackInterval = 1.0f;
+    public int health = 3; // Vida do Goblin
+    public int attackDamage = 1; // Dano ao jogador
+
+    private float attackCooldown = 0.25f;
+
+    public GameObject attackPoint; 
+
+    public LayerMask enemyLayer;
 
     private Animator animator;
     private Rigidbody2D rigidbody2d;
@@ -13,13 +23,16 @@ public class Goblin : MonoBehaviour
 
     private Vector2 moveDirection;
     private float distance;
-    private float nextAttackTime = 0f; // Tempo para o próximo ataque
+    private float nextAttackTime = 0f;
+
+    private bool isAttacking;
 
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         rigidbody2d = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        gameObject.GetComponent<Animator>().SetBool("isDead", false);
 
         if (player == null)
         {
@@ -29,47 +42,41 @@ public class Goblin : MonoBehaviour
 
     void Update()
     {
-        if (player != null)
+        if (gameObject.GetComponent<Animator>().GetBool("isDead")) return;
+
+        if (player != null )
         {
-            // Calcula a direção para o jogador
             Vector2 direction = player.position - transform.position;
             distance = direction.magnitude;
 
-            // Atualiza a direção de movimento se estiver fora da distância mínima
-            if (distance > attackRange)
+            if (distance > attackDistance)
             {
+                isAttacking = false;
                 moveDirection = direction.normalized;
                 animator.SetFloat("Speed", distance);
             }
             else
             {
-                moveDirection = Vector2.zero; // Para de mover ao atingir a distância mínima
+                isAttacking = true;
                 animator.SetFloat("Speed", 0);
 
-                // Verifica se está na range de ataque
-                if (distance <= attackRange && Time.time >= nextAttackTime)
+                if ( Time.time >= nextAttackTime)
                 {
-                    Attack(); // Realiza o ataque
-                    nextAttackTime = Time.time + attackInterval; // Atualiza o próximo tempo de ataque
+                    Attack();
+                    nextAttackTime = Time.time + attackInterval;
                 }
             }
 
-            // Atualiza o sprite para olhar na direção correta
-            if (direction.x > 0)
-            {
-                spriteRenderer.flipX = false;
-            }
-            else if (direction.x < 0)
-            {
-                spriteRenderer.flipX = true;
-            }
+            if (!isAttacking)
+                spriteRenderer.flipX = direction.x > 0 ? false : true;
         }
     }
 
     void FixedUpdate()
     {
-        // Move o Goblin apenas se estiver longe o suficiente do jogador
-        if (moveDirection != Vector2.zero)
+        if (gameObject.GetComponent<Animator>().GetBool("isDead")) return;
+
+        if (!isAttacking)
         {
             Vector2 position = rigidbody2d.position + moveDirection * speed * Time.fixedDeltaTime;
             rigidbody2d.MovePosition(position);
@@ -78,6 +85,40 @@ public class Goblin : MonoBehaviour
 
     void Attack()
     {
+        isAttacking = true;
         animator.SetTrigger("Attack");
+
+        if (moveDirection.x < 0 ){
+            attackPoint.transform.localPosition = new Vector3(-0.15f,0.12f,0);
+        }else{
+            attackPoint.transform.localPosition = new Vector3(0.15f,0.12f,0);
+        }
+
+        // Fiz um array para possivel multiplayer  
+
+        Collider2D [] playersColliders = Physics2D.OverlapCircleAll(attackPoint.transform.position, attackRange, enemyLayer);
+
+        if (playersColliders != null){
+
+            foreach (Collider2D playerCollider in playersColliders ){
+
+            playerCollider.GetComponent<Health>().TakeDamage(attackDamage);
+
+            playerCollider.GetComponent<Animator>().SetTrigger("Hit");
+
+            }
+        } 
+
+        StartCoroutine(ResetAttackState()); // Espera o cooldown antes de permitir outro ataque
+    }
+
+    IEnumerator ResetAttackState()
+    {
+        yield return new WaitForSeconds(attackCooldown); // Tempo do HasExitTime
+        isAttacking = false; // Permite um novo ataque
+    }
+
+    private void OnDrawGizmos(){
+        Gizmos.DrawWireSphere(attackPoint.transform.position, attackRange);
     }
 }
