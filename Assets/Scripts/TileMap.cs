@@ -24,7 +24,7 @@ public class TerrainGenerator2D : MonoBehaviour
     public float rocksInWaterDensity = 0.02f;   // Chance de gerar pedras na água
     
 
-    Cell[,] grid;                               // Matriz para representar o terreno e características de cada célula
+    public Cell[,] grid;                               // Matriz para representar o terreno e características de cada célula
     
 
     void Start()
@@ -73,7 +73,7 @@ public class TerrainGenerator2D : MonoBehaviour
 
                     // Gera pedra e arbustos em locais que não sejam borda do mapa.
                     if (countAdjWater == 0 )
-                        GenerateObjectOnLayerSpecified(x,y, bushesAndRocksDensity, bushesAndRocks);
+                        GenerateObjectOnLayerSpecified(x,y, bushesAndRocksDensity, bushesAndRocks, true);
 
                 }
             }
@@ -83,7 +83,7 @@ public class TerrainGenerator2D : MonoBehaviour
     
 
     // Gera ativos como arbustos ou pedras no layer especificado
-    void GenerateObjectOnLayerSpecified(int x, int y, float density, GameObject[] prefabs)
+    public void GenerateObjectOnLayerSpecified(int x, int y, float density, GameObject[] prefabs, bool hasRandomScale)
     {
         float randomValue = UnityEngine.Random.Range(0f, 1f);
 
@@ -93,7 +93,7 @@ public class TerrainGenerator2D : MonoBehaviour
             Instantiate(prefab, transform);
             prefab.transform.position = new Vector3(x, y, 0) + new Vector3(0.5f, 0.5f, 0);
 
-                                // Ajusta o BoxCollider2D relativo ao tamanho da árvore
+            // Ajusta o BoxCollider2D relativo ao tamanho da árvore
             BoxCollider2D prefabCollider = prefab.GetComponent<BoxCollider2D>();
 
             Vector2 originalSize = new Vector2(0,0);
@@ -102,8 +102,10 @@ public class TerrainGenerator2D : MonoBehaviour
                 originalSize = prefabCollider.size; // Obtém o tamanho original do collider
 
             // Definindo uma escala aleatória para o tamanho de x e y entre 1 e 5
-            float randomScale = UnityEngine.Random.Range(1f, 3f);
-            prefab.transform.localScale = new Vector3(randomScale, randomScale, prefab.transform.localScale.z);
+            if (hasRandomScale){
+                float randomScale = UnityEngine.Random.Range(1f, 3f);
+                prefab.transform.localScale = new Vector3(randomScale, randomScale, prefab.transform.localScale.z);
+            }
 
             if(!(prefab.name == "Bush")) {
                 prefabCollider.size = new Vector2(originalSize.x, originalSize.y);

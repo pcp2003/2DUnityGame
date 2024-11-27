@@ -7,62 +7,63 @@ using Random = UnityEngine.Random;
 
 public class Spawner : MonoBehaviour
 {
-    public GameObject player; // Referência ao jogador n sei se é preciso mudar
-    public GameObject objectToSpawn; // Prefab do objeto (inimigos, etc.)
-    public float spawnDistance = 10.0f; // Distância do jogador onde os objetos serão criados
-   // public int numberOfObjects = 3; // Número de objetos para spawnar
+    public GameObject [] EntitiesToSpawn; // Prefab do objeto (inimigos, etc.)
+    public Tilemap tilemap;
     public Vector2[] spawnDirections; // Direções específicas de spawn (opcional)
     private float timer = 0.0f;
-    public float timeBetweenSpawns= 60.0f; // 1 minuto
+    private float timeBetweenSpawns = 60.0f * 10; // 10 minuto
     public int lambda = 3;
-    
+
+    private int numberOfEntitiesRemaining;
+
     //quando começa o jogo
     void Start()
     {
-        SpawnObjectsAtDistance();
+        SpawnEntitiesAtDistance();
     }
 
-    
     //de x em x tempo chama
     private void Update()
     {
-        timer+=Time.deltaTime;
-        if (timer >= timeBetweenSpawns)
+        timer += Time.deltaTime;
+
+        if (timer >= timeBetweenSpawns && numberOfEntitiesRemaining == 0)
+
         {
-            Debug.Log("Spawnei mais inemigos");
+            Debug.Log("Spawnei mais arcas");
             timer = 0.0f;
-            SpawnObjectsAtDistance();
+            SpawnEntitiesAtDistance();
         }
     }
-    
-    
-    void SpawnObjectsAtDistance()
+
+
+    void SpawnEntitiesAtDistance()
     {
-        if (player == null || objectToSpawn == null)
+        if (EntitiesToSpawn == null || tilemap == null)
         {
-            Debug.LogError("Spawner: Player or ObjectToSpawn not assigned.");
+            Debug.LogError("Spawner: ObjectToSpawn or Tilemap not assigned.");
             return;
         }
 
-        Vector2 playerPosition = player.transform.position;
-        int numberOfObjects = GeneratePoisson(lambda);
-        Debug.Log("Numero de objetos: " +numberOfObjects);
-        for (int i = 0; i < numberOfObjects; i++)
+        TerrainGenerator2D terrainGenerator = tilemap.GetComponent<TerrainGenerator2D>();
+
+        int numberOfEntities = GeneratePoisson(lambda);
+
+        Debug.Log("Number of Entities to spawn: " + numberOfEntities);
+
+        for (int i = 0; i < numberOfEntities; i++)
         {
-            // Escolhe uma direção aleatória (ou específica, se fornecido)
-            Vector2 spawnDirection = spawnDirections.Length > 0
-                ? spawnDirections[i % spawnDirections.Length]
-                : Random.insideUnitCircle.normalized;
-
-            // Calcula a posição de spawn
-            Vector2 spawnPosition = playerPosition + spawnDirection * spawnDistance;
-
-            // Instancia o objeto no local calculado
-            Instantiate(objectToSpawn, spawnPosition, Quaternion.identity);
+              
+            numberOfEntitiesRemaining++;
         }
     }
 
-    
+    public void decreaseNumberOfEntities () {
+        numberOfEntitiesRemaining--;
+        Debug.Log("Decreasing number of Entities");
+    }
+
+
     public static int GeneratePoisson(double lambda)
     {
         // Verifica se lambda é válido
@@ -84,5 +85,7 @@ public class Spawner : MonoBehaviour
 
         return k - 1;
     }
-    
+
+
+
 }

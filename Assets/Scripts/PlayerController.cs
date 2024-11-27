@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,7 +10,6 @@ public class PlayerController : MonoBehaviour
     Rigidbody2D rigidbody2d;
     Vector2 move;
     public float speed = 3.0f;
-
     public int health = 3; // Vida do Player
 
     // Variáveis relacionadas ao ataque
@@ -21,6 +21,10 @@ public class PlayerController : MonoBehaviour
 
     private bool isAttacking = false; // Controle se o jogador está atacando
 
+    public int inventorySize;
+
+    private List<Key> keys;
+
     Animator animator;
     Vector2 moveDirection = new Vector2(0, 0);
 
@@ -30,6 +34,7 @@ public class PlayerController : MonoBehaviour
         rigidbody2d = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         gameObject.GetComponent<Animator>().SetBool("isDead", false);
+        keys = new List<Key>(); // Inicializa a lista
     }
 
     void Update()
@@ -123,6 +128,39 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(attackCooldown); // Tempo do HasExitTime
         isAttacking = false; // Permite um novo ataque
     }
+
+    public bool GetIsInventoryFull()
+    {
+        return keys.Count >= inventorySize;
+    }
+
+    public void AddKeyToInventory(Key key)
+    {
+        if (!GetIsInventoryFull())
+        {
+            keys.Add(key);
+            Debug.Log($"Key {key.tag} added to inventory.");
+        }
+    }
+
+    public void UseKey(Key key)
+    {
+        keys.Remove(key);
+        Debug.Log($"Key {key.tag} was used.");
+    }
+
+    public Key GetKeyByColor(string Color)
+    {
+        foreach (Key key in keys)
+        {
+            if (string.Equals(key.GetColor(), Color, StringComparison.OrdinalIgnoreCase) || string.Equals(key.GetColor(), "Golden", StringComparison.OrdinalIgnoreCase)) // Ignora maiúsculas/minúsculas
+            {
+                return key;
+            }
+        }
+        return null;
+    }
+
 
     private void OnDrawGizmos()
     {

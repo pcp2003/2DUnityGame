@@ -3,32 +3,43 @@ using System.Collections;
 
 public class Health : MonoBehaviour
 {
-    public int health;
-    public float destroyColldown = 3.0f; // Tempo de cooldown em segundos
+    public int currentHealth;
 
-    private bool isDying = false; // Controle para evitar múltiplas chamadas
+    private int maxHealth;
+    public float destroyCooldown = 3.0f; // Tempo de cooldown em segundos
+
+    private bool isDying; // Controle para evitar múltiplas chamadas
+
+    void Start(){
+         
+        maxHealth = currentHealth;
+        isDying = false;
+    }
 
     void Update()
     {
-        if (health <= 0 && !isDying)
+        if (currentHealth <= 0 && !isDying)
         {
             isDying = true; // Marca que o objeto está em processo de destruição
             Debug.Log("Iniciando cooldown para destruir " + gameObject.name);
             gameObject.GetComponent<Animator>().SetBool("isDead", true);
-            StartCoroutine(DestroyColldown());
+            StartCoroutine(DestroyCooldown());
         }
     }
 
-    IEnumerator DestroyColldown()
+    IEnumerator DestroyCooldown()
     {
-        yield return new WaitForSeconds(destroyColldown); // Aguarda o tempo especificado
+        yield return new WaitForSeconds(destroyCooldown); // Aguarda o tempo especificado
         Debug.Log("Destruindo objeto: " + gameObject.name);
         Destroy(gameObject); // Destrói o objeto após o tempo
     }
 
     public void TakeDamage(int damage)
     {
-        health -= damage;
-        Debug.Log(gameObject.tag + " took damage");
+        currentHealth -= damage;
+
+        if (gameObject.tag.Equals("Player"))
+            UIHandler.instance.SetHealthValue(currentHealth / (float)maxHealth);
+
     }
 }
