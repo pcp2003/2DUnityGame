@@ -16,6 +16,7 @@ public class Chest : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
+        Debug.Log("Collision Detected");
         PlayerController player = other.GetComponent<PlayerController>();
 
         if (player != null)
