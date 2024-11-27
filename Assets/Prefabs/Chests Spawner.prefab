@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4109966360629180178
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8784980966489584946}
+  - component: {fileID: 3196445836769370241}
+  m_Layer: 0
+  m_Name: Chests Spawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &8784980966489584946
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4109966360629180178}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 50.34792, y: 50.551743, z: -8.359984}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3196445836769370241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4109966360629180178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 713b4ed8111f78b4c82d4aee503e34b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EntitiesToSpawn:
+  - {fileID: 1268766838867547445, guid: 18a64d252f1d24841bceff7d1e5d33d7, type: 3}
+  - {fileID: 6759559948895965235, guid: 59c31f259d5c72f49917e04a852c8f94, type: 3}
+  - {fileID: 1263327130128617311, guid: 01af10d0167a9d646aad7c626b02deef, type: 3}
+  - {fileID: 4834261983715624536, guid: 222cf28425891634e93e13c0ee880a14, type: 3}
+  - {fileID: 7779529551072784661, guid: 871053a42a66ff344b94165d659011f6, type: 3}
+  tilemap: {fileID: 0}
+  spawnDirections: []
+  lambda: 3

@@ -8,28 +8,33 @@ public class Chest : MonoBehaviour
     public float destroyCooldown;
     private String color;
 
-
-
     void Start(){
-        color = gameObject.tag.Split(' ')[0];
+        color = gameObject.name.Split(' ')[0];
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    void OnCollisionEnter2D(Collision2D other)
     {
-        Debug.Log("Collision Detected");
-        PlayerController player = other.GetComponent<PlayerController>();
+        Debug.Log("Collision Detected (Chest)");
+
+         PlayerController player = other.gameObject.GetComponent<PlayerController>();
 
         if (player != null)
-        {  
-            Key key = player.GetKeyByColor(color);
+        {   
+
+             if (other.gameObject.tag.Equals("Player")){
+
+                Key key = player.GetKeyByColor(color);
             
-            if (key != null ){
-                
-                player.UseKey(key);
-                spawner.GetComponent<Spawner>().decreaseNumberOfEntities();
-                StartCoroutine(DestroyCooldown());
+                if ( key != null && !gameObject.GetComponent<Animator>().GetBool("isOpen")){
+
+                    Debug.Log($"Key {key.GetColor()}. NOT NULL");
+
+                    player.UseKey(key);
+                    gameObject.GetComponent<Animator>().SetBool("isOpen", true);
+                    // spawner.GetComponent<Spawner>().decreaseNumberOfEntities();
+                    StartCoroutine(DestroyCooldown());
+                }
             }
-            
             
         }
 

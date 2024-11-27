@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Goblin : MonoBehaviour
 {
@@ -10,12 +11,13 @@ public class Goblin : MonoBehaviour
     public float attackInterval = 1.0f;
     public int health = 3; // Vida do Goblin
     public int attackDamage = 1; // Dano ao jogador
-
+    private float raycastOffset = 0.5f;        // Offset do raycast para detectar obstáculos
+    public float avoidObstacleDistance = 1.0f; // Distância para evitar obstáculos
+    public List<GameObject> possibleKeys; // Lista de prefabs de chaves possíveis
     private float attackCooldown = 0.25f;
-
-    public GameObject attackPoint; 
-
+    public GameObject attackPoint;
     public LayerMask enemyLayer;
+    public float destroyCooldown = 3.0f; // Tempo de cooldown em segundos
 
     private Animator animator;
     private Rigidbody2D rigidbody2d;
@@ -42,12 +44,25 @@ public class Goblin : MonoBehaviour
 
     void Update()
     {
-        if (gameObject.GetComponent<Animator>().GetBool("isDead")) return;
+        if (gameObject.GetComponent<Animator>().GetBool("isDead"))
+        {   
+            gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+            StartCoroutine(DestroyCooldown()); 
 
-        if (player != null )
+            return;
+        }
+
+        if (player != null)
         {
             Vector2 direction = player.position - transform.position;
-            distance = direction.magnitude;
+
+            // Detectar e evitar obstáculos
+            Vector2 adjustedDirection = AvoidObstacles(direction);
+
+            // Atualiza a direção do movimento
+            moveDirection = adjustedDirection;
+
+            distance = moveDirection.magnitude;
 
             if (distance > attackDistance)
             {
@@ -60,7 +75,7 @@ public class Goblin : MonoBehaviour
                 isAttacking = true;
                 animator.SetFloat("Speed", 0);
 
-                if ( Time.time >= nextAttackTime)
+                if (Time.time >= nextAttackTime)
                 {
                     Attack();
                     nextAttackTime = Time.time + attackInterval;
@@ -70,6 +85,32 @@ public class Goblin : MonoBehaviour
             if (!isAttacking)
                 spriteRenderer.flipX = direction.x > 0 ? false : true;
         }
+    }
+
+    private Vector2 AvoidObstacles(Vector2 direction)
+    {
+        // Raycasts para detectar obstáculos
+        Vector2 leftRayOrigin = (Vector2)transform.position + Vector2.left * raycastOffset;
+        Vector2 rightRayOrigin = (Vector2)transform.position + Vector2.right * raycastOffset;
+
+        RaycastHit2D hitFront = Physics2D.Raycast(transform.position, direction, avoidObstacleDistance);
+        RaycastHit2D hitLeft = Physics2D.Raycast(leftRayOrigin, direction, avoidObstacleDistance);
+        RaycastHit2D hitRight = Physics2D.Raycast(rightRayOrigin, direction, avoidObstacleDistance);
+
+        // Se houver obstáculo à frente, ajusta a direção
+        if (hitFront.collider != null)
+        {
+            Debug.Log("Obstacle detected ahead: " + hitFront.collider.name);
+
+            // Tenta desviar para a esquerda ou direita
+            if (hitLeft.collider == null)
+                return Vector2.Perpendicular(direction); // Direção à esquerda
+            else if (hitRight.collider == null)
+                return -Vector2.Perpendicular(direction); // Direção à direita
+        }
+
+        // Caso não detecte obstáculos, mantém a direção
+        return direction;
     }
 
     void FixedUpdate()
@@ -86,30 +127,88 @@ public class Goblin : MonoBehaviour
     void Attack()
     {
         isAttacking = true;
-        animator.SetTrigger("Attack");
 
-        if (moveDirection.x < 0 ){
-            attackPoint.transform.localPosition = new Vector3(-0.15f,0.12f,0);
-        }else{
-            attackPoint.transform.localPosition = new Vector3(0.15f,0.12f,0);
+        float differentAttacksChance = 50.0f;
+
+        float randomChance = UnityEngine.Random.Range(0f, 100f);
+
+        if (randomChance > differentAttacksChance)
+        {
+            animator.SetTrigger("Attack01");
+        }else {
+            animator.SetTrigger("Attack02");
+        }
+
+        
+
+        if (moveDirection.x < 0)
+        {
+            attackPoint.transform.localPosition = new Vector3(-0.15f, 0.12f, 0);
+        }
+        else
+        {
+            attackPoint.transform.localPosition = new Vector3(0.15f, 0.12f, 0);
         }
 
         // Fiz um array para possivel multiplayer  
 
-        Collider2D [] playersColliders = Physics2D.OverlapCircleAll(attackPoint.transform.position, attackRange, enemyLayer);
+        Collider2D[] playersColliders = Physics2D.OverlapCircleAll(attackPoint.transform.position, attackRange, enemyLayer);
 
-        if (playersColliders != null){
+        if (playersColliders != null)
+        {
 
-            foreach (Collider2D playerCollider in playersColliders ){
+            foreach (Collider2D playerCollider in playersColliders)
+            {
 
-            playerCollider.GetComponent<Health>().TakeDamage(attackDamage);
+                playerCollider.GetComponent<Health>().TakeDamage(attackDamage);
 
-            playerCollider.GetComponent<Animator>().SetTrigger("Hit");
+                playerCollider.GetComponent<Animator>().SetTrigger("Hit");
 
             }
-        } 
+        }
 
         StartCoroutine(ResetAttackState()); // Espera o cooldown antes de permitir outro ataque
+    }
+
+    void DropKey()
+    {
+        // Define a chance de drop em porcentagem (ajustável)
+        float dropChance = 50.0f;
+
+        // Gera um número aleatório entre 0 e 100
+        float randomChance = UnityEngine.Random.Range(0f, 100f);
+
+        // Se a chance não for atingida, não dropa nenhuma chave
+        if (randomChance > dropChance)
+        {
+            Debug.Log("No key dropped. Chance: " + randomChance + "%");
+            return;
+        }
+
+        // Continua com o drop de uma chave aleatória
+        if (possibleKeys != null && possibleKeys.Count > 0)
+        {
+            // Escolhe uma chave aleatória da lista
+            int randomIndex = UnityEngine.Random.Range(0, possibleKeys.Count);
+            GameObject selectedKey = possibleKeys[randomIndex];
+
+            // Instancia a chave selecionada na posição do Goblin
+            Instantiate(selectedKey, transform.position, Quaternion.identity);
+            Debug.Log($"Key dropped: {selectedKey.name} at position: {transform.position}");
+        }
+        else
+        {
+            Debug.LogWarning("No possible keys assigned to Goblin.");
+        }
+    }
+
+
+    IEnumerator DestroyCooldown()
+    {
+        yield return new WaitForSeconds(destroyCooldown); // Aguarda o tempo especificado
+        Debug.Log("Destruindo objeto: " + gameObject.name);
+        DropKey();
+        Destroy(gameObject); // Destrói o objeto após o tempo
     }
 
     IEnumerator ResetAttackState()
@@ -118,7 +217,8 @@ public class Goblin : MonoBehaviour
         isAttacking = false; // Permite um novo ataque
     }
 
-    private void OnDrawGizmos(){
+    private void OnDrawGizmos()
+    {
         Gizmos.DrawWireSphere(attackPoint.transform.position, attackRange);
     }
 }

@@ -192,9 +192,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 237
-        y: 48
-        width: 15
-        height: 13
+        y: 39
+        width: 29
+        height: 22
       alignment: 9
       pivot: {x: 0.3, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -210,57 +210,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Orc-Death_3
-      rect:
-        serializedVersion: 2
-        x: 255
-        y: 42
-        width: 10
-        height: 12
-      alignment: 9
-      pivot: {x: 0.3, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: a0c294718d465f250800000000000000
-      internalID: 5977794959670586378
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Orc-Death_4
-      rect:
-        serializedVersion: 2
-        x: 336
-        y: 40
-        width: 15
-        height: 14
-      alignment: 9
-      pivot: {x: 0.3, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 77069ea8920bba5d0800000000000000
-      internalID: -3050150630142680969
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: Orc-Death_5
       rect:
         serializedVersion: 2
-        x: 355
-        y: 42
-        width: 10
-        height: 12
+        x: 335
+        y: 39
+        width: 30
+        height: 15
       alignment: 9
       pivot: {x: 0.3, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -271,28 +227,6 @@ TextureImporter:
       bones: []
       spriteID: 54d23fab39e13d820800000000000000
       internalID: 2941728601448590661
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Orc-Death_6
-      rect:
-        serializedVersion: 2
-        x: 239
-        y: 40
-        width: 13
-        height: 5
-      alignment: 9
-      pivot: {x: 0.3, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: c5716eed3c0b47e40800000000000000
-      internalID: 5653337787561547612
       vertices: []
       indices: 
       edges: []

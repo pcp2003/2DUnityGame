@@ -23,7 +23,9 @@ public class PlayerController : MonoBehaviour
 
     public int inventorySize;
 
-    private List<Key> keys;
+    public List<Key> keys;
+
+    public float destroyCooldown = 3.0f; // Tempo de cooldown em segundos
 
     Animator animator;
     Vector2 moveDirection = new Vector2(0, 0);
@@ -40,7 +42,10 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
 
-        if (gameObject.GetComponent<Animator>().GetBool("isDead")) return;
+        if (gameObject.GetComponent<Animator>().GetBool("isDead")) {
+            StartCoroutine(DestroyCooldown());
+            return;
+        }
 
         // Leitura do movimento
         move = MoveAction.ReadValue<Vector2>();
@@ -123,6 +128,13 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(ResetAttackState()); // Espera o cooldown antes de permitir outro ataque
     }
 
+    IEnumerator DestroyCooldown()
+    {
+        yield return new WaitForSeconds(destroyCooldown); // Aguarda o tempo especificado
+        Debug.Log("Destruindo objeto: " + gameObject.name);
+        Destroy(gameObject); // Destrói o objeto após o tempo
+    }
+
     IEnumerator ResetAttackState()
     {
         yield return new WaitForSeconds(attackCooldown); // Tempo do HasExitTime
@@ -139,14 +151,13 @@ public class PlayerController : MonoBehaviour
         if (!GetIsInventoryFull())
         {
             keys.Add(key);
-            Debug.Log($"Key {key.tag} added to inventory.");
+            Debug.Log($"Chave {key.GetColor()} adicionada ao inventário. Total de chaves: {keys.Count}");
         }
     }
 
     public void UseKey(Key key)
     {
         keys.Remove(key);
-        Debug.Log($"Key {key.tag} was used.");
     }
 
     public Key GetKeyByColor(string Color)
@@ -154,7 +165,7 @@ public class PlayerController : MonoBehaviour
         foreach (Key key in keys)
         {
             if (string.Equals(key.GetColor(), Color, StringComparison.OrdinalIgnoreCase) || string.Equals(key.GetColor(), "Golden", StringComparison.OrdinalIgnoreCase)) // Ignora maiúsculas/minúsculas
-            {
+            {  
                 return key;
             }
         }
@@ -166,4 +177,5 @@ public class PlayerController : MonoBehaviour
     {
         Gizmos.DrawWireSphere(attackPoint.transform.position, attackRange);
     }
+
 }
