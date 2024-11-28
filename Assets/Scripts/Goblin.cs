@@ -15,7 +15,7 @@ public class Goblin : MonoBehaviour
     public float avoidObstacleDistance = 1.0f; // Distância para evitar obstáculos
     public List<GameObject> possibleKeys; // Lista de prefabs de chaves possíveis
     private float attackCooldown = 0.25f;
-    public GameObject attackPoint;
+    private GameObject attackPoint;
     public LayerMask enemyLayer;
     public float destroyCooldown = 3.0f; // Tempo de cooldown em segundos
 
@@ -40,6 +40,11 @@ public class Goblin : MonoBehaviour
         {
             Debug.LogError("Player reference not set on Goblin.");
         }
+
+        // Criando o ponto de ataque
+        attackPoint = new GameObject("AttackPoint");
+        attackPoint.transform.parent = this.transform; // Define o Player como pai
+        attackPoint.transform.localPosition = Vector3.zero; // Define a posição relativa ao Player como (0, 0, 0)
     }
 
     void Update()

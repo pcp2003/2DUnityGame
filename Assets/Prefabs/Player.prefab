@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 6197364295621610241}
   - component: {fileID: 4861826555204782699}
   - component: {fileID: 4985090693938092577}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -153,13 +153,15 @@ MonoBehaviour:
       m_Flags: 8
     m_Flags: 0
   speed: 5
+  health: 3
   attackRange: 1
   attackDamage: 1
   enemyLayer:
     serializedVersion: 2
-    m_Bits: 0
-  attackPoint: {fileID: 0}
-  attackCooldown: 1
+    m_Bits: 128
+  inventorySize: 3
+  keys: []
+  destroyCooldown: 3
 --- !u!50 &6197364295621610241
 Rigidbody2D:
   serializedVersion: 5

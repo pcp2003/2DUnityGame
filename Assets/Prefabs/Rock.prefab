@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7528552630258907076}
   - component: {fileID: 9170888059369968529}
   - component: {fileID: -6190648569276351152}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Rock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27,8 +27,8 @@ Transform:
   m_GameObject: {fileID: 6269274457917925183}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 62.5, y: 55.5, z: 0}
-  m_LocalScale: {x: 2.2622323, y: 2.2622323, z: 1}
+  m_LocalPosition: {x: 77.5, y: 55.5, z: 0}
+  m_LocalScale: {x: 2.0070384, y: 2.0070384, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}

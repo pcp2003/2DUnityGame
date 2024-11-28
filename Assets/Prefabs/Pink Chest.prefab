@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 748633704896945643}
   - component: {fileID: -1179235542308142116}
   m_Layer: 0
-  m_Name: BlueChest
-  m_TagString: Untagged
+  m_Name: Pink Chest
+  m_TagString: Chest
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 1268766838867547445}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 36.44, y: 44.171825, z: -15.815188}
+  m_LocalPosition: {x: 54.5, y: 39.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0.33333334}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -78,8 +78,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: -1870876656750283219, guid: 37b56bb63b676d84d8ddef00a3a2b9e8, type: 3}
+  m_SortingOrder: 1
+  m_Sprite: {fileID: -9085773957535209297, guid: bebe84e9dc3e44d4cbaa0042361d5b63, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -89,7 +89,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
+  m_SpriteSortPoint: 1
 --- !u!61 &6784200825773204148
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -120,21 +120,21 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.009326816, y: 0.059071317}
+  m_Offset: {x: 0.00023078918, y: 0.25501442}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.5, y: 0.012545109}
     oldSize: {x: 1, y: 1}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1.0559623, y: 0.93160176}
+  m_Size: {x: 0.8647957, y: 0.25296402}
   m_EdgeRadius: 0
 --- !u!114 &748633704896945643
 MonoBehaviour:
@@ -149,6 +149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawner: {fileID: 0}
+  destroyCooldown: 5
 --- !u!95 &-1179235542308142116
 Animator:
   serializedVersion: 7
@@ -159,7 +160,7 @@ Animator:
   m_GameObject: {fileID: 1268766838867547445}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: db3dad5cb796b6947bb5a07a049b7e56, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

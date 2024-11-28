@@ -16,7 +16,7 @@ public class Chest : MonoBehaviour
     {
         Debug.Log("Collision Detected (Chest)");
 
-         PlayerController player = other.gameObject.GetComponent<PlayerController>();
+        PlayerController player = other.gameObject.GetComponent<PlayerController>();
 
         if (player != null)
         {   

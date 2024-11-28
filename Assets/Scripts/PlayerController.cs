@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     public int health = 3; // Vida do Player
 
     // Variáveis relacionadas ao ataque
-    public GameObject attackPoint;
+    private GameObject attackPoint;
     public float attackRange = 1.0f; // Alcance do ataque
     public int attackDamage = 1;     // Dano do ataque
     public LayerMask enemyLayer;     // Camada dos inimigos
@@ -37,6 +37,11 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
         gameObject.GetComponent<Animator>().SetBool("isDead", false);
         keys = new List<Key>(); // Inicializa a lista
+        
+        // Criando o ponto de ataque
+        attackPoint = new GameObject("AttackPoint");
+        attackPoint.transform.parent = this.transform; // Define o Player como pai
+        attackPoint.transform.localPosition = Vector3.zero; // Define a posição relativa ao Player como (0, 0, 0)
     }
 
     void Update()

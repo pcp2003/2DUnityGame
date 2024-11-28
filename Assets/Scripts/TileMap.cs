@@ -13,7 +13,8 @@ public class TerrainGenerator2D : MonoBehaviour
     public TileBase[] grassTiles;               // Conjunto de tiles para grama
     public TileBase[] grassWithWater;           // Tiles de borda de grama próxima à água
     public GameObject[] treePrefabs;            // Prefab de árvores
-    public GameObject[] bushesAndRocks;      // Tiles de arbustos e pedras
+    public GameObject[] bushesAndRocks;         // Tiles de arbustos e pedras
+    public GameObject[] chests;                 // baús
     public int size = 100;                      // Tamanho do mapa
     public float noiseScale = 0.1f;             // Escala do Perlin Noise para geração do terreno
     public float waterLevel = 0.4f;             // Nível de água
@@ -22,6 +23,7 @@ public class TerrainGenerator2D : MonoBehaviour
     public float treeDensity = .5f;             // Densidade de árvores
     public float bushesAndRocksDensity = 0.01f; // Chance de gerar pedras e arbustos
     public float rocksInWaterDensity = 0.02f;   // Chance de gerar pedras na água
+    public float chanceToSpawnChest = 0.001f;   // Chance de spawnar um baú
     
 
     public Cell[,] grid;                               // Matriz para representar o terreno e características de cada célula
@@ -74,6 +76,7 @@ public class TerrainGenerator2D : MonoBehaviour
                     // Gera pedra e arbustos em locais que não sejam borda do mapa.
                     if (countAdjWater == 0 )
                         GenerateObjectOnLayerSpecified(x,y, bushesAndRocksDensity, bushesAndRocks, true);
+                        GenerateObjectOnLayerSpecified(x,y, chanceToSpawnChest, chests, false);
 
                 }
             }
