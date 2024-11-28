@@ -259,7 +259,13 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      UIHealthFrame_0: -5047484281555416397
+      UIHealthFrame_1: 5326287119372293863
+      UIHealthFrame_2: 2154651366485273264
+      UIHealthFrame_3: -2794606930186418174
+      UIHealthFrame_4: 2381904416027673334
+      UIHealthFrame_5: -7567137496774473664
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
