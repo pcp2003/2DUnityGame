@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Tilemaps;
 
-public class TerrainGenerator2D : MonoBehaviour
+public class TileMap : MonoBehaviour
 {
     public Tilemap tilemap;                     // Referência ao TileMap onde os tiles serão desenhados
     public TileBase[] waterTiles;               // Conjunto de tiles para água
@@ -15,6 +15,7 @@ public class TerrainGenerator2D : MonoBehaviour
     public GameObject[] treePrefabs;            // Prefab de árvores
     public GameObject[] bushesAndRocks;         // Tiles de arbustos e pedras
     public GameObject[] chests;                 // baús
+    public GameObject player;                   // Player
     public int size = 100;                      // Tamanho do mapa
     public float noiseScale = 0.1f;             // Escala do Perlin Noise para geração do terreno
     public float waterLevel = 0.4f;             // Nível de água
@@ -24,10 +25,9 @@ public class TerrainGenerator2D : MonoBehaviour
     public float bushesAndRocksDensity = 0.01f; // Chance de gerar pedras e arbustos
     public float rocksInWaterDensity = 0.02f;   // Chance de gerar pedras na água
     public float chanceToSpawnChest = 0.001f;   // Chance de spawnar um baú
-    
+    public CameraFollow followCam;
 
-    public Cell[,] grid;                               // Matriz para representar o terreno e características de cada célula
-    
+    public Cell[,] grid;                        // Matriz para representar o terreno e características de cada célula
 
     void Start()
     {
@@ -35,7 +35,48 @@ public class TerrainGenerator2D : MonoBehaviour
         GenerateGrid(GenerateNoiseMap(noiseScale), GenerateFalloffMap());               // Preenche o grid com dados do terreno
         GenerateTerrain();                                                              // Gera o terreno no Tilemap
         GenerateTrees(treeNoiseScale, treeDensity);                                     // Gera árvores a partir de um novo NoiseMap e a Grid
+        SpawnPlayer();
     }
+ 
+    void SpawnPlayer()
+    {
+        // Verifica posições aleatórias até encontrar uma célula válida
+        while (true)
+        {
+            int x = UnityEngine.Random.Range(0, size);
+            int y = UnityEngine.Random.Range(0, size);
+
+            // Verifica se a célula não é água e não está ocupada
+            if (!grid[x, y].isWater && !grid[x, y].isOccupied)
+            {
+                GameObject playerInstance = Instantiate(player, transform);
+                playerInstance.transform.position = new Vector3(x, y, 0) + new Vector3(0.5f, 0.5f, 0);
+                followCam.SetTarget(playerInstance);
+                Debug.Log($"Player spawned at: ({x}, {y})");
+                break;
+            }
+        }
+    }
+
+    public void SpawnEnemy (GameObject enemy ) {
+        // Verifica posições aleatórias até encontrar uma célula válida
+        while (true)
+        {
+            int x = UnityEngine.Random.Range(0, size);
+            int y = UnityEngine.Random.Range(0, size);
+
+            // Verifica se a célula não é água e não está ocupada
+            if (!grid[x, y].isWater && !grid[x, y].isOccupied)
+            {
+                GameObject enemyInstance = Instantiate(enemy, transform);
+                enemyInstance.transform.position = new Vector3(x, y, 0) + new Vector3(0.5f, 0.5f, 0);
+                enemyInstance.GetComponent<Goblin>().SetPlayerReference(player);
+                Debug.Log($"Enemy spawned at: ({x}, {y})");
+                break;
+            }
+        }
+    }
+
 
     // Preenche a grade com valores de células de acordo com o ruído e o mapa de queda
     void GenerateGrid(float[,] noiseMap, float[,] falloffMap)
@@ -61,37 +102,38 @@ public class TerrainGenerator2D : MonoBehaviour
         for (int x = 0; x < size; x++)
         {
             for (int y = 0; y < size; y++)
-            {   
+            {
                 // Define tile de água
-                if (grid[x, y].isWater)  tilemap.SetTile(new Vector3Int(x, y, 0), SelectWaterTile(rocksInWaterDensity));
+                if (grid[x, y].isWater) tilemap.SetTile(new Vector3Int(x, y, 0), SelectWaterTile(rocksInWaterDensity));
 
-                else  
+                else
                 {
                     int countAdjWater = CountAdjacentWater(x, y); // Conta tiles adjacentes de água
                     tilemap.SetTile(new Vector3Int(x, y, 0), SelectTile(x, y, countAdjWater)); // Define tiles de grama ou borda
                     {
-                        
+
                     }
 
                     // Gera pedra e arbustos em locais que não sejam borda do mapa.
-                    if (countAdjWater == 0 )
-                        GenerateObjectOnLayerSpecified(x,y, bushesAndRocksDensity, bushesAndRocks, true);
-                        GenerateObjectOnLayerSpecified(x,y, chanceToSpawnChest, chests, false);
+                    if (countAdjWater == 0)
+                        GenerateObjectOnLayerSpecified(x, y, bushesAndRocksDensity, bushesAndRocks, true);
+                        GenerateObjectOnLayerSpecified(x, y, chanceToSpawnChest, chests, false);
 
                 }
             }
         }
     }
 
-    
+
 
     // Gera ativos como arbustos ou pedras no layer especificado
     public void GenerateObjectOnLayerSpecified(int x, int y, float density, GameObject[] prefabs, bool hasRandomScale)
     {
         float randomValue = UnityEngine.Random.Range(0f, 1f);
 
-        if (randomValue < density && !grid[x,y].isOccupied){
-        
+        if (randomValue < density && !grid[x, y].isOccupied)
+        {
+
             GameObject prefab = prefabs[UnityEngine.Random.Range(0, prefabs.Length)];
             Instantiate(prefab, transform);
             prefab.transform.position = new Vector3(x, y, 0) + new Vector3(0.5f, 0.5f, 0);
@@ -99,35 +141,41 @@ public class TerrainGenerator2D : MonoBehaviour
             // Ajusta o BoxCollider2D relativo ao tamanho da árvore
             BoxCollider2D prefabCollider = prefab.GetComponent<BoxCollider2D>();
 
-            Vector2 originalSize = new Vector2(0,0);
+            Vector2 originalSize = new Vector2(0, 0);
 
             if (prefabCollider != null)
                 originalSize = prefabCollider.size; // Obtém o tamanho original do collider
 
             // Definindo uma escala aleatória para o tamanho de x e y entre 1 e 5
-            if (hasRandomScale){
+            if (hasRandomScale)
+            {
                 float randomScale = UnityEngine.Random.Range(1f, 3f);
                 prefab.transform.localScale = new Vector3(randomScale, randomScale, prefab.transform.localScale.z);
             }
 
-            if(!(prefab.name == "Bush")) {
+            if (!(prefab.name == "Bush"))
+            {
                 prefabCollider.size = new Vector2(originalSize.x, originalSize.y);
             }
 
-            grid[x,y].setIsOccupied(true);
+            grid[x, y].setIsOccupied(true);
 
         }
-        
+
     }
 
     // Gera árvores a partir de um parâmetro treeNoiseScale e um parâmetro treeDensity
-    void GenerateTrees(float treeNoiseScale, float treeDensity) {
+    void GenerateTrees(float treeNoiseScale, float treeDensity)
+    {
 
         float[,] noiseMap = GenerateNoiseMap(treeNoiseScale);
 
-        for (int x = 0; x != size; x++) {
-            for (int y = 0; y != size; y++) {
-                if (!grid[x, y].isOccupied && !grid[x, y].isWater && noiseMap[x, y] < UnityEngine.Random.Range(0f, treeDensity)) {
+        for (int x = 0; x != size; x++)
+        {
+            for (int y = 0; y != size; y++)
+            {
+                if (!grid[x, y].isOccupied && !grid[x, y].isWater && noiseMap[x, y] < UnityEngine.Random.Range(0f, treeDensity))
+                {
 
                     GameObject prefab = treePrefabs[UnityEngine.Random.Range(0, treePrefabs.Length)];
                     GameObject tree = Instantiate(prefab, transform);
@@ -137,7 +185,7 @@ public class TerrainGenerator2D : MonoBehaviour
 
                     // Ajusta o tamanho do collider baseado na escala da árvore
                     Vector2 originalSize = collider.size; // Obtém o tamanho original do collider
-                    
+
                     // Ajuste da posição para o centro do tile
                     tree.transform.position = new Vector3(x, y, 0) + new Vector3(0.5f, 0.5f, 0);
 
@@ -149,7 +197,7 @@ public class TerrainGenerator2D : MonoBehaviour
 
                     // Ajusta o offset do collider para acompanhar o centro do tile
                     collider.offset = new Vector2(0, collider.size.y / 2f);
-                
+
 
                     grid[x, y].setIsOccupied(true);
                 }
@@ -191,14 +239,14 @@ public class TerrainGenerator2D : MonoBehaviour
         return falloffMap;
     }
 
-    
 
-     // Seleciona o tile apropriado com base nos adjacentes de água
+
+    // Seleciona o tile apropriado com base nos adjacentes de água
     TileBase SelectTile(int x, int y, int waterCount)
     {
         // Verificações de bordas e água para aplicar o tile correto de borda ou grama
         bool up = IsWithinBounds(x, y + 1);
-        bool down = IsWithinBounds(x, y - 1); 
+        bool down = IsWithinBounds(x, y - 1);
         bool left = IsWithinBounds(x - 1, y);
         bool right = IsWithinBounds(x + 1, y);
 
@@ -235,25 +283,26 @@ public class TerrainGenerator2D : MonoBehaviour
             else if (right) return grassWithWater[UnityEngine.Random.Range(6, 8)];
         }
 
-        if (IsWithinBounds(x - 1, y + 1)) 
+        if (IsWithinBounds(x - 1, y + 1))
             if (grid[x - 1, y + 1].isWater) return grassWithWater[26];
 
-        else if (IsWithinBounds(x + 1, y + 1))
-            if (grid[x + 1, y + 1].isWater) return grassWithWater[27];
+            else if (IsWithinBounds(x + 1, y + 1))
+                if (grid[x + 1, y + 1].isWater) return grassWithWater[27];
 
-        else if (IsWithinBounds(x + 1, y - 1))
-            if (grid[x + 1, y - 1].isWater) return grassWithWater[28];
+                else if (IsWithinBounds(x + 1, y - 1))
+                    if (grid[x + 1, y - 1].isWater) return grassWithWater[28];
 
-        else if (IsWithinBounds(x - 1, y - 1))
-            if (grid[x - 1, y - 1].isWater) return grassWithWater[29];
+                    else if (IsWithinBounds(x - 1, y - 1))
+                        if (grid[x - 1, y - 1].isWater) return grassWithWater[29];
 
         return grassTiles[UnityEngine.Random.Range(0, grassTiles.Length)]; // Tile de grama padrão
     }
 
 
     // Seleciona aleatoriamente um tile de água
-    TileBase SelectWaterTile(float rocksOnWaterDensity) {
-        return UnityEngine.Random.Range(0f, 1f) < rocksOnWaterDensity ? waterTiles[UnityEngine.Random.Range(1, waterTiles.Length)] :  waterTiles[0];
+    TileBase SelectWaterTile(float rocksOnWaterDensity)
+    {
+        return UnityEngine.Random.Range(0f, 1f) < rocksOnWaterDensity ? waterTiles[UnityEngine.Random.Range(1, waterTiles.Length)] : waterTiles[0];
     }
 
     // Função para contar o número de tiles de água adjacentes
@@ -269,7 +318,7 @@ public class TerrainGenerator2D : MonoBehaviour
         return waterCount;
     }
 
-   
+
     // Verifica se uma posição está dentro dos limites do mapa
     bool IsWithinBounds(int x, int y)
     {

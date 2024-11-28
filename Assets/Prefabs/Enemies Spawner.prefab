@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 2953226417886803874}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 46.610897, y: 51.870697, z: -8.424306}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EntitiesToSpawn:
-  - {fileID: 0}
+  - {fileID: 3674475951122706009, guid: 3de45d18be259e1409f67453b05ac580, type: 3}
   tilemap: {fileID: 0}
   spawnDirections: []
   lambda: 3

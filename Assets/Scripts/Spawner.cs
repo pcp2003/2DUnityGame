@@ -8,61 +8,63 @@ using Random = UnityEngine.Random;
 public class Spawner : MonoBehaviour
 {
     public GameObject [] EntitiesToSpawn; // Prefab do objeto (inimigos, etc.)
-    public Tilemap tilemap;
     public Vector2[] spawnDirections; // Direções específicas de spawn (opcional)
+    private TileMap tilemap; 
     private float timer = 0.0f;
-    private float timeBetweenSpawns = 60.0f * 10; // 10 minuto
+    private float timeBetweenSpawns = 60.0f; // 10 minuto
     public int lambda = 3;
+    private Transform playerReference;
+    private int horda;
 
-    private int numberOfEntitiesRemaining;
+    void Start(){
 
-    //quando começa o jogo
-    void Start()
-    {
-        SpawnEntitiesAtDistance();
-    }
+        tilemap = gameObject.GetComponent<TileMap>();
 
-    //de x em x tempo chama
-    private void Update()
-    {
-        timer += Time.deltaTime;
-
-        if (timer >= timeBetweenSpawns && numberOfEntitiesRemaining == 0)
-
-        {
-            Debug.Log("Spawnei mais arcas");
-            timer = 0.0f;
-            SpawnEntitiesAtDistance();
-        }
-    }
-
-
-    void SpawnEntitiesAtDistance()
-    {
-        if (EntitiesToSpawn == null || tilemap == null)
-        {
-            Debug.LogError("Spawner: ObjectToSpawn or Tilemap not assigned.");
+        if (EntitiesToSpawn == null){
+            Debug.LogError("Spawner: EntitiesToSpawn not assigned.");
             return;
         }
 
-        TerrainGenerator2D terrainGenerator = tilemap.GetComponent<TerrainGenerator2D>();
+        horda = 0;
+
+    }
+
+    private void Update()
+    {
+        if (playerReference != null ){
+
+            timer += Time.deltaTime;
+
+            if (timer >= timeBetweenSpawns)
+
+            {
+                Debug.Log("Spawnando mais inimigos!");
+                timer = 0.0f;
+                SpawnEntities();
+            }
+        }
+        
+    }
+
+
+    void SpawnEntities()
+    {
 
         int numberOfEntities = GeneratePoisson(lambda);
 
         Debug.Log("Number of Entities to spawn: " + numberOfEntities);
 
-        for (int i = 0; i < numberOfEntities; i++)
-        {
-              
-            numberOfEntitiesRemaining++;
+        for (int i = 0; i != numberOfEntities; i++){
+
+            tilemap.SpawnEnemy(EntitiesToSpawn[0]);
         }
+
+        horda++;
     }
 
-    public void decreaseNumberOfEntities () {
-        numberOfEntitiesRemaining--;
-        Debug.Log("Decreasing number of Entities");
-    }
-
+    public void SetPlayerReference ( GameObject player){
+        playerReference = player.transform;
+    }   
 
     public static int GeneratePoisson(double lambda)
     {

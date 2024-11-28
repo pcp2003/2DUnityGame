@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class Goblin : MonoBehaviour
 {
-    public Transform player;
+    private Transform playerReference;
     public float speed = 2.0f;
     public float attackDistance = 1.0f;
     public float attackRange = 1.0f;
@@ -36,11 +36,6 @@ public class Goblin : MonoBehaviour
         animator = GetComponent<Animator>();
         gameObject.GetComponent<Animator>().SetBool("isDead", false);
 
-        if (player == null)
-        {
-            Debug.LogError("Player reference not set on Goblin.");
-        }
-
         // Criando o ponto de ataque
         attackPoint = new GameObject("AttackPoint");
         attackPoint.transform.parent = this.transform; // Define o Player como pai
@@ -57,9 +52,9 @@ public class Goblin : MonoBehaviour
             return;
         }
 
-        if (player != null)
+        if (playerReference != null)
         {
-            Vector2 direction = player.position - transform.position;
+            Vector2 direction = playerReference.position - transform.position;
 
             // Detectar e evitar obstáculos
             Vector2 adjustedDirection = AvoidObstacles(direction);
@@ -90,6 +85,10 @@ public class Goblin : MonoBehaviour
             if (!isAttacking)
                 spriteRenderer.flipX = direction.x > 0 ? false : true;
         }
+    }
+
+    public void SetPlayerReference (GameObject player) {
+        playerReference = player.transform;
     }
 
     private Vector2 AvoidObstacles(Vector2 direction)
