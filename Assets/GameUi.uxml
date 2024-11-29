@@ -6,24 +6,23 @@
         <engine:VisualElement name="HealthBar" style="flex-grow: 1; background-image: none;" />
     </engine:VisualElement>
     <engine:GroupBox name="Power" style="position: absolute; height: 173px; width: 350px; top: 4px; left: -129px;">
-        <engine:Label text="0" name="TextoChaves" style="font-size: 60px; width: 30px; position: absolute; top: 40px; left: 1464px;" />
+        <engine:Label text="0" name="swordpower" style="font-size: 60px; width: 30px; position: absolute; top: 40px; left: 1464px;" />
         <engine:VisualElement style="flex-grow: 1; background-image: url(&quot;project://database/Assets/SpritesAndTextures/Player_Character/Front%20animations/spr_player_front_attack.png?fileID=9116391583386554501&amp;guid=11a18862f7e815f4a9d6a37c86bf7694&amp;type=3#spr_player_front_attack_0&quot;); -unity-background-scale-mode: scale-to-fit; position: absolute; height: 65px; width: 104px; top: 55px; left: 1493px;" />
     </engine:GroupBox>
     <engine:GroupBox name="Arrows" style="position: absolute; height: 107px; width: 153px; top: 3px; left: 124px;">
-        <engine:Label text="0" name="TextoChaves" style="font-size: 60px; width: 30px; position: absolute; top: 40px; left: 1455px;" />
-        <engine:VisualElement style="flex-grow: 1; background-image: url(&quot;project://database/Assets/SpritesAndTextures/Props.png?fileID=343797302&amp;guid=37b56bb63b676d84d8ddef00a3a2b9e8&amp;type=3#Props_50&quot;); -unity-background-scale-mode: scale-to-fit; position: absolute; height: 109px; width: 142px; top: 32px; left: 1444px; rotate: 90deg;" />
+        <engine:Label text="0" name="goldenkey" style="font-size: 60px; width: 30px; position: absolute; top: 40px; left: 1455px;" />
         <engine:VisualElement style="flex-grow: 1; background-image: url(&quot;project://database/Assets/SpritesAndTextures/Props.png?fileID=343797302&amp;guid=37b56bb63b676d84d8ddef00a3a2b9e8&amp;type=3#Props_50&quot;); -unity-background-scale-mode: scale-to-fit; position: absolute; height: 109px; width: 142px; top: 32px; left: 1444px; rotate: 90deg;" />
     </engine:GroupBox>
     <engine:GroupBox name="Key1" style="position: absolute; top: 3px; left: -3px; height: 301px; width: 700px;">
-        <engine:Label text="0" name="Key1" style="font-size: 60px; width: 30px; position: absolute; top: 40px; left: 1464px;" />
-        <engine:VisualElement style="flex-grow: 1; background-image: url(&quot;project://database/Assets/SpritesAndTextures/Props.png?fileID=-1986662914&amp;guid=37b56bb63b676d84d8ddef00a3a2b9e8&amp;type=3#Props_31&quot;); -unity-background-scale-mode: scale-to-fit; position: absolute; height: 77px; width: 128px; top: 57px; left: 1474px;" />
+        <engine:Label text="0" name="arrow" style="font-size: 60px; width: 30px; position: absolute; top: 40px; left: 1464px;" />
+        <engine:VisualElement style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Tiny%20RPG%20Character%20Asset%20Pack%20v1.03%20-Free%20Soldier&amp;Orc/Arrow(Projectile)/Arrow01(32x32).png?fileID=2367449957533476818&amp;guid=42b4c84cb594f6d4bac7149437f35535&amp;type=3#Arrow01(32x32)_0&quot;); -unity-background-scale-mode: scale-to-fit; position: absolute; height: 40px; width: 123px; top: 63px; left: 1470px; rotate: 230deg;" />
     </engine:GroupBox>
     <engine:GroupBox name="Key2" style="position: absolute; top: 2px; left: 232px; height: 301px; width: 700px;">
-        <engine:Label text="0" name="Key2" style="font-size: 60px; width: 30px; position: absolute; top: 40px; left: 1464px;" />
-        <engine:VisualElement style="flex-grow: 1; background-image: url(&quot;project://database/Assets/SpritesAndTextures/Props.png?fileID=-1986662914&amp;guid=37b56bb63b676d84d8ddef00a3a2b9e8&amp;type=3#Props_31&quot;); -unity-background-scale-mode: scale-to-fit; position: absolute; height: 77px; width: 128px; top: 57px; left: 1474px;" />
+        <engine:Label text="0" name="bluekey" style="font-size: 60px; width: 30px; position: absolute; top: 40px; left: 1464px;" />
+        <engine:VisualElement style="flex-grow: 1; background-image: url(&quot;project://database/Assets/SpritesAndTextures/Props.png?fileID=-2043030525&amp;guid=37b56bb63b676d84d8ddef00a3a2b9e8&amp;type=3#Props_48&quot;); -unity-background-scale-mode: scale-to-fit; position: absolute; height: 108px; width: 158px; top: 28px; left: 1440px; rotate: 90deg;" />
     </engine:GroupBox>
     <engine:GroupBox name="Key3" style="position: absolute; top: 2px; left: 341px; height: 301px; width: 700px;">
-        <engine:Label text="0" name="TextoChaves" style="font-size: 60px; width: 30px; position: absolute; top: 40px; left: 1464px;" />
-        <engine:VisualElement style="flex-grow: 1; background-image: url(&quot;project://database/Assets/SpritesAndTextures/Props.png?fileID=-1986662914&amp;guid=37b56bb63b676d84d8ddef00a3a2b9e8&amp;type=3#Props_31&quot;); -unity-background-scale-mode: scale-to-fit; position: absolute; height: 77px; width: 128px; top: 57px; left: 1474px;" />
+        <engine:Label text="0" name="redkey" style="font-size: 60px; width: 30px; position: absolute; top: 40px; left: 1464px;" />
+        <engine:VisualElement style="flex-grow: 1; background-image: url(&quot;project://database/Assets/SpritesAndTextures/Props.png?fileID=-1342386488&amp;guid=37b56bb63b676d84d8ddef00a3a2b9e8&amp;type=3#Props_39&quot;); -unity-background-scale-mode: scale-to-fit; position: absolute; height: 106px; width: 152px; top: 30px; left: 1442px; rotate: 90deg;" />
     </engine:GroupBox>
 </engine:UXML>
