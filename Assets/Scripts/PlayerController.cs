@@ -48,6 +48,7 @@ public class PlayerController : MonoBehaviour
     {
 
         if (gameObject.GetComponent<Animator>().GetBool("isDead")) {
+            gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
             StartCoroutine(DestroyCooldown());
             return;
         }

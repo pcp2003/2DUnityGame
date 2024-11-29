@@ -11,9 +11,9 @@ public class Spawner : MonoBehaviour
     public Vector2[] spawnDirections; // Direções específicas de spawn (opcional)
     private TileMap tilemap; 
     private float timer = 0.0f;
-    private float timeBetweenSpawns = 60.0f; // 10 minuto
+    public float timeBetweenSpawns = 60.0f; // 10 minuto
     public int lambda = 3;
-    private Transform playerReference;
+    private GameObject playerReference;
     private int horda;
 
     void Start(){
@@ -31,9 +31,18 @@ public class Spawner : MonoBehaviour
 
     private void Update()
     {
+
+
         if (playerReference != null ){
 
+             // Escreve as coordenadas do playerReference no console
+            Vector3 playerPosition = playerReference.transform.position;
+            Debug.Log($"Player Position: ({playerPosition.x}, {playerPosition.y}, {playerPosition.z})");
+
+
             timer += Time.deltaTime;
+
+            Debug.Log(timer);
 
             if (timer >= timeBetweenSpawns)
 
@@ -49,21 +58,21 @@ public class Spawner : MonoBehaviour
 
     void SpawnEntities()
     {
-
+        
         int numberOfEntities = GeneratePoisson(lambda);
 
         Debug.Log("Number of Entities to spawn: " + numberOfEntities);
 
         for (int i = 0; i != numberOfEntities; i++){
 
-            tilemap.SpawnEnemy(EntitiesToSpawn[0]);
+            tilemap.SpawnEnemy(EntitiesToSpawn[0], playerReference);
         }
 
         horda++;
     }
 
     public void SetPlayerReference ( GameObject player){
-        playerReference = player.transform;
+        playerReference = player;
     }   
 
     public static int GeneratePoisson(double lambda)

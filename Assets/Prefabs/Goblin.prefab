@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7194864188145766307}
   - component: {fileID: 2923987550567001119}
   - component: {fileID: 6543588547889030416}
+  - component: {fileID: 4774426742169156758}
   m_Layer: 7
   m_Name: Goblin
   m_TagString: Enemy
@@ -176,7 +177,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7cfc05f3f1f5494bbaadb6e82e4e7df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
   speed: 2
   attackDistance: 1
   attackRange: 1
@@ -184,11 +184,18 @@ MonoBehaviour:
   health: 3
   attackDamage: 1
   avoidObstacleDistance: 1
-  possibleKeys: []
+  possibleKeys:
+  - {fileID: 374036408393086347, guid: c15f144ef3e478c41a04ff7e2e707d01, type: 3}
+  - {fileID: 5649237846080690947, guid: 53686aed55222de479136d25e29de945, type: 3}
+  - {fileID: 3426887096715397849, guid: b7d400c35cc347c40bd9b4695b17c310, type: 3}
+  - {fileID: 8417362820182881551, guid: b0d03df643042434593019e60c9c4f02, type: 3}
+  - {fileID: 3003108398581010620, guid: 552789601b8139342aa6e0e7d7150a6e, type: 3}
+  - {fileID: 866351757324242030, guid: b6a9e5029062dd74aac8fe799315f005, type: 3}
   enemyLayer:
     serializedVersion: 2
     m_Bits: 64
   destroyCooldown: 3
+  chanceToDropKey: 100
 --- !u!95 &6543588547889030416
 Animator:
   serializedVersion: 7
@@ -211,3 +218,16 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &4774426742169156758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3674475951122706009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e73e38afd3eb1e4cbdc789392211549, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHealth: 3

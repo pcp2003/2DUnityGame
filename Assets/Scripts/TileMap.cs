@@ -8,7 +8,7 @@ using UnityEngine.Tilemaps;
 
 public class TileMap : MonoBehaviour
 {
-    public Tilemap tilemap;                     // Referência ao TileMap onde os tiles serão desenhados
+    private Tilemap tilemap;                     // Referência ao TileMap onde os tiles serão desenhados
     public TileBase[] waterTiles;               // Conjunto de tiles para água
     public TileBase[] grassTiles;               // Conjunto de tiles para grama
     public TileBase[] grassWithWater;           // Tiles de borda de grama próxima à água
@@ -27,10 +27,14 @@ public class TileMap : MonoBehaviour
     public float chanceToSpawnChest = 0.001f;   // Chance de spawnar um baú
     public CameraFollow followCam;
 
+    private Spawner spawner;
+
     public Cell[,] grid;                        // Matriz para representar o terreno e características de cada célula
 
     void Start()
     {
+        tilemap = GetComponent<Tilemap>();
+        spawner = GetComponent<Spawner>();
         UnityEngine.Random.InitState(seed);                                             // Inicializa o gerador com a seed para repetibilidade
         GenerateGrid(GenerateNoiseMap(noiseScale), GenerateFalloffMap());               // Preenche o grid com dados do terreno
         GenerateTerrain();                                                              // Gera o terreno no Tilemap
@@ -52,13 +56,14 @@ public class TileMap : MonoBehaviour
                 GameObject playerInstance = Instantiate(player, transform);
                 playerInstance.transform.position = new Vector3(x, y, 0) + new Vector3(0.5f, 0.5f, 0);
                 followCam.SetTarget(playerInstance);
+                spawner.SetPlayerReference(playerInstance);
                 Debug.Log($"Player spawned at: ({x}, {y})");
                 break;
             }
         }
     }
 
-    public void SpawnEnemy (GameObject enemy ) {
+    public void SpawnEnemy (GameObject enemy, GameObject playerReference ) {
         // Verifica posições aleatórias até encontrar uma célula válida
         while (true)
         {
@@ -70,7 +75,7 @@ public class TileMap : MonoBehaviour
             {
                 GameObject enemyInstance = Instantiate(enemy, transform);
                 enemyInstance.transform.position = new Vector3(x, y, 0) + new Vector3(0.5f, 0.5f, 0);
-                enemyInstance.GetComponent<Goblin>().SetPlayerReference(player);
+                enemyInstance.GetComponent<Goblin>().SetPlayerReference(playerReference);
                 Debug.Log($"Enemy spawned at: ({x}, {y})");
                 break;
             }

@@ -18,16 +18,14 @@ public class Goblin : MonoBehaviour
     private GameObject attackPoint;
     public LayerMask enemyLayer;
     public float destroyCooldown = 3.0f; // Tempo de cooldown em segundos
-
     private Animator animator;
     private Rigidbody2D rigidbody2d;
     private SpriteRenderer spriteRenderer;
-
     private Vector2 moveDirection;
     private float distance;
     private float nextAttackTime = 0f;
-
     private bool isAttacking;
+    public float chanceToDropKey;
 
     void Start()
     {
@@ -176,14 +174,12 @@ public class Goblin : MonoBehaviour
 
     void DropKey()
     {
-        // Define a chance de drop em porcentagem (ajustável)
-        float dropChance = 50.0f;
 
         // Gera um número aleatório entre 0 e 100
         float randomChance = UnityEngine.Random.Range(0f, 100f);
 
         // Se a chance não for atingida, não dropa nenhuma chave
-        if (randomChance > dropChance)
+        if (randomChance > chanceToDropKey)
         {
             Debug.Log("No key dropped. Chance: " + randomChance + "%");
             return;
