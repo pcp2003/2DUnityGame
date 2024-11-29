@@ -133,14 +133,13 @@ public class TileMap : MonoBehaviour
                 {
                     int countAdjWater = CountAdjacentWater(x, y); // Conta tiles adjacentes de água
                     tilemap.SetTile(new Vector3Int(x, y, 0), SelectTile(x, y, countAdjWater)); // Define tiles de grama ou borda
-                    {
-
-                    }
 
                     // Gera pedra e arbustos em locais que não sejam borda do mapa.
-                    if (countAdjWater == 0)
+                    if (countAdjWater == 0){
                         GenerateObjectOnLayerSpecified(x, y, bushesAndRocksDensity, bushesAndRocks, true);
-                    GenerateObjectOnLayerSpecified(x, y, chanceToSpawnChest, chests, false);
+                        GenerateObjectOnLayerSpecified(x, y, chanceToSpawnChest, chests, false);
+                    }
+                        
 
                 }
             }
