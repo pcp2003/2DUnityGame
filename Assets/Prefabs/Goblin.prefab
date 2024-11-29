@@ -233,8 +233,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentHealth: 3
-  hitAudioSource: {fileID: 0}
-  deathAudioSource: {fileID: 5089380669461110906}
+  hitAudioSource: {fileID: 5089380669461110906}
+  deathAudioSource: {fileID: 0}
 --- !u!82 &5089380669461110906
 AudioSource:
   m_ObjectHideFlags: 0
