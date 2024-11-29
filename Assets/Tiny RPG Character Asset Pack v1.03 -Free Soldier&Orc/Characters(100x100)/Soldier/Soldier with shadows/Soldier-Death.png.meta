@@ -46,7 +46,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -84,7 +84,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -138,12 +138,12 @@ TextureImporter:
       name: Soldier-Death_0
       rect:
         serializedVersion: 2
-        x: 40
-        y: 39
-        width: 19
-        height: 23
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 41
+        y: 40
+        width: 17
+        height: 21
+      alignment: 9
+      pivot: {x: 0.5, y: -0.1}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -160,12 +160,12 @@ TextureImporter:
       name: Soldier-Death_1
       rect:
         serializedVersion: 2
-        x: 140
-        y: 39
-        width: 19
-        height: 21
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 141
+        y: 40
+        width: 17
+        height: 19
+      alignment: 9
+      pivot: {x: 0.5, y: -0.1}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -182,12 +182,12 @@ TextureImporter:
       name: Soldier-Death_2
       rect:
         serializedVersion: 2
-        x: 244
-        y: 39
-        width: 18
-        height: 19
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 245
+        y: 40
+        width: 16
+        height: 17
+      alignment: 9
+      pivot: {x: 0.5, y: -0.1}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -204,12 +204,12 @@ TextureImporter:
       name: Soldier-Death_3
       rect:
         serializedVersion: 2
-        x: 345
-        y: 39
-        width: 24
-        height: 15
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 346
+        y: 40
+        width: 22
+        height: 13
+      alignment: 9
+      pivot: {x: 0.5, y: -0.1}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -226,7 +226,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 57606d431449bcb45a393ba65c340e6d
     internalID: 0
     vertices: []
     indices: 

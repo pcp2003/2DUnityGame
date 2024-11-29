@@ -58,7 +58,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -96,7 +96,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -150,12 +150,12 @@ TextureImporter:
       name: Soldier-Walk_0
       rect:
         serializedVersion: 2
-        x: 40
-        y: 39
-        width: 19
-        height: 23
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 41
+        y: 40
+        width: 17
+        height: 21
+      alignment: 9
+      pivot: {x: 0.5, y: -0.1}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -172,12 +172,12 @@ TextureImporter:
       name: Soldier-Walk_1
       rect:
         serializedVersion: 2
-        x: 140
-        y: 39
-        width: 19
-        height: 24
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 141
+        y: 40
+        width: 17
+        height: 22
+      alignment: 9
+      pivot: {x: 0.5, y: -0.1}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -194,12 +194,12 @@ TextureImporter:
       name: Soldier-Walk_2
       rect:
         serializedVersion: 2
-        x: 240
-        y: 39
-        width: 19
-        height: 23
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 241
+        y: 40
+        width: 17
+        height: 21
+      alignment: 9
+      pivot: {x: 0.5, y: -0.1}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -216,12 +216,12 @@ TextureImporter:
       name: Soldier-Walk_3
       rect:
         serializedVersion: 2
-        x: 340
-        y: 39
-        width: 19
-        height: 22
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 341
+        y: 40
+        width: 17
+        height: 20
+      alignment: 9
+      pivot: {x: 0.5, y: -0.1}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -238,12 +238,12 @@ TextureImporter:
       name: Soldier-Walk_4
       rect:
         serializedVersion: 2
-        x: 440
-        y: 39
-        width: 19
-        height: 23
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 441
+        y: 40
+        width: 17
+        height: 21
+      alignment: 9
+      pivot: {x: 0.5, y: -0.1}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -260,12 +260,12 @@ TextureImporter:
       name: Soldier-Walk_5
       rect:
         serializedVersion: 2
-        x: 540
-        y: 39
-        width: 19
-        height: 24
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 541
+        y: 40
+        width: 17
+        height: 22
+      alignment: 9
+      pivot: {x: 0.5, y: -0.1}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -282,12 +282,12 @@ TextureImporter:
       name: Soldier-Walk_6
       rect:
         serializedVersion: 2
-        x: 640
-        y: 39
-        width: 19
-        height: 23
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 641
+        y: 40
+        width: 17
+        height: 21
+      alignment: 9
+      pivot: {x: 0.5, y: -0.1}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -304,12 +304,12 @@ TextureImporter:
       name: Soldier-Walk_7
       rect:
         serializedVersion: 2
-        x: 740
-        y: 39
-        width: 19
-        height: 22
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 741
+        y: 40
+        width: 17
+        height: 20
+      alignment: 9
+      pivot: {x: 0.5, y: -0.1}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -326,7 +326,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 2a7fc28fe1bd3dc40beead4693919f5c
     internalID: 0
     vertices: []
     indices: 

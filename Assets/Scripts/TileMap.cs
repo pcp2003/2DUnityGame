@@ -41,7 +41,7 @@ public class TileMap : MonoBehaviour
         GenerateTrees(treeNoiseScale, treeDensity);                                     // Gera árvores a partir de um novo NoiseMap e a Grid
         SpawnPlayer();
     }
- 
+
     void SpawnPlayer()
     {
         // Verifica posições aleatórias até encontrar uma célula válida
@@ -63,7 +63,10 @@ public class TileMap : MonoBehaviour
         }
     }
 
-    public void SpawnEnemy (GameObject enemy, GameObject playerReference ) {
+    public void SpawnEnemy(GameObject enemy, GameObject playerReference)
+    {
+
+        String enemyName = enemy.name;
         // Verifica posições aleatórias até encontrar uma célula válida
         while (true)
         {
@@ -75,7 +78,21 @@ public class TileMap : MonoBehaviour
             {
                 GameObject enemyInstance = Instantiate(enemy, transform);
                 enemyInstance.transform.position = new Vector3(x, y, 0) + new Vector3(0.5f, 0.5f, 0);
-                enemyInstance.GetComponent<Goblin>().SetPlayerReference(playerReference);
+                switch (enemyName)
+                {
+                    case "Soldier":
+                        enemyInstance.GetComponent<Soldier>().SetPlayerReference(playerReference);
+                        break;
+
+                    case "Goblin":
+                        enemyInstance.GetComponent<Goblin>().SetPlayerReference(playerReference);
+                        break;
+
+                    default:
+                        Debug.LogWarning($"Enemy type '{enemyName}' is not recognized.");
+                        break;
+                }
+
                 Debug.Log($"Enemy spawned at: ({x}, {y})");
                 break;
             }
@@ -122,7 +139,7 @@ public class TileMap : MonoBehaviour
                     // Gera pedra e arbustos em locais que não sejam borda do mapa.
                     if (countAdjWater == 0)
                         GenerateObjectOnLayerSpecified(x, y, bushesAndRocksDensity, bushesAndRocks, true);
-                        GenerateObjectOnLayerSpecified(x, y, chanceToSpawnChest, chests, false);
+                    GenerateObjectOnLayerSpecified(x, y, chanceToSpawnChest, chests, false);
 
                 }
             }

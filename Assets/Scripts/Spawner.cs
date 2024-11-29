@@ -8,7 +8,6 @@ using Random = UnityEngine.Random;
 public class Spawner : MonoBehaviour
 {
     public GameObject [] EntitiesToSpawn; // Prefab do objeto (inimigos, etc.)
-    public Vector2[] spawnDirections; // Direções específicas de spawn (opcional)
     private TileMap tilemap; 
     private float timer = 0.0f;
     public float timeBetweenSpawns = 60.0f; // 10 minuto
@@ -50,6 +49,7 @@ public class Spawner : MonoBehaviour
                 Debug.Log("Spawnando mais inimigos!");
                 timer = 0.0f;
                 SpawnEntities();
+                Debug.Log($"Horda: {horda}");
             }
         }
         
@@ -65,7 +65,7 @@ public class Spawner : MonoBehaviour
 
         for (int i = 0; i != numberOfEntities; i++){
 
-            tilemap.SpawnEnemy(EntitiesToSpawn[0], playerReference);
+            tilemap.SpawnEnemy(EntitiesToSpawn[UnityEngine.Random.Range(0, EntitiesToSpawn.Length)], playerReference);
         }
 
         horda++;
