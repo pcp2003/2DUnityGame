@@ -7,8 +7,8 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     public InputAction MoveAction;
-    Rigidbody2D rigidbody2d;
-    Vector2 move;
+    private Rigidbody2D rigidbody2d;
+    private Vector2 move;
     public float speed = 3.0f;
     public int health = 3; // Vida do Player
 
@@ -22,13 +22,18 @@ public class PlayerController : MonoBehaviour
     private bool isAttacking = false; // Controle se o jogador está atacando
 
     public int inventorySize;
-
     public List<Key> keys;
 
     public float destroyCooldown = 3.0f; // Tempo de cooldown em segundos
 
-    Animator animator;
-    Vector2 moveDirection = new Vector2(0, 0);
+    private Animator animator;
+    private Vector2 moveDirection = new Vector2(0, 0);
+
+    // AudioSources para diferentes eventos
+    public AudioSource walkAudioSource;
+    public AudioSource getHitAudioSource;
+    public AudioSource attackAudioSource;
+    public AudioSource deathAudioSource;
 
     void Start()
     {
@@ -46,8 +51,8 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-
-        if (gameObject.GetComponent<Animator>().GetBool("isDead")) {
+        if (gameObject.GetComponent<Animator>().GetBool("isDead"))
+        {
             gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
             StartCoroutine(DestroyCooldown());
             return;
@@ -59,6 +64,12 @@ public class PlayerController : MonoBehaviour
         {
             moveDirection.Set(move.x, move.y);
             moveDirection.Normalize();
+            
+            if (!walkAudioSource.isPlaying) walkAudioSource.Play(); // Toca o som de andar se o jogador estiver se movendo
+        }
+        else
+        {
+            walkAudioSource.Stop(); // Para o som de andar se o jogador não estiver se movendo
         }
 
         animator.SetFloat("Move X", moveDirection.x);
@@ -71,8 +82,6 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Mouse Left Button Pressed");
             Attack();
         }
-
-
     }
 
     void FixedUpdate()
@@ -86,6 +95,8 @@ public class PlayerController : MonoBehaviour
     {
         isAttacking = true; // Impede que outros ataques sejam iniciados durante a animação
         animator.SetTrigger("Attack");
+
+        if (attackAudioSource != null) attackAudioSource.Play(); // Toca o som de ataque
 
         // Determina a posição do ponto de ataque com base na direção de movimento
         Vector3 newAttackPointPosition = attackPoint.transform.localPosition;
@@ -116,7 +127,6 @@ public class PlayerController : MonoBehaviour
         if (enemiesColliders != null)
         {
             // Aplica dano aos inimigos detectados
-
             foreach (Collider2D enemyCollider in enemiesColliders)
             {
                 Health enemyHealth = enemyCollider.GetComponent<Health>();
@@ -129,9 +139,24 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-
-
         StartCoroutine(ResetAttackState()); // Espera o cooldown antes de permitir outro ataque
+    }
+
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
+        if (getHitAudioSource != null) getHitAudioSource.Play(); // Toca o som de dano
+
+        if (health <= 0)
+        {
+            Die();
+        }
+    }
+
+    void Die()
+    {
+        animator.SetBool("isDead", true);
+        if (deathAudioSource != null) deathAudioSource.Play(); // Toca o som de morte
     }
 
     IEnumerator DestroyCooldown()
@@ -178,10 +203,8 @@ public class PlayerController : MonoBehaviour
         return null;
     }
 
-
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(attackPoint.transform.position, attackRange);
     }
-
 }
