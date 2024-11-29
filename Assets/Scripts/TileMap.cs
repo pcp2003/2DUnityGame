@@ -16,10 +16,10 @@ public class TileMap : MonoBehaviour
     public GameObject[] bushesAndRocks;         // Tiles de arbustos e pedras
     public GameObject[] chests;                 // baús
     public GameObject player;                   // Player
-    public int size = 100;                      // Tamanho do mapa
+    public int size = 300;                      // Tamanho do mapa
     public float noiseScale = 0.1f;             // Escala do Perlin Noise para geração do terreno
     public float waterLevel = 0.4f;             // Nível de água
-    public int seed = 0;                        // Semente para gerar o mapa
+    private int seed = 0;                        // Semente para gerar o mapa
     public float treeNoiseScale = 0.1f;         // Escala do Perlin Noise para geração das árvores
     public float treeDensity = .5f;             // Densidade de árvores
     public float bushesAndRocksDensity = 0.01f; // Chance de gerar pedras e arbustos
@@ -33,6 +33,7 @@ public class TileMap : MonoBehaviour
 
     void Start()
     {
+        seed = UnityEngine.Random.Range(0, 100);
         tilemap = GetComponent<Tilemap>();
         spawner = GetComponent<Spawner>();
         UnityEngine.Random.InitState(seed);                                             // Inicializa o gerador com a seed para repetibilidade

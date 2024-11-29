@@ -148,7 +148,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65d6ec4f04a6bcd4f88cad551c94636e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawner: {fileID: 0}
   destroyCooldown: 5
 --- !u!95 &-1179235542308142116
 Animator:

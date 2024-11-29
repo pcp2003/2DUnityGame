@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Chest : MonoBehaviour
 {
-    public Spawner spawner;
     public float destroyCooldown;
     private String color;
 
@@ -31,7 +30,6 @@ public class Chest : MonoBehaviour
 
                     player.UseKey(key);
                     gameObject.GetComponent<Animator>().SetBool("isOpen", true);
-                    // spawner.GetComponent<Spawner>().decreaseNumberOfEntities();
                     StartCoroutine(DestroyCooldown());
                 }
             }
