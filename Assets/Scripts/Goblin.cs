@@ -162,7 +162,7 @@ public class Goblin : MonoBehaviour
             foreach (Collider2D playerCollider in playersColliders)
             {
 
-                playerCollider.GetComponent<Health>().TakeDamage(attackDamage);
+                playerCollider.GetComponent<PlayerHealth>().TakeDamage(attackDamage);
 
                 playerCollider.GetComponent<Animator>().SetTrigger("Hit");
 

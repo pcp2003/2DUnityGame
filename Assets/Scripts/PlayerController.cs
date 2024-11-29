@@ -31,9 +31,7 @@ public class PlayerController : MonoBehaviour
 
     // AudioSources para diferentes eventos
     public AudioSource walkAudioSource;
-    public AudioSource getHitAudioSource;
     public AudioSource attackAudioSource;
-    public AudioSource deathAudioSource;
 
     void Start()
     {
@@ -129,7 +127,7 @@ public class PlayerController : MonoBehaviour
             // Aplica dano aos inimigos detectados
             foreach (Collider2D enemyCollider in enemiesColliders)
             {
-                Health enemyHealth = enemyCollider.GetComponent<Health>();
+                EnemiesHealth enemyHealth = enemyCollider.GetComponent<EnemiesHealth>();
                 if (enemyHealth != null)
                 {
                     enemyHealth.TakeDamage(attackDamage);
@@ -145,18 +143,7 @@ public class PlayerController : MonoBehaviour
     public void TakeDamage(int damage)
     {
         health -= damage;
-        if (getHitAudioSource != null) getHitAudioSource.Play(); // Toca o som de dano
 
-        if (health <= 0)
-        {
-            Die();
-        }
-    }
-
-    void Die()
-    {
-        animator.SetBool("isDead", true);
-        if (deathAudioSource != null) deathAudioSource.Play(); // Toca o som de morte
     }
 
     IEnumerator DestroyCooldown()

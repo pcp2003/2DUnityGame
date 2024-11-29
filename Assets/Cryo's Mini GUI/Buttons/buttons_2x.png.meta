@@ -635,7 +635,27 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      buttons_2x_0: 371397598370140140
+      buttons_2x_1: -1922984276000229685
+      buttons_2x_10: 3842494754771230085
+      buttons_2x_11: -3038955478491181810
+      buttons_2x_12: -6198941022238029467
+      buttons_2x_13: 8268058260202110986
+      buttons_2x_14: -9090833433720455265
+      buttons_2x_15: 5001588161623202166
+      buttons_2x_16: 6224075022101927021
+      buttons_2x_17: 1616838926428502323
+      buttons_2x_18: 4063458435842086877
+      buttons_2x_19: 968314839498675944
+      buttons_2x_2: 5099423060410739401
+      buttons_2x_3: 2886441492210748926
+      buttons_2x_4: -3896322187214767633
+      buttons_2x_5: 6984324063025680785
+      buttons_2x_6: -7038092542697505667
+      buttons_2x_7: -3890263123809191945
+      buttons_2x_8: -2405483149181316690
+      buttons_2x_9: -3616969787688080744
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

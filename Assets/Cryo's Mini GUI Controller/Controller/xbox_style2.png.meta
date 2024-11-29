@@ -785,7 +785,33 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      xbox_style2_0: -7260203679730136469
+      xbox_style2_1: -7532678986211456762
+      xbox_style2_10: -7505548111306108787
+      xbox_style2_11: 4885897901102974574
+      xbox_style2_12: 5417918492355198883
+      xbox_style2_13: -7197617204754251310
+      xbox_style2_14: 2766703782200072195
+      xbox_style2_15: 3842308579882069743
+      xbox_style2_16: -723897532052822336
+      xbox_style2_17: -2301820392845635106
+      xbox_style2_18: 147892911983236024
+      xbox_style2_19: 899200979133669864
+      xbox_style2_2: -4990309231536005096
+      xbox_style2_20: -260104710425299010
+      xbox_style2_21: -1675463353195753993
+      xbox_style2_22: 2540401107974015882
+      xbox_style2_23: 1204273243319037665
+      xbox_style2_24: 1154467762758735414
+      xbox_style2_25: 7940024392076090344
+      xbox_style2_3: 2609415659068927028
+      xbox_style2_4: -2298408480097736898
+      xbox_style2_5: -3560516641278268841
+      xbox_style2_6: 813673134693153624
+      xbox_style2_7: 1189512514648357006
+      xbox_style2_8: 1180445426192151200
+      xbox_style2_9: 2706677523130378618
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

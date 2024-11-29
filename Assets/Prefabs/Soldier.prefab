@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 5454368705706707002}
   - component: {fileID: 7194864188145766307}
   - component: {fileID: 6543588547889030416}
-  - component: {fileID: 4774426742169156758}
   - component: {fileID: 3072404584734083069}
+  - component: {fileID: -513823339930840016}
   m_Layer: 7
   m_Name: Soldier
   m_TagString: Enemy
@@ -187,19 +187,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &4774426742169156758
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3674475951122706009}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e73e38afd3eb1e4cbdc789392211549, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentHealth: 2
 --- !u!114 &3072404584734083069
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -231,3 +218,18 @@ MonoBehaviour:
     m_Bits: 64
   destroyCooldown: 3
   chanceToDropKey: 10
+--- !u!114 &-513823339930840016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3674475951122706009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95ac1662254e8d14dbf4e3390162c380, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHealth: 2
+  hitAudioSource: {fileID: 0}
+  deathAudioSource: {fileID: 0}

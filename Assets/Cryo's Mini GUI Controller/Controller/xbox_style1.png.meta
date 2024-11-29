@@ -910,7 +910,38 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      xbox_style1_0: -1006056099614930909
+      xbox_style1_1: -1904547195327658774
+      xbox_style1_10: -8981769719199171054
+      xbox_style1_11: -5127086363075899314
+      xbox_style1_12: 5451793081892000965
+      xbox_style1_13: 1112528197182914168
+      xbox_style1_14: -8479794731891498365
+      xbox_style1_15: -1629955743410259657
+      xbox_style1_16: 8546044248304263570
+      xbox_style1_17: -8047168624006404418
+      xbox_style1_18: 8689743789245981583
+      xbox_style1_19: 44700280737790968
+      xbox_style1_2: 2205841438681787264
+      xbox_style1_20: -1205946445182998544
+      xbox_style1_21: -8776025307745285076
+      xbox_style1_22: 4730174109857971349
+      xbox_style1_23: 3975325676621394133
+      xbox_style1_24: -3446169751171048760
+      xbox_style1_25: 2143251065552378635
+      xbox_style1_26: 7191901499522619748
+      xbox_style1_27: -7438893561045792498
+      xbox_style1_28: -6365993358295727360
+      xbox_style1_29: 7088382145034286745
+      xbox_style1_3: -4012957945227693031
+      xbox_style1_30: 3114942812519738442
+      xbox_style1_4: -7066840111203728070
+      xbox_style1_5: 9075656478654049758
+      xbox_style1_6: -5727162430998142595
+      xbox_style1_7: -4028699255707265289
+      xbox_style1_8: 7229406730116287197
+      xbox_style1_9: -465628966022412457
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
