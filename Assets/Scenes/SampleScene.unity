@@ -988,7 +988,7 @@ MonoBehaviour:
   size: 200
   noiseScale: 0.05
   waterLevel: 0.2
-  seed: 1
+  seed: 9
   treeNoiseScale: 0.8
   treeDensity: 0.2
   bushesAndRocksDensity: 0.01

@@ -14,7 +14,7 @@ public class Spawner : MonoBehaviour
     public Tilemap spawnTilemap;
     public Vector2[] spawnDirections; // Direções específicas de spawn (opcional)
     private float timer = 0.0f;
-    private float timeBetweenSpawns= 60.0f*10; // 1 minuto
+    private float timeBetweenSpawns= 10.0f; // 1 minuto
     public int lambda = 3;
     
     //quando começa o jogo
@@ -46,8 +46,16 @@ public class Spawner : MonoBehaviour
         }
 
         Vector3 playerPosition = player.transform.position;
-        int numberOfObjects = GeneratePoisson(lambda);
-       
+        //Ex with poisson
+        //int numberOfObjects = GeneratePoisson(lambda);
+        
+        //Ex with binomial
+        //int numberOfObjects = GenerateRandomNumberOfCrates(10,0.50f);
+
+        int numberOfObjects = exponecial(3);
+        
+        
+        
         Debug.Log("Numero de objetos: " +numberOfObjects);
        
         int spawnedObjects = 0;
@@ -81,6 +89,17 @@ public class Spawner : MonoBehaviour
     }
 
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    // Poisson
     public static int GeneratePoisson(double lambda)
     {
         // Verifica se lambda é válido
@@ -102,6 +121,78 @@ public class Spawner : MonoBehaviour
 
         return k - 1;
     }
+    
+    //Exponecial, determinar a frequencia de ataques de inimigos
+    private int exponecial(float lambda)
+    {
+        // Generate U ~ [0,1]
+        float U = UnityEngine.Random.value;
+        // Generate X ~ Exp(lambda)
+        float X = -Mathf.Log(1 - U) / lambda;
+
+        Debug.Log("Com a exponecial gerei: " + Mathf.RoundToInt(X));
+        return Mathf.RoundToInt(X);
+    }
+    
+    
+    // Binomial
+    
+    private int GenerateRandomNumberOfCrates(int n, float p)
+    {
+        // Generate a random variable U in the interval [0, 1]
+        float U = UnityEngine.Random.value;
+
+        // Initialize X and cumulative distribution function (CDF) to 0
+        int X = 0;
+        float cdf = 0;
+
+        // Loop through all possible outcomes (from 0 to n)
+        for (int k = 0; k <= n; k++)
+        {
+            // Calculate the probability mass function (PMF) for the current outcome
+            float pmf = BinomialPMF(n, p, k);
+
+            // Add the PMF to the CDF
+            cdf += pmf;
+            
+            // If the random variable U is less than or equal to the CDF,
+            // set X to the current outcome and break the loop
+            if (U <= cdf)
+            {
+                X = k;
+                break;
+            }
+        }
+
+        // Return the generated random number of crates
+        return X;
+    }
+    
+    
+    private float BinomialPMF(int n, float p, int k)
+    {
+        return Combination(n, k) * Mathf.Pow(p, k) * Mathf.Pow(1 - p, n - k);
+    }
+
+    private int Combination(int n, int k)
+    {
+        return Factorial(n) / (Factorial(k) * Factorial(n - k));
+    }
+
+
+    private int Factorial(int n)
+    {
+        int result = 1;
+        for (int i = 1; i <= n; i++)
+        {
+            result *= i;
+        }
+        return result;
+    }
+    
+    
+    
+    
     
     bool IsGrassTile(TileBase tile)
     {
