@@ -6,7 +6,7 @@
         <engine:VisualElement name="HealthBar" style="flex-grow: 1; background-image: none;" />
     </engine:VisualElement>
     <engine:GroupBox name="Power" style="position: absolute; height: 173px; width: 350px; top: 4px; left: -129px;">
-        <engine:Label text="0" name="swordpower" style="font-size: 60px; width: 30px; position: absolute; top: 40px; left: 1464px;" />
+        <engine:Label text="0" name="swordpower" style="font-size: 60px; width: 30px; position: absolute; top: 40px; left: 1464px; -unity-font-style: normal;" />
         <engine:VisualElement style="flex-grow: 1; background-image: url(&quot;project://database/Assets/SpritesAndTextures/Player_Character/Front%20animations/spr_player_front_attack.png?fileID=9116391583386554501&amp;guid=11a18862f7e815f4a9d6a37c86bf7694&amp;type=3#spr_player_front_attack_0&quot;); -unity-background-scale-mode: scale-to-fit; position: absolute; height: 65px; width: 104px; top: 55px; left: 1493px;" />
     </engine:GroupBox>
     <engine:GroupBox name="Arrows" style="position: absolute; height: 107px; width: 153px; top: 3px; left: 124px;">
