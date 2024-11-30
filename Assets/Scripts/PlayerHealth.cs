@@ -12,12 +12,17 @@ public class PlayerHealth : MonoBehaviour
     public AudioSource hitAudioSource;
 
     public AudioSource deathAudioSource;
+
+    public static float volume = 1.0f;
     
 
     void Start(){
          
         maxHealth = currentHealth;
         isDying = false;
+
+        deathAudioSource.volume *= volume;
+        hitAudioSource.volume *= volume;
     }
 
     void Update()

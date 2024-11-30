@@ -32,6 +32,7 @@ public class PlayerController : MonoBehaviour
     // AudioSources para diferentes eventos
     public AudioSource walkAudioSource;
     public AudioSource attackAudioSource;
+    public static float volume = 1.0f;
 
     void Start()
     {
@@ -45,6 +46,9 @@ public class PlayerController : MonoBehaviour
         attackPoint = new GameObject("AttackPoint");
         attackPoint.transform.parent = this.transform; // Define o Player como pai
         attackPoint.transform.localPosition = Vector3.zero; // Define a posição relativa ao Player como (0, 0, 0)
+
+        walkAudioSource.volume *= volume;
+        attackAudioSource.volume *= volume;
     }
 
     void Update()

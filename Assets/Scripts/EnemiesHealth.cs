@@ -11,9 +11,14 @@ public class EnemiesHealth : MonoBehaviour
 
     public AudioSource deathAudioSource;
 
+    public static float volume = 1.0f;
+
     void Start(){
          
         isDying = false;
+
+        deathAudioSource.volume *= volume;
+        hitAudioSource.volume *= volume;
     }
 
     void Update()
