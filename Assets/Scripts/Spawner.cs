@@ -24,7 +24,7 @@ public class Spawner : MonoBehaviour
     }
 
     
-    //de x em x tempo chama
+    //de x em x tempo spwan mais arcas
     private void Update()
     {
         timer+=Time.deltaTime;
@@ -50,13 +50,14 @@ public class Spawner : MonoBehaviour
         //int numberOfObjects = GeneratePoisson(lambda);
         
         //Ex with binomial
-        //int numberOfObjects = GenerateRandomNumberOfCrates(10,0.50f);
+        //int numberOfObjects = GenerateRandomNumberOfCrates(1,0.50f);
 
-        int numberOfObjects = exponecial(3);
+       
+       //ex with normal 
+       double numberOfObjects = GenerateNormal(5, 2);   // media e desvio padrão
+       
         
-        
-        
-        Debug.Log("Numero de objetos: " +numberOfObjects);
+        Debug.LogError("Numero de objetos: " +numberOfObjects);
        
         int spawnedObjects = 0;
        
@@ -191,9 +192,17 @@ public class Spawner : MonoBehaviour
     }
     
     
-    
-    
-    
+    // Normal pode ser preciso truncar mas matematicamante e chato
+    public static double GenerateNormal(double mean, double stdDev)
+    {
+        float U1 = UnityEngine.Random.value; // UnityEngine.Random
+        float U2 = UnityEngine.Random.value;
+        double z0 = Math.Sqrt(-2.0 * Math.Log(U1)) * Math.Cos(2.0 * Math.PI * U2);
+        return mean + z0 * stdDev;
+    }
+
+   
+
     bool IsGrassTile(TileBase tile)
     {
         foreach (TileBase grassTile in grassTiles)
