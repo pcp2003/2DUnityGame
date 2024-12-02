@@ -43,9 +43,9 @@ public class Goblin : MonoBehaviour
     void Update()
     {
         if (gameObject.GetComponent<Animator>().GetBool("isDead"))
-        {   
+        {
             gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
-            StartCoroutine(DestroyCooldown()); 
+            StartCoroutine(DestroyCooldown());
 
             return;
         }
@@ -85,7 +85,8 @@ public class Goblin : MonoBehaviour
         }
     }
 
-    public void SetPlayerReference (GameObject player) {
+    public void SetPlayerReference(GameObject player)
+    {
         playerReference = player.transform;
     }
 
@@ -137,11 +138,13 @@ public class Goblin : MonoBehaviour
         if (randomChance > differentAttacksChance)
         {
             animator.SetTrigger("Attack01");
-        }else {
+        }
+        else
+        {
             animator.SetTrigger("Attack02");
         }
 
-        
+
 
         if (moveDirection.x < 0)
         {
@@ -174,7 +177,6 @@ public class Goblin : MonoBehaviour
 
     void DropKey()
     {
-
         // Gera um número aleatório entre 0 e 100
         float randomChance = UnityEngine.Random.Range(0f, 100f);
 
@@ -185,22 +187,49 @@ public class Goblin : MonoBehaviour
             return;
         }
 
-        // Continua com o drop de uma chave aleatória
+        // Configurar as probabilidades das chaves
+        List<(GameObject key, float probability)> keysWithProbabilities = new List<(GameObject, float)>();
+
         if (possibleKeys != null && possibleKeys.Count > 0)
         {
-            // Escolhe uma chave aleatória da lista
-            int randomIndex = UnityEngine.Random.Range(0, possibleKeys.Count);
-            GameObject selectedKey = possibleKeys[randomIndex];
+            // Exemplo: atribuir manualmente as probabilidades
+            keysWithProbabilities.Add((possibleKeys[0], 5f)); // Chave dourada - 1%
+            float remainingProbability = (100f - 5f) / (possibleKeys.Count - 1); // Divide 99% igualmente entre as outras chaves
 
-            // Instancia a chave selecionada na posição do Goblin
-            Instantiate(selectedKey, transform.position, Quaternion.identity);
-            Debug.Log($"Key dropped: {selectedKey.name} at position: {transform.position}");
+            for (int i = 1; i < possibleKeys.Count; i++)
+            {
+                keysWithProbabilities.Add((possibleKeys[i], remainingProbability));
+            }
+
+            // Normalizar para criar a CDF
+            float cumulativeProbability = 0f;
+            List<(GameObject key, float cdf)> keysWithCDF = new List<(GameObject, float)>();
+
+            foreach (var (key, probability) in keysWithProbabilities)
+            {
+                cumulativeProbability += probability;
+                keysWithCDF.Add((key, cumulativeProbability));
+            }
+
+            // Selecionar a chave com base no número aleatório
+            float randomValue = UnityEngine.Random.Range(0f, 100f); // Número aleatório de 0 a 100
+            foreach (var (key, cdf) in keysWithCDF)
+            {
+                if (randomValue <= cdf)
+                {
+                    // Instanciar a chave selecionada
+                    Instantiate(key, transform.position, Quaternion.identity);
+                    Debug.Log($"Key dropped: {key.name} at position: {transform.position}");
+                    return;
+                }
+            }
         }
         else
         {
             Debug.LogWarning("No possible keys assigned to Goblin.");
         }
     }
+
 
 
     IEnumerator DestroyCooldown()
@@ -221,4 +250,6 @@ public class Goblin : MonoBehaviour
     {
         Gizmos.DrawWireSphere(attackPoint.transform.position, attackRange);
     }
+
+
 }

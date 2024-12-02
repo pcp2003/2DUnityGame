@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Unity.Burst.Intrinsics;
 using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
@@ -64,42 +65,65 @@ public class TileMap : MonoBehaviour
         }
     }
 
-    public void SpawnEnemy(GameObject enemy, GameObject playerReference)
+    public void SpawnEnemy(GameObject enemy, GameObject playerReference, float exactDistanceFromPlayer)
     {
+        string enemyName = enemy.name;
 
-        String enemyName = enemy.name;
-        // Verifica posições aleatórias até encontrar uma célula válida
-        while (true)
+        // Obtém a posição atual do jogador
+        Vector3 playerPosition = playerReference.transform.position;
+
+        // Lista para armazenar posições válidas
+        List<Vector3> validPositions = new List<Vector3>();
+
+        // Verifica todas as células no grid
+        for (int x = 0; x < size; x++)
         {
-            int x = UnityEngine.Random.Range(0, size);
-            int y = UnityEngine.Random.Range(0, size);
-
-            // Verifica se a célula não é água e não está ocupada
-            if (!grid[x, y].isWater && !grid[x, y].isOccupied)
+            for (int y = 0; y < size; y++)
             {
-                GameObject enemyInstance = Instantiate(enemy, transform);
-                enemyInstance.transform.position = new Vector3(x, y, 0) + new Vector3(0.5f, 0.5f, 0);
-                switch (enemyName)
+                // Calcula a posição da célula
+                Vector3 potentialPosition = new Vector3(x, y, 0) + new Vector3(0.5f, 0.5f, 0);
+
+                // Verifica se a célula é válida e está na distância exata
+                if (!grid[x, y].isWater && !grid[x, y].isOccupied &&
+                    Mathf.Approximately(Vector3.Distance(potentialPosition, playerPosition), exactDistanceFromPlayer))
                 {
-                    case "Soldier":
-                        enemyInstance.GetComponent<Soldier>().SetPlayerReference(playerReference);
-                        break;
-
-                    case "Goblin":
-                        enemyInstance.GetComponent<Goblin>().SetPlayerReference(playerReference);
-                        break;
-
-                    default:
-                        Debug.LogWarning($"Enemy type '{enemyName}' is not recognized.");
-                        break;
+                    validPositions.Add(potentialPosition);
                 }
-
-                Debug.Log($"Enemy spawned at: ({x}, {y})");
-                break;
             }
         }
-    }
 
+        // Se não houver posições válidas, aborta o spawn
+        if (validPositions.Count == 0)
+        {
+            Debug.LogWarning("No valid positions found at the exact distance.");
+            return;
+        }
+
+        // Seleciona uma posição aleatória entre as válidas
+        Vector3 spawnPosition = validPositions[UnityEngine.Random.Range(0, validPositions.Count)];
+
+        // Instancia o inimigo na posição selecionada
+        GameObject enemyInstance = Instantiate(enemy, transform);
+        enemyInstance.transform.position = spawnPosition;
+
+        // Configura referências específicas para o inimigo
+        switch (enemyName)
+        {
+            case "Soldier":
+                enemyInstance.GetComponent<Soldier>().SetPlayerReference(playerReference);
+                break;
+
+            case "Goblin":
+                enemyInstance.GetComponent<Goblin>().SetPlayerReference(playerReference);
+                break;
+
+            default:
+                Debug.LogWarning($"Enemy type '{enemyName}' is not recognized.");
+                break;
+        }
+
+        Debug.Log($"Enemy '{enemyName}' spawned at: {spawnPosition}");
+    }
 
     // Preenche a grade com valores de células de acordo com o ruído e o mapa de queda
     void GenerateGrid(float[,] noiseMap, float[,] falloffMap)
@@ -135,11 +159,12 @@ public class TileMap : MonoBehaviour
                     tilemap.SetTile(new Vector3Int(x, y, 0), SelectTile(x, y, countAdjWater)); // Define tiles de grama ou borda
 
                     // Gera pedra e arbustos em locais que não sejam borda do mapa.
-                    if (countAdjWater == 0){
+                    if (countAdjWater == 0)
+                    {
                         GenerateObjectOnLayerSpecified(x, y, bushesAndRocksDensity, bushesAndRocks, true);
                         GenerateObjectOnLayerSpecified(x, y, chanceToSpawnChest, chests, false);
                     }
-                        
+
 
                 }
             }
@@ -153,7 +178,7 @@ public class TileMap : MonoBehaviour
     {
         float randomValue = UnityEngine.Random.Range(0f, 1f);
 
-        if (randomValue < density && !grid[x, y].isOccupied)
+        if (randomValue < density && !grid[x, y].isOccupied && !grid[x,y].isWater)
         {
 
             GameObject prefab = prefabs[UnityEngine.Random.Range(0, prefabs.Length)];

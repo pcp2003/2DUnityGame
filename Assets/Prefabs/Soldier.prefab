@@ -208,8 +208,8 @@ MonoBehaviour:
   attackDamage: 1
   avoidObstacleDistance: 1
   possibleKeys:
-  - {fileID: 374036408393086347, guid: c15f144ef3e478c41a04ff7e2e707d01, type: 3}
   - {fileID: 5649237846080690947, guid: 53686aed55222de479136d25e29de945, type: 3}
+  - {fileID: 374036408393086347, guid: c15f144ef3e478c41a04ff7e2e707d01, type: 3}
   - {fileID: 3426887096715397849, guid: b7d400c35cc347c40bd9b4695b17c310, type: 3}
   - {fileID: 8417362820182881551, guid: b0d03df643042434593019e60c9c4f02, type: 3}
   - {fileID: 3003108398581010620, guid: 552789601b8139342aa6e0e7d7150a6e, type: 3}
