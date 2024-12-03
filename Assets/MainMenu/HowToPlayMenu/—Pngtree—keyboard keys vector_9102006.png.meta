@@ -1,25 +1,19 @@
 fileFormatVersion: 2
-guid: 6d6578f4af7154046b2392513b7a9870
+guid: 9b11c396ddde7b4469aed8edfeb1850b
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5120410236738981136
-    second: Orc-Idle_0
+      213: -1276160749065208030
+    second: "\u2014Pngtree\u2014keyboard keys vector_9102006_0"
   - first:
-      213: 1133040411461804861
-    second: Orc-Idle_1
+      213: -6294447340039059197
+    second: "\u2014Pngtree\u2014keyboard keys vector_9102006_1"
   - first:
-      213: -5096723200824463030
-    second: Orc-Idle_2
+      213: 2207661838585377934
+    second: "\u2014Pngtree\u2014keyboard keys vector_9102006_2"
   - first:
-      213: -2225174341924067898
-    second: Orc-Idle_3
-  - first:
-      213: -8233152129326895834
-    second: Orc-Idle_4
-  - first:
-      213: -4010699835880829198
-    second: Orc-Idle_5
+      213: -347645279496890080
+    second: "\u2014Pngtree\u2014keyboard keys vector_9102006_3"
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -52,7 +46,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -61,7 +55,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -90,7 +84,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -141,133 +135,89 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Orc-Idle_0
+      name: "\u2014Pngtree\u2014keyboard keys vector_9102006_0"
       rect:
         serializedVersion: 2
-        x: 43
-        y: 42
-        width: 24
-        height: 17
+        x: 367
+        y: 615
+        width: 323
+        height: 334
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 01dc9113bf95f0740800000000000000
-      internalID: 5120410236738981136
+      spriteID: 22ffba36f8a2a4ee0800000000000000
+      internalID: -1276160749065208030
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Orc-Idle_1
+      name: "\u2014Pngtree\u2014keyboard keys vector_9102006_1"
       rect:
         serializedVersion: 2
-        x: 143
-        y: 42
-        width: 24
-        height: 17
+        x: 84
+        y: 251
+        width: 323
+        height: 334
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d33e759404e59bf00800000000000000
-      internalID: 1133040411461804861
+      spriteID: 309c19f5e71a5a8a0800000000000000
+      internalID: -6294447340039059197
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Orc-Idle_2
+      name: "\u2014Pngtree\u2014keyboard keys vector_9102006_2"
       rect:
         serializedVersion: 2
-        x: 243
-        y: 42
-        width: 24
-        height: 18
+        x: 439
+        y: 251
+        width: 322
+        height: 334
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a41bd50a04dc449b0800000000000000
-      internalID: -5096723200824463030
+      spriteID: e843119deb033ae10800000000000000
+      internalID: 2207661838585377934
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Orc-Idle_3
+      name: "\u2014Pngtree\u2014keyboard keys vector_9102006_3"
       rect:
         serializedVersion: 2
-        x: 343
-        y: 42
-        width: 24
-        height: 18
+        x: 793
+        y: 251
+        width: 323
+        height: 334
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6c56d4ab9b79e11e0800000000000000
-      internalID: -2225174341924067898
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Orc-Idle_4
-      rect:
-        serializedVersion: 2
-        x: 443
-        y: 42
-        width: 24
-        height: 17
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 62d28bd62c7fdbd80800000000000000
-      internalID: -8233152129326895834
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Orc-Idle_5
-      rect:
-        serializedVersion: 2
-        x: 543
-        y: 42
-        width: 24
-        height: 17
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 2fe0b95bfb12758c0800000000000000
-      internalID: -4010699835880829198
+      spriteID: 0291fbfc57aec2bf0800000000000000
+      internalID: -347645279496890080
       vertices: []
       indices: 
       edges: []
@@ -276,8 +226,8 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
-    internalID: 0
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 1537655665
     vertices: []
     indices: 
     edges: []
@@ -286,12 +236,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Orc-Idle_0: 5120410236738981136
-      Orc-Idle_1: 1133040411461804861
-      Orc-Idle_2: -5096723200824463030
-      Orc-Idle_3: -2225174341924067898
-      Orc-Idle_4: -8233152129326895834
-      Orc-Idle_5: -4010699835880829198
+      "\u2014Pngtree\u2014keyboard keys vector_9102006_0": -1276160749065208030
+      "\u2014Pngtree\u2014keyboard keys vector_9102006_1": -6294447340039059197
+      "\u2014Pngtree\u2014keyboard keys vector_9102006_2": 2207661838585377934
+      "\u2014Pngtree\u2014keyboard keys vector_9102006_3": -347645279496890080
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
