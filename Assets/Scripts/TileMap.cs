@@ -68,62 +68,62 @@ public class TileMap : MonoBehaviour
     public void SpawnEnemy(GameObject enemy, GameObject playerReference, float exactDistanceFromPlayer)
     {
         string enemyName = enemy.name;
-
-        // Obtém a posição atual do jogador
+        List<Vector3> validPositions = new List<Vector3>();
         Vector3 playerPosition = playerReference.transform.position;
 
-        // Lista para armazenar posições válidas
-        List<Vector3> validPositions = new List<Vector3>();
-
-        // Verifica todas as células no grid
+        // Busca posições válidas, ajustando condições automaticamente
         for (int x = 0; x < size; x++)
         {
             for (int y = 0; y < size; y++)
             {
-                // Calcula a posição da célula
-                Vector3 potentialPosition = new Vector3(x, y, 0) + new Vector3(0.5f, 0.5f, 0);
+                if (grid[x, y].isWater || grid[x, y].isOccupied) continue;
 
-                // Verifica se a célula é válida e está na distância exata
-                if (!grid[x, y].isWater && !grid[x, y].isOccupied &&
-                    Mathf.Approximately(Vector3.Distance(potentialPosition, playerPosition), exactDistanceFromPlayer))
+                Vector3 potentialPosition = new Vector3(x, y, 0) + new Vector3(0.5f, 0.5f, 0);
+                float distance = Vector3.Distance(potentialPosition, playerPosition);
+
+                // Adiciona posição se for exata ou próxima
+                if (Mathf.Abs(distance - exactDistanceFromPlayer) < 0.1f ||
+                    distance <= exactDistanceFromPlayer + 5f)
                 {
                     validPositions.Add(potentialPosition);
                 }
             }
         }
 
-        // Se não houver posições válidas, aborta o spawn
+        // Se nenhuma posição foi encontrada, adiciona qualquer posição válida
         if (validPositions.Count == 0)
         {
-            Debug.LogWarning("No valid positions found at the exact distance.");
-            return;
+            Debug.LogWarning("No suitable positions found. Using any valid position...");
+            for (int x = 0; x < size; x++)
+            {
+                for (int y = 0; y < size; y++)
+                {
+                    if (!grid[x, y].isWater && !grid[x, y].isOccupied)
+                    {
+                        validPositions.Add(new Vector3(x, y, 0) + new Vector3(0.5f, 0.5f, 0));
+                    }
+                }
+            }
         }
 
-        // Seleciona uma posição aleatória entre as válidas
+        // Seleciona uma posição aleatória
         Vector3 spawnPosition = validPositions[UnityEngine.Random.Range(0, validPositions.Count)];
 
-        // Instancia o inimigo na posição selecionada
+        // Instancia o inimigo
         GameObject enemyInstance = Instantiate(enemy, transform);
         enemyInstance.transform.position = spawnPosition;
 
-        // Configura referências específicas para o inimigo
-        switch (enemyName)
-        {
-            case "Soldier":
-                enemyInstance.GetComponent<Soldier>().SetPlayerReference(playerReference);
-                break;
-
-            case "Goblin":
-                enemyInstance.GetComponent<Goblin>().SetPlayerReference(playerReference);
-                break;
-
-            default:
-                Debug.LogWarning($"Enemy type '{enemyName}' is not recognized.");
-                break;
-        }
+        // Configura referências específicas do inimigo
+        if (enemyName == "Soldier")
+            enemyInstance.GetComponent<Soldier>().SetPlayerReference(playerReference);
+        else if (enemyName == "Goblin")
+            enemyInstance.GetComponent<Goblin>().SetPlayerReference(playerReference);
+        else
+            Debug.LogWarning($"Enemy type '{enemyName}' is not recognized.");
 
         Debug.Log($"Enemy '{enemyName}' spawned at: {spawnPosition}");
     }
+
 
     // Preenche a grade com valores de células de acordo com o ruído e o mapa de queda
     void GenerateGrid(float[,] noiseMap, float[,] falloffMap)
@@ -178,7 +178,7 @@ public class TileMap : MonoBehaviour
     {
         float randomValue = UnityEngine.Random.Range(0f, 1f);
 
-        if (randomValue < density && !grid[x, y].isOccupied && !grid[x,y].isWater)
+        if (randomValue < density && !grid[x, y].isOccupied && !grid[x, y].isWater)
         {
 
             GameObject prefab = prefabs[UnityEngine.Random.Range(0, prefabs.Length)];

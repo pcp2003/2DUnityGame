@@ -39,11 +39,27 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        currentHealth -= damage;
+        if (!isDying) {
 
-        UIHandler.instance.SetHealthValue(currentHealth / (float)maxHealth);
+            currentHealth -= damage;
 
-        if (hitAudioSource != null && currentHealth != 0) hitAudioSource.Play();
+            UIHandler.instance.SetHealthValue(currentHealth / (float)maxHealth);
 
+            if (hitAudioSource != null && currentHealth != 0) hitAudioSource.Play();
+        }
+        
+
+    }
+
+    public void RestoreHealth(int restore)
+    {
+        if (!isDying) {
+            
+            currentHealth += restore;
+
+            UIHandler.instance.SetHealthValue(currentHealth / (float)maxHealth);
+
+            if (hitAudioSource != null && currentHealth != 0) hitAudioSource.Play();
+        }
     }
 }

@@ -16,6 +16,8 @@ public class Spawner : MonoBehaviour
     private GameObject playerReference;
     private int horda;
 
+    public int avarageSpawnDistanceFromPlayer;
+
     void Start(){
 
         tilemap = gameObject.GetComponent<TileMap>();
@@ -68,7 +70,7 @@ public class Spawner : MonoBehaviour
 
             int exp = Exponecial(exponencialLambda);
 
-            tilemap.SpawnEnemy(EntitiesToSpawn[UnityEngine.Random.Range(0, EntitiesToSpawn.Length)], playerReference, 10 - exp);
+            tilemap.SpawnEnemy(EntitiesToSpawn[UnityEngine.Random.Range(0, EntitiesToSpawn.Length)], playerReference, avarageSpawnDistanceFromPlayer - exp);
         }
 
         horda++;
@@ -100,7 +102,6 @@ public class Spawner : MonoBehaviour
         return k - 1;
     }
 
-     //Exponecial, determinar a frequencia de ataques de inimigos
     private int Exponecial(float exponencialLambda)
     {
         // Generate U ~ [0,1]
