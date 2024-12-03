@@ -49,6 +49,10 @@ public class Key : MonoBehaviour
         return color;
     }
 
+    public Sprite GetSprite () {
+        return GetComponent<SpriteRenderer>().sprite;
+    }
+
 
     // Função para gerar um número aleatório segundo a distribuição Weibull
     float Weibull( double l )

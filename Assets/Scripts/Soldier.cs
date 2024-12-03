@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class Soldier : MonoBehaviour
 {
-    private Transform playerReference;
+    private GameObject playerReference;
     public float speed = 2.0f;
     public float attackDistance = 1.0f;
     public float attackRange = 1.0f;
@@ -52,7 +52,7 @@ public class Soldier : MonoBehaviour
 
         if (playerReference != null)
         {
-            Vector2 direction = playerReference.position - transform.position;
+            Vector2 direction = playerReference.transform.position - transform.position;
 
             // Detectar e evitar obstáculos
             Vector2 adjustedDirection = AvoidObstacles(direction);
@@ -86,7 +86,7 @@ public class Soldier : MonoBehaviour
     }
 
     public void SetPlayerReference (GameObject player) {
-        playerReference = player.transform;
+        playerReference = player;
     }
 
     private Vector2 AvoidObstacles(Vector2 direction)
@@ -102,7 +102,7 @@ public class Soldier : MonoBehaviour
         // Se houver obstáculo à frente, ajusta a direção
         if (hitFront.collider != null)
         {
-            Debug.Log("Obstacle detected ahead: " + hitFront.collider.name);
+            // Debug.Log("Obstacle detected ahead: " + hitFront.collider.name);
 
             // Tenta desviar para a esquerda ou direita
             if (hitLeft.collider == null)
@@ -233,6 +233,7 @@ public class Soldier : MonoBehaviour
         yield return new WaitForSeconds(destroyCooldown); // Aguarda o tempo especificado
         Debug.Log("Destruindo objeto: " + gameObject.name);
         DropKey();
+        playerReference.GetComponent<PlayerController>().addKill();
         Destroy(gameObject); // Destrói o objeto após o tempo
     }
 
@@ -242,8 +243,8 @@ public class Soldier : MonoBehaviour
         isAttacking = false; // Permite um novo ataque
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawWireSphere(attackPoint.transform.position, attackRange);
-    }
+    // private void OnDrawGizmos()
+    // {
+    //     Gizmos.DrawWireSphere(attackPoint.transform.position, attackRange);
+    // }
 }

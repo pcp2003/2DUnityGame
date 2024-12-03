@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
-{
+{   
     public InputAction MoveAction;
     private Rigidbody2D rigidbody2d;
     private Vector2 move;
@@ -34,6 +34,8 @@ public class PlayerController : MonoBehaviour
     public AudioSource attackAudioSource;
     public static float volume = 1.0f;
 
+    private int kills;
+
     void Start()
     {
         MoveAction.Enable();
@@ -49,6 +51,16 @@ public class PlayerController : MonoBehaviour
 
         walkAudioSource.volume *= volume;
         attackAudioSource.volume *= volume;
+
+        kills = 0;
+    }
+
+    public void addKill () {
+        kills++;
+    }
+
+    public int getKills () {
+        return kills;
     }
 
     void Update()
@@ -81,7 +93,7 @@ public class PlayerController : MonoBehaviour
         // Detectar ataque
         if (Mouse.current.leftButton.wasPressedThisFrame && !isAttacking) // Apenas permite atacar se não estiver atacando
         {
-            Debug.Log("Mouse Left Button Pressed");
+            // Debug.Log("Mouse Left Button Pressed");
             Attack();
         }
     }

@@ -27,7 +27,7 @@ public class TileMap : MonoBehaviour
     public float rocksInWaterDensity = 0.02f;   // Chance de gerar pedras na água
     public float chanceToSpawnChest = 0.001f;   // Chance de spawnar um baú
     public CameraFollow followCam;
-
+    public CanvasUpdate canvas;
     private Spawner spawner;
 
     public Cell[,] grid;                        // Matriz para representar o terreno e características de cada célula
@@ -59,6 +59,7 @@ public class TileMap : MonoBehaviour
                 playerInstance.transform.position = new Vector3(x, y, 0) + new Vector3(0.5f, 0.5f, 0);
                 followCam.SetTarget(playerInstance);
                 spawner.SetPlayerReference(playerInstance);
+                canvas.SetPlayer(playerInstance);
                 Debug.Log($"Player spawned at: ({x}, {y})");
                 break;
             }
@@ -121,7 +122,7 @@ public class TileMap : MonoBehaviour
         else
             Debug.LogWarning($"Enemy type '{enemyName}' is not recognized.");
 
-        Debug.Log($"Enemy '{enemyName}' spawned at: {spawnPosition}");
+        // Debug.Log($"Enemy '{enemyName}' spawned at: {spawnPosition}");
     }
 
 

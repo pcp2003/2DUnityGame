@@ -8,7 +8,7 @@ public class CameraFollow : MonoBehaviour
     public float smoothSpeed = 0.125f; // Smoothing speed for the camera movement
     public Vector3 offset;         // Offset to keep the camera at a certain distance from the player
 
-    void LateUpdate()
+    void Update()
     {
         if (target != null)
         {

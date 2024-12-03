@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 6543588547889030416}
   - component: {fileID: -2532313611175952461}
   - component: {fileID: 5089380669461110906}
-  - component: {fileID: 3474398389283940376}
+  - component: {fileID: 1194115438209467997}
   m_Layer: 7
   m_Name: Goblin
   m_TagString: Enemy
@@ -197,7 +197,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   destroyCooldown: 3
-  chanceToDropKey: 0.3
+  chanceToDropKey: 100
 --- !u!95 &6543588547889030416
 Animator:
   serializedVersion: 7
@@ -234,7 +234,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHealth: 3
   hitAudioSource: {fileID: 5089380669461110906}
-  deathAudioSource: {fileID: 5089380669461110906}
+  deathAudioSource: {fileID: 1194115438209467997}
 --- !u!82 &5089380669461110906
 AudioSource:
   m_ObjectHideFlags: 0
@@ -332,7 +332,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!82 &3474398389283940376
+--- !u!82 &1194115438209467997
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -342,11 +342,11 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: ed1c8861d80888949a3d61a967030caa, type: 3}
-  m_Resource: {fileID: 8300000, guid: ed1c8861d80888949a3d61a967030caa, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 47d5399c7e6a1984c99def770219b10e, type: 3}
+  m_Resource: {fileID: 8300000, guid: 47d5399c7e6a1984c99def770219b10e, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.158
-  m_Pitch: 1.42
+  m_Volume: 0.2
+  m_Pitch: 1.5
   Loop: 0
   Mute: 0
   Spatialize: 0

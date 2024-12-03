@@ -39,12 +39,12 @@ public class Spawner : MonoBehaviour
 
              // Escreve as coordenadas do playerReference no console
             Vector3 playerPosition = playerReference.transform.position;
-            Debug.Log($"Player Position: ({playerPosition.x}, {playerPosition.y}, {playerPosition.z})");
+            // Debug.Log($"Player Position: ({playerPosition.x}, {playerPosition.y}, {playerPosition.z})");
 
 
             timer += Time.deltaTime;
 
-            Debug.Log(timer);
+            // Debug.Log(timer);
 
             if (timer >= timeBetweenSpawns)
 
@@ -109,7 +109,7 @@ public class Spawner : MonoBehaviour
         // Generate X ~ Exp(lambda)
         float X = -Mathf.Log(1 - U) / exponencialLambda;
 
-        Debug.Log("Com a exponecial gerei: " + Mathf.RoundToInt(X));
+        // Debug.Log("Com a exponecial gerei: " + Mathf.RoundToInt(X));
         return Mathf.RoundToInt(X);
     }
 
