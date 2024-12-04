@@ -4,7 +4,7 @@ using System.Data.Common;
 
 public class EnemiesHealth : MonoBehaviour
 {
-    public int currentHealth;
+    private int currentHealth;
     private bool isDying; // Controle para evitar múltiplas chamadas
 
     public AudioSource hitAudioSource;
@@ -14,9 +14,11 @@ public class EnemiesHealth : MonoBehaviour
     public static float volume = 1.0f;
 
     void Start(){
-         
-        isDying = false;
+        
+        if (name.Equals("Goblin(Clone)")) currentHealth = GetComponent<Goblin>().health;
+        if (name.Equals("Soldier(Clone)")) currentHealth = GetComponent<Soldier>().health;
 
+        isDying = false;
         deathAudioSource.volume *= volume;
         hitAudioSource.volume *= volume;
     }
@@ -28,7 +30,7 @@ public class EnemiesHealth : MonoBehaviour
             if (deathAudioSource != null) deathAudioSource.Play();
             isDying = true; // Marca que o objeto está em processo de destruição
             Debug.Log("Iniciando cooldown para destruir " + gameObject.name);
-            gameObject.GetComponent<Animator>().SetBool("isDead", true);
+            GetComponent<Animator>().SetBool("isDead", true);
              
         }
     }

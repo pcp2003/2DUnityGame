@@ -3,7 +3,7 @@ using System.Collections;
 
 public class PlayerHealth : MonoBehaviour
 {
-    public int currentHealth;
+    private int currentHealth;
 
     private int maxHealth;
 
@@ -18,7 +18,8 @@ public class PlayerHealth : MonoBehaviour
 
     void Start(){
          
-        maxHealth = currentHealth;
+        maxHealth = GetComponent<PlayerController>().health;
+        currentHealth = maxHealth;
         isDying = false;
 
         deathAudioSource.volume *= volume;
@@ -32,7 +33,7 @@ public class PlayerHealth : MonoBehaviour
             if (deathAudioSource != null) deathAudioSource.Play();
             isDying = true; // Marca que o objeto está em processo de destruição
             Debug.Log("Iniciando cooldown para destruir " + gameObject.name);
-            gameObject.GetComponent<Animator>().SetBool("isDead", true);
+            GetComponent<Animator>().SetBool("isDead", true);
              
         }
     }
@@ -41,6 +42,7 @@ public class PlayerHealth : MonoBehaviour
     {
         if (!isDying) {
 
+            Debug.Log($"Health = {currentHealth}, Damage = {damage}");
             currentHealth -= damage;
 
             UIHandler.instance.SetHealthValue(currentHealth / (float)maxHealth);

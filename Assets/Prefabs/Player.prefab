@@ -158,10 +158,6 @@ MonoBehaviour:
       m_Action: Move
       m_Flags: 8
     m_Flags: 0
-  speed: 5
-  health: 3
-  attackRange: 1
-  attackDamage: 1
   enemyLayer:
     serializedVersion: 2
     m_Bits: 128
@@ -170,6 +166,10 @@ MonoBehaviour:
   destroyCooldown: 3
   walkAudioSource: {fileID: 7105837857125231664}
   attackAudioSource: {fileID: 6021109766232172784}
+  speed: 3
+  health: 100
+  attackRange: 1
+  attackDamage: 10
 --- !u!50 &6197364295621610241
 Rigidbody2D:
   serializedVersion: 5

@@ -27,9 +27,10 @@ public class Chest : MonoBehaviour
                 if ( key != null && !gameObject.GetComponent<Animator>().GetBool("isOpen")){
 
                     Debug.Log($"Key {key.GetColor()}. NOT NULL");
-
+                    player.AdquireRandomPowerUp();
                     player.UseKey(key);
                     gameObject.GetComponent<Animator>().SetBool("isOpen", true);
+
                     StartCoroutine(DestroyCooldown());
                 }
             }
@@ -37,6 +38,11 @@ public class Chest : MonoBehaviour
         }
 
     }
+
+    public void randomPowerUp () {
+
+    }
+
 
     IEnumerator DestroyCooldown()
     {

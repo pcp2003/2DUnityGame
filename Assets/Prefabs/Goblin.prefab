@@ -179,12 +179,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7cfc05f3f1f5494bbaadb6e82e4e7df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
   attackDistance: 1
   attackRange: 1
-  attackInterval: 1
-  health: 3
-  attackDamage: 1
   avoidObstacleDistance: 1
   possibleKeys:
   - {fileID: 5649237846080690947, guid: 53686aed55222de479136d25e29de945, type: 3}
@@ -197,7 +193,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   destroyCooldown: 3
-  chanceToDropKey: 100
+  chanceToDropKey: 1
+  speed: 2
+  attackInterval: 1
+  health: 20
+  attackDamage: 5
 --- !u!95 &6543588547889030416
 Animator:
   serializedVersion: 7

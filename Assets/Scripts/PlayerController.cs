@@ -5,36 +5,84 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
-{   
+{
     public InputAction MoveAction;
     private Rigidbody2D rigidbody2d;
     private Vector2 move;
-    public float speed = 3.0f;
-    public int health = 3; // Vida do Player
-
-    // Variáveis relacionadas ao ataque
     private GameObject attackPoint;
-    public float attackRange = 1.0f; // Alcance do ataque
-    public int attackDamage = 1;     // Dano do ataque
     public LayerMask enemyLayer;     // Camada dos inimigos
-    private float attackCooldown = 1.0f; // Duração do ataque (igual ao HasExitTime)
-
     private bool isAttacking = false; // Controle se o jogador está atacando
-
     public int inventorySize;
     public List<Key> keys;
-
     public float destroyCooldown = 3.0f; // Tempo de cooldown em segundos
-
     private Animator animator;
     private Vector2 moveDirection = new Vector2(0, 0);
 
-    // AudioSources para diferentes eventos
     public AudioSource walkAudioSource;
     public AudioSource attackAudioSource;
     public static float volume = 1.0f;
-
     private int kills;
+
+    // Player Stats
+    public float speed = 3.0f;
+    public int health = 3; // Vida do Player
+    public float attackRange = 1.0f; // Alcance do ataque
+    public int attackDamage = 1;     // Dano do ataque
+    private float attackCooldown = 1.0f; // Duração do ataque (igual ao HasExitTime)
+
+    // Player PowerUps
+
+    private int healthPowerUps;
+    private int strengthPowerUps;
+    private int speedPowerUps;
+    private int attackSpeedPowerUps;
+    private int criticalHitPowerUps;
+    private int superPowerUps; 
+
+    public void AdquireRandomPowerUp () {
+
+        // // Pesos dos PowerUps
+        // float[] pesos = { 0.3f, 0.2f, 0.2f, 0.1f, 0.1f, 0.1f }; // Certifique-se que somam 1.0
+        // float random = UnityEngine.Random.Range(0f,1.0f);
+        // float acumulador = 0;
+
+        // for (int i = 0; i < pesos.Length; i++)
+        // {
+        //     acumulador += pesos[i];
+        //     if (random < acumulador)
+        //     {
+        //          switch(i){
+
+        //             case(0){
+        //                 // Restaura vida e aumenta o tamanho
+        //             }
+
+        //             case(1) {
+        //                 // Adiciona força ao player
+        //             }
+
+        //             case (2) {
+        //                 // Adiciona adiciona velocidade ao player
+        //             }
+
+        //             case (3) {
+        //                 // Aumenta a chance de Critico
+        //             }
+
+        //             case (4) {
+        //                 // Deixa imortal por 5 segundos
+        //             }
+
+        //             case (5) {
+        //                 // Aumenta o attack Speed
+        //             }   
+
+        //          }
+        //     }
+        // }
+
+        Debug.LogError("Erro em AdquireRandomPowerUp");
+    }
 
     void Start()
     {
@@ -43,7 +91,7 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
         gameObject.GetComponent<Animator>().SetBool("isDead", false);
         keys = new List<Key>(); // Inicializa a lista
-        
+
         // Criando o ponto de ataque
         attackPoint = new GameObject("AttackPoint");
         attackPoint.transform.parent = this.transform; // Define o Player como pai
@@ -53,14 +101,6 @@ public class PlayerController : MonoBehaviour
         attackAudioSource.volume *= volume;
 
         kills = 0;
-    }
-
-    public void addKill () {
-        kills++;
-    }
-
-    public int getKills () {
-        return kills;
     }
 
     void Update()
@@ -78,7 +118,7 @@ public class PlayerController : MonoBehaviour
         {
             moveDirection.Set(move.x, move.y);
             moveDirection.Normalize();
-            
+
             if (!walkAudioSource.isPlaying) walkAudioSource.Play(); // Toca o som de andar se o jogador estiver se movendo
         }
         else
@@ -199,12 +239,24 @@ public class PlayerController : MonoBehaviour
         foreach (Key key in keys)
         {
             if (string.Equals(key.GetColor(), Color, StringComparison.OrdinalIgnoreCase) || string.Equals(key.GetColor(), "Golden", StringComparison.OrdinalIgnoreCase)) // Ignora maiúsculas/minúsculas
-            {  
+            {
                 return key;
             }
         }
         return null;
     }
+
+    public void addKill()
+    {
+        kills++;
+    }
+
+    public int getKills()
+    {
+        return kills;
+    }
+
+    
 
     private void OnDrawGizmos()
     {

@@ -29,7 +29,6 @@ public class TileMap : MonoBehaviour
     public CameraFollow followCam;
     public CanvasUpdate canvas;
     private Spawner spawner;
-
     public Cell[,] grid;                        // Matriz para representar o terreno e características de cada célula
 
     void Start()
@@ -172,8 +171,6 @@ public class TileMap : MonoBehaviour
         }
     }
 
-
-
     // Gera ativos como arbustos ou pedras no layer especificado
     public void GenerateObjectOnLayerSpecified(int x, int y, float density, GameObject[] prefabs, bool hasRandomScale)
     {
@@ -201,7 +198,7 @@ public class TileMap : MonoBehaviour
                 prefab.transform.localScale = new Vector3(randomScale, randomScale, prefab.transform.localScale.z);
             }
 
-            if (!(prefab.name == "Bush"))
+            if (! (prefab.name == "Bush") )
             {
                 prefabCollider.size = new Vector2(originalSize.x, originalSize.y);
             }

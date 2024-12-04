@@ -5,16 +5,11 @@ using System.Collections.Generic;
 public class Goblin : MonoBehaviour
 {
     private GameObject playerReference;
-    public float speed = 2.0f;
     public float attackDistance = 1.0f;
     public float attackRange = 1.0f;
-    public float attackInterval = 1.0f;
-    public int health = 3; // Vida do Goblin
-    public int attackDamage = 1; // Dano ao jogador
     private float raycastOffset = 0.5f;        // Offset do raycast para detectar obstáculos
     public float avoidObstacleDistance = 1.0f; // Distância para evitar obstáculos
     public List<GameObject> possibleKeys; // Lista de prefabs de chaves possíveis
-    private float attackCooldown = 0.25f;
     private GameObject attackPoint;
     public LayerMask enemyLayer;
     public float destroyCooldown = 3.0f; // Tempo de cooldown em segundos
@@ -23,9 +18,16 @@ public class Goblin : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private Vector2 moveDirection;
     private float distance;
-    private float nextAttackTime = 0f;
     private bool isAttacking;
     public float chanceToDropKey;
+
+    // Goblin Stats
+    private float attackCooldown = 0.25f;
+    private float nextAttackTime = 0f;
+    public float speed = 2.0f;
+    public float attackInterval = 1.0f;
+    public int health = 3; // Vida do Goblin
+    public int attackDamage = 1; // Dano ao jogador
 
     void Start()
     {
@@ -143,8 +145,6 @@ public class Goblin : MonoBehaviour
         {
             animator.SetTrigger("Attack02");
         }
-
-
 
         if (moveDirection.x < 0)
         {
