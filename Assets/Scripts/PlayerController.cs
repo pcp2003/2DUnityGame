@@ -180,7 +180,7 @@ public class PlayerController : MonoBehaviour
         return keys.Count >= inventorySize;
     }
 
-    public void AddKeyToInventory(Key key)
+    public void AddKey(Key key)
     {
         if (!GetIsInventoryFull())
         {

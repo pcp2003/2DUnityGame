@@ -38,7 +38,7 @@ public class Key : MonoBehaviour
 
         if (player != null && !player.GetIsInventoryFull())
         {   
-            player.AddKeyToInventory(this);
+            player.AddKey(this);
             gameObject.SetActive(false);
             
         }

@@ -46,21 +46,20 @@ public class CanvasUpdate : MonoBehaviour
 
         for (int i = 0; i < slots.Length; i++)
         {
-            if (player.keys[i] != null)
+            // Verifica se o índice `i` existe na lista de chaves
+            if (i < player.keys.Count && player.keys[i] != null)
             {
                 Debug.Log($"Slot {i}: Chave encontrada.");
                 slots[i].sprite = player.keys[i].GetSprite();
-                slots[i].color = Color.white; // Totalmente opaco
                 slots[i].enabled = true; // Ativa o componente para exibir o sprite
             }
             else
             {
-                Debug.Log($"Slot {i}: Chave não encontrada (null).");
-                slots[i].color = new Color(1, 1, 1, 0); // Totalmente transparente
-                slots[i].enabled = false; // Ativa o componente para exibir o sprite
+                slots[i].enabled = false; // Desativa o componente
             }
         }
     }
+
 
 
 }
