@@ -22,12 +22,27 @@ public class Goblin : MonoBehaviour
     public float chanceToDropKey;
 
     // Goblin Stats
+    private float scaleFactor;
     private float attackCooldown = 0.25f;
     private float nextAttackTime = 0f;
-    public float speed = 2.0f;
-    public float attackInterval = 1.0f;
-    public int health = 3; // Vida do Goblin
-    public int attackDamage = 1; // Dano ao jogador
+    private float speed = 2.0f;
+    private float attackInterval = 1.0f;
+    private float health = 3; // Vida do Goblin
+    private float attackDamage = 1; // Dano ao jogador
+
+    public float getHealth (){
+        return health;
+    }
+
+    public void updateStats () {
+        this.health = health*scaleFactor;
+        this.speed = speed*scaleFactor;
+        this.attackDamage = attackDamage*scaleFactor;
+    }
+
+    public void setScaleFactor (float scaleFactor) {
+        this.scaleFactor = scaleFactor;
+    }
 
     void Start()
     {

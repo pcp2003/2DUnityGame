@@ -166,7 +166,7 @@ MonoBehaviour:
   destroyCooldown: 3
   walkAudioSource: {fileID: 7105837857125231664}
   attackAudioSource: {fileID: 6021109766232172784}
-  speed: 3
+  speed: 5
   health: 100
   attackRange: 1
   attackDamage: 10
@@ -665,7 +665,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e73e38afd3eb1e4cbdc789392211549, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHealth: 5
   hitAudioSource: {fileID: 3746987701602924796}
   deathAudioSource: {fileID: -376748008184848240}
 --- !u!82 &-3087046914291329139

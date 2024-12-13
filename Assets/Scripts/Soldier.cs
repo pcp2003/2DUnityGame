@@ -20,14 +20,31 @@ public class Soldier : MonoBehaviour
     public float chanceToDropKey;
 
     // Soldier Stats
-    public float speed = 2.0f;
-    public float attackDistance = 1.0f;
-    public float attackRange = 1.0f;
-    public float attackInterval = 1.0f;
-    public int health = 3; // Vida do Soldier
-    public int attackDamage = 1; // Dano ao jogador
+
+    private float scaleFactor;
+    private float speed = 2.0f;
+    private float attackDistance = 1.0f;
+    private float attackRange = 1.0f;
+    private float attackInterval = 1.0f;
+    private float health = 3; // Vida do Soldier
+    private float attackDamage = 1; // Dano ao jogador
     private float attackCooldown = 0.25f;
     private float nextAttackTime = 0f;
+
+    public float getHealth () {
+        return health;
+    }
+
+    public void setScaleFactor (float scaleFactor) {
+        this.scaleFactor = scaleFactor;
+        
+    }
+
+    public void updateStats () {
+        this.health = health*scaleFactor;
+        this.speed = speed*scaleFactor;
+        this.attackDamage = attackDamage*scaleFactor;
+    }
     
     void Start()
     {
@@ -40,10 +57,13 @@ public class Soldier : MonoBehaviour
         attackPoint = new GameObject("AttackPoint");
         attackPoint.transform.parent = this.transform; // Define o Player como pai
         attackPoint.transform.localPosition = Vector3.zero; // Define a posição relativa ao Player como (0, 0, 0)
+
+        Debug.Log($"Soldier Health: {health}");
     }
 
     void Update()
     {
+        
         if (gameObject.GetComponent<Animator>().GetBool("isDead"))
         {   
             gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
@@ -245,8 +265,4 @@ public class Soldier : MonoBehaviour
         isAttacking = false; // Permite um novo ataque
     }
 
-    // private void OnDrawGizmos()
-    // {
-    //     Gizmos.DrawWireSphere(attackPoint.transform.position, attackRange);
-    // }
 }

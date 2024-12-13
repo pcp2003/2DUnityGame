@@ -3,9 +3,9 @@ using System.Collections;
 
 public class PlayerHealth : MonoBehaviour
 {
-    private int currentHealth;
+    private float currentHealth;
 
-    private int maxHealth;
+    private float maxHealth;
 
     private bool isDying; // Controle para evitar múltiplas chamadas
 
@@ -38,7 +38,7 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         if (!isDying) {
 

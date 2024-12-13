@@ -4,7 +4,7 @@ using System.Data.Common;
 
 public class EnemiesHealth : MonoBehaviour
 {
-    private int currentHealth;
+    private float currentHealth;
     private bool isDying; // Controle para evitar múltiplas chamadas
 
     public AudioSource hitAudioSource;
@@ -15,8 +15,8 @@ public class EnemiesHealth : MonoBehaviour
 
     void Start(){
         
-        if (name.Equals("Goblin(Clone)")) currentHealth = GetComponent<Goblin>().health;
-        if (name.Equals("Soldier(Clone)")) currentHealth = GetComponent<Soldier>().health;
+        if (name.Equals("Goblin(Clone)") ) currentHealth = GetComponent<Goblin>().getHealth();
+        if (name.Equals("Soldier(Clone)")) currentHealth = GetComponent<Soldier>().getHealth();
 
         isDying = false;
         deathAudioSource.volume *= volume;
@@ -35,7 +35,7 @@ public class EnemiesHealth : MonoBehaviour
         }
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         currentHealth -= damage;
 

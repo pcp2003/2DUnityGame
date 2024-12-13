@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Unity.Burst.Intrinsics;
+using Unity.Collections;
 using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
@@ -28,6 +29,7 @@ public class TileMap : MonoBehaviour
     public float chanceToSpawnChest = 0.001f;   // Chance de spawnar um baú
     public CameraFollow followCam;
     public CanvasUpdate canvas;
+    public PowerUpManager powerUpManager;
     private Spawner spawner;
     public Cell[,] grid;                        // Matriz para representar o terreno e características de cada célula
 
@@ -58,14 +60,16 @@ public class TileMap : MonoBehaviour
                 playerInstance.transform.position = new Vector3(x, y, 0) + new Vector3(0.5f, 0.5f, 0);
                 followCam.SetTarget(playerInstance);
                 spawner.SetPlayerReference(playerInstance);
-                canvas.SetPlayer(playerInstance);
+                playerInstance.GetComponent<PlayerController>().SetCanvas(canvas);
+                powerUpManager.SetPlayer(playerInstance);
+                powerUpManager.SetCanvas(canvas);
                 Debug.Log($"Player spawned at: ({x}, {y})");
                 break;
             }
         }
     }
 
-    public void SpawnEnemy(GameObject enemy, GameObject playerReference, float exactDistanceFromPlayer)
+    public void SpawnEnemy(GameObject enemy, GameObject playerReference, float exactDistanceFromPlayer, float scaleFactor)
     {
         string enemyName = enemy.name;
         List<Vector3> validPositions = new List<Vector3>();
@@ -114,10 +118,19 @@ public class TileMap : MonoBehaviour
         enemyInstance.transform.position = spawnPosition;
 
         // Configura referências específicas do inimigo
-        if (enemyName == "Soldier")
-            enemyInstance.GetComponent<Soldier>().SetPlayerReference(playerReference);
-        else if (enemyName == "Goblin")
-            enemyInstance.GetComponent<Goblin>().SetPlayerReference(playerReference);
+        if (enemyName == "Soldier"){
+            Soldier soldier =  enemyInstance.GetComponent<Soldier>();
+            soldier.SetPlayerReference(playerReference);
+            soldier.setScaleFactor(scaleFactor);
+            soldier.updateStats();
+        }
+
+        else if (enemyName == "Goblin"){
+            Goblin goblin =  enemyInstance.GetComponent<Goblin>();
+            goblin.SetPlayerReference(playerReference);
+            goblin.setScaleFactor(scaleFactor);
+            goblin.updateStats();
+        }
         else
             Debug.LogWarning($"Enemy type '{enemyName}' is not recognized.");
 
@@ -161,8 +174,8 @@ public class TileMap : MonoBehaviour
                     // Gera pedra e arbustos em locais que não sejam borda do mapa.
                     if (countAdjWater == 0)
                     {
-                        GenerateObjectOnLayerSpecified(x, y, bushesAndRocksDensity, bushesAndRocks, true);
-                        GenerateObjectOnLayerSpecified(x, y, chanceToSpawnChest, chests, false);
+                        GenerateObjectOnLayerSpecified(x, y, bushesAndRocksDensity, bushesAndRocks);
+                        GenerateChests(x, y, chanceToSpawnChest);
                     }
 
 
@@ -171,13 +184,35 @@ public class TileMap : MonoBehaviour
         }
     }
 
-    // Gera ativos como arbustos ou pedras no layer especificado
-    public void GenerateObjectOnLayerSpecified(int x, int y, float density, GameObject[] prefabs, bool hasRandomScale)
+    public void GenerateChests(int x, int y, float chanceToSpawnChest)
     {
         float randomValue = UnityEngine.Random.Range(0f, 1f);
 
-        if (randomValue < density && !grid[x, y].isOccupied && !grid[x, y].isWater)
+        if (randomValue < chanceToSpawnChest && !grid[x, y].isOccupied)
         {
+            GameObject chestPrefab = chests[UnityEngine.Random.Range(0, chests.Length)];
+            GameObject chestInstance = Instantiate(chestPrefab, transform);
+            chestInstance.transform.position = new Vector3(x, y, 0) + new Vector3(0.5f, 0.5f, 0);
+
+            Chest chestScript = chestInstance.GetComponent<Chest>();
+
+            chestScript.setCanvas(canvas);
+
+            chestScript.SetPowerUpManager(powerUpManager);
+
+            grid[x, y].setIsOccupied(true);
+        }
+    }
+
+
+    // Gera ativos como arbustos ou pedras no layer especificado
+    public void GenerateObjectOnLayerSpecified(int x, int y, float density, GameObject[] prefabs)
+    {
+        float randomValue = UnityEngine.Random.Range(0f, 1f);
+
+        if (randomValue < density && !grid[x, y].isOccupied)
+        {
+            grid[x, y].setIsOccupied(true);
 
             GameObject prefab = prefabs[UnityEngine.Random.Range(0, prefabs.Length)];
             Instantiate(prefab, transform);
@@ -192,18 +227,17 @@ public class TileMap : MonoBehaviour
                 originalSize = prefabCollider.size; // Obtém o tamanho original do collider
 
             // Definindo uma escala aleatória para o tamanho de x e y entre 1 e 5
-            if (hasRandomScale)
-            {
-                float randomScale = UnityEngine.Random.Range(1f, 3f);
-                prefab.transform.localScale = new Vector3(randomScale, randomScale, prefab.transform.localScale.z);
-            }
 
-            if (! (prefab.name == "Bush") )
+            float randomScale = UnityEngine.Random.Range(1f, 3f);
+            prefab.transform.localScale = new Vector3(randomScale, randomScale, prefab.transform.localScale.z);
+
+
+            if (!(prefab.name == "Bush"))
             {
                 prefabCollider.size = new Vector2(originalSize.x, originalSize.y);
             }
 
-            grid[x, y].setIsOccupied(true);
+
 
         }
 

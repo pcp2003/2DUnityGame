@@ -193,7 +193,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   destroyCooldown: 3
-  chanceToDropKey: 1
+  chanceToDropKey: 100
   speed: 2
   attackInterval: 1
   health: 20
@@ -232,7 +232,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95ac1662254e8d14dbf4e3390162c380, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHealth: 3
   hitAudioSource: {fileID: 5089380669461110906}
   deathAudioSource: {fileID: 1194115438209467997}
 --- !u!82 &5089380669461110906

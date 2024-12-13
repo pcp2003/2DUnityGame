@@ -1,19 +1,22 @@
 using System;
 using System.Collections;
+using UnityEngine.UI;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Chest : MonoBehaviour
 {
-    public float destroyCooldown;
     private String color;
+    private CanvasUpdate canvas;
+    private PowerUpManager powerUpManager;
 
     void Start(){
+
         color = gameObject.name.Split(' ')[0];
     }
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        Debug.Log("Collision Detected (Chest)");
 
         PlayerController player = other.gameObject.GetComponent<PlayerController>();
 
@@ -26,12 +29,8 @@ public class Chest : MonoBehaviour
             
                 if ( key != null && !gameObject.GetComponent<Animator>().GetBool("isOpen")){
 
-                    Debug.Log($"Key {key.GetColor()}. NOT NULL");
-                    player.AdquireRandomPowerUp();
-                    player.UseKey(key);
-                    gameObject.GetComponent<Animator>().SetBool("isOpen", true);
+                    OpenChest(key, player);
 
-                    StartCoroutine(DestroyCooldown());
                 }
             }
             
@@ -39,16 +38,20 @@ public class Chest : MonoBehaviour
 
     }
 
-    public void randomPowerUp () {
-
+    public void OpenChest (Key key, PlayerController player ) {
+        
+        player.UseKey(key);
+        gameObject.GetComponent<Animator>().SetBool("isOpen", true);
+        Image PowerUp = powerUpManager.GenerateRandomPowerUp();
+        canvas.ShowMessage(PowerUp);
     }
 
+    public void setCanvas (CanvasUpdate canvasUpdate) {
+        canvas = canvasUpdate;
+    }
 
-    IEnumerator DestroyCooldown()
-    {
-        yield return new WaitForSeconds(destroyCooldown); // Aguarda o tempo especificado
-        Debug.Log("Destruindo objeto: " + gameObject.name);
-        Destroy(gameObject); // Destrói o objeto após o tempo
+    public void SetPowerUpManager (PowerUpManager powerUpManagerScript){
+        powerUpManager = powerUpManagerScript;
     }
 
     public String GetColor (){

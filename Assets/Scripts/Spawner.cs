@@ -15,8 +15,8 @@ public class Spawner : MonoBehaviour
     public int exponencialLambda = 1;
     private GameObject playerReference;
     private int horda;
-
     public int avarageSpawnDistanceFromPlayer;
+    public float scaleFactor; 
 
     void Start(){
 
@@ -34,12 +34,10 @@ public class Spawner : MonoBehaviour
     private void Update()
     {
 
-
         if (playerReference != null ){
 
              // Escreve as coordenadas do playerReference no console
             Vector3 playerPosition = playerReference.transform.position;
-            // Debug.Log($"Player Position: ({playerPosition.x}, {playerPosition.y}, {playerPosition.z})");
 
 
             timer += Time.deltaTime;
@@ -58,6 +56,13 @@ public class Spawner : MonoBehaviour
         
     }
 
+public float newScaleFactor() {
+
+    float scale = 1.0f + (horda * scaleFactor);
+    Debug.Log($"ScaleFactor: {scale}");
+    return scale;
+}
+
 
     void SpawnEntities()
     {
@@ -70,7 +75,7 @@ public class Spawner : MonoBehaviour
 
             int exp = Exponecial(exponencialLambda);
 
-            tilemap.SpawnEnemy(EntitiesToSpawn[UnityEngine.Random.Range(0, EntitiesToSpawn.Length)], playerReference, avarageSpawnDistanceFromPlayer - exp);
+            tilemap.SpawnEnemy(EntitiesToSpawn[UnityEngine.Random.Range(0, EntitiesToSpawn.Length)], playerReference, avarageSpawnDistanceFromPlayer - exp, newScaleFactor());
         }
 
         horda++;

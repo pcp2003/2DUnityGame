@@ -3,9 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
 
 public class PlayerController : MonoBehaviour
 {
+    public CanvasUpdate canvas;
     public InputAction MoveAction;
     private Rigidbody2D rigidbody2d;
     private Vector2 move;
@@ -25,64 +27,12 @@ public class PlayerController : MonoBehaviour
 
     // Player Stats
     public float speed = 3.0f;
-    public int health = 3; // Vida do Player
+    public float health = 3; // Vida do Player
     public float attackRange = 1.0f; // Alcance do ataque
-    public int attackDamage = 1;     // Dano do ataque
+    public float attackDamage = 1;     // Dano do ataque
     private float attackCooldown = 1.0f; // Duração do ataque (igual ao HasExitTime)
 
-    // Player PowerUps
 
-    private int healthPowerUps;
-    private int strengthPowerUps;
-    private int speedPowerUps;
-    private int attackSpeedPowerUps;
-    private int criticalHitPowerUps;
-    private int superPowerUps; 
-
-    public void AdquireRandomPowerUp () {
-
-        // // Pesos dos PowerUps
-        // float[] pesos = { 0.3f, 0.2f, 0.2f, 0.1f, 0.1f, 0.1f }; // Certifique-se que somam 1.0
-        // float random = UnityEngine.Random.Range(0f,1.0f);
-        // float acumulador = 0;
-
-        // for (int i = 0; i < pesos.Length; i++)
-        // {
-        //     acumulador += pesos[i];
-        //     if (random < acumulador)
-        //     {
-        //          switch(i){
-
-        //             case(0){
-        //                 // Restaura vida e aumenta o tamanho
-        //             }
-
-        //             case(1) {
-        //                 // Adiciona força ao player
-        //             }
-
-        //             case (2) {
-        //                 // Adiciona adiciona velocidade ao player
-        //             }
-
-        //             case (3) {
-        //                 // Aumenta a chance de Critico
-        //             }
-
-        //             case (4) {
-        //                 // Deixa imortal por 5 segundos
-        //             }
-
-        //             case (5) {
-        //                 // Aumenta o attack Speed
-        //             }   
-
-        //          }
-        //     }
-        // }
-
-        Debug.LogError("Erro em AdquireRandomPowerUp");
-    }
 
     void Start()
     {
@@ -196,7 +146,7 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(ResetAttackState()); // Espera o cooldown antes de permitir outro ataque
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         health -= damage;
 
@@ -205,7 +155,6 @@ public class PlayerController : MonoBehaviour
     IEnumerator DestroyCooldown()
     {
         yield return new WaitForSeconds(destroyCooldown); // Aguarda o tempo especificado
-        Debug.Log("Destruindo objeto: " + gameObject.name);
         Destroy(gameObject); // Destrói o objeto após o tempo
     }
 
@@ -225,6 +174,7 @@ public class PlayerController : MonoBehaviour
         if (!GetIsInventoryFull())
         {
             keys.Add(key);
+            canvas.UpdateSlotBars(keys.Count, keys);
             Debug.Log($"Chave {key.GetColor()} adicionada ao inventário. Total de chaves: {keys.Count}");
         }
     }
@@ -232,6 +182,7 @@ public class PlayerController : MonoBehaviour
     public void UseKey(Key key)
     {
         keys.Remove(key);
+        canvas.UpdateSlotBars(keys.Count, keys);
     }
 
     public Key GetKeyByColor(string Color)
@@ -248,7 +199,9 @@ public class PlayerController : MonoBehaviour
 
     public void addKill()
     {
-        kills++;
+        
+        canvas.UpdateKillCounter(kills++);
+        
     }
 
     public int getKills()
@@ -256,10 +209,8 @@ public class PlayerController : MonoBehaviour
         return kills;
     }
 
-    
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawWireSphere(attackPoint.transform.position, attackRange);
+    public void SetCanvas (CanvasUpdate canvasUpdate){
+        canvas = canvasUpdate;
     }
 }
