@@ -7,13 +7,13 @@ public class PowerUpManager : MonoBehaviour
     private GameObject player; 
     public Image [] powerUps;
 
-    public CanvasUpdate canvas;
+    private CanvasUpdate canvas;
 
     // Player PowerUps
     private int healthPowerUps = 0;
     private int strengthPowerUps = 0;
     private int speedPowerUps = 0;
-    private int attackSpeedPowerUps = 0;
+    private int knockBackPowerUps = 0;
     private int criticalHitPowerUps = 0;
 
     public Image GenerateRandomPowerUp()
@@ -34,23 +34,23 @@ public class PowerUpManager : MonoBehaviour
                         healthPowerUps++;
                         // Restaura vida e aumenta o tamanho
                         canvas.UpdatePowerUps(i, healthPowerUps);
-                        // IncreaseHealth();
+                        IncreaseHealth();
                         return powerUps[0];
 
                     case 1:
                         strengthPowerUps++;
                         // Adiciona força ao player
                         canvas.UpdatePowerUps(i, strengthPowerUps);
-                        // IncreaseStrength();
+                        IncreaseStrength();
                         return powerUps[2];
 
                     case 2:
                         
-                        // Adiciona velocidade ao player
-                        speedPowerUps++;
-                        canvas.UpdatePowerUps(i, speedPowerUps);
-                        // IncreaseSpeed();
-                        return powerUps[1];
+                        // Aumenta o KnockBack
+                        knockBackPowerUps++;
+                        canvas.UpdatePowerUps(i, knockBackPowerUps);
+                        IncreaseKnockBack();
+                        return powerUps[3];
 
                     case 3:
                         // Aumenta a chance de Crítico
@@ -60,11 +60,13 @@ public class PowerUpManager : MonoBehaviour
                         return powerUps[4];
 
                     case 4:
-                        // Aumenta o attack Speed
-                        attackSpeedPowerUps++;
-                        canvas.UpdatePowerUps(i, attackSpeedPowerUps);
-                        // IncreaseAttackSpeed();
-                        return powerUps[3];
+
+                        // Adiciona velocidade ao player
+                        speedPowerUps++;
+                        canvas.UpdatePowerUps(i, speedPowerUps);
+                        IncreaseSpeed();
+                        return powerUps[1];
+                        
 
                     default:
                         // Caso não esperado (falha de segurança)
@@ -77,9 +79,9 @@ public class PowerUpManager : MonoBehaviour
         return null;
     }
 
-    private void IncreaseAttackSpeed()
+    private void IncreaseKnockBack()
     {
-        throw new NotImplementedException();
+        player.GetComponent<PlayerController>().addKnockBack(2);
     }
 
     private void IncreaseCriticalChance()
@@ -89,17 +91,17 @@ public class PowerUpManager : MonoBehaviour
 
     private void IncreaseSpeed()
     {
-        throw new NotImplementedException();
+        player.GetComponent<PlayerController>().addSpeed(0.5f);
     }
 
     private void IncreaseStrength()
     {
-        throw new NotImplementedException();
+        player.GetComponent<PlayerController>().addStrength(5);
     }
 
     private void IncreaseHealth()
     {
-        PlayerHealth healthScript = player.GetComponent<PlayerHealth>();
+        player.GetComponent<PlayerHealth>().addHealth(10);
 
     }
 
@@ -115,8 +117,8 @@ public class PowerUpManager : MonoBehaviour
         return speedPowerUps;
     }
 
-    public int getAttackSpeedPowerUps(){
-        return attackSpeedPowerUps;
+    public int getKnockBackPowerUps(){
+        return knockBackPowerUps;
     }
 
     public int getCriticalHitPowerUps(){

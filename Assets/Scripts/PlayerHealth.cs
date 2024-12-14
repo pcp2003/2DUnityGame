@@ -53,15 +53,17 @@ public class PlayerHealth : MonoBehaviour
 
     }
 
-    public void RestoreHealth(int restore)
+    public void addHealth (float healthToAdd)
     {
         if (!isDying) {
             
-            currentHealth += restore;
+            currentHealth = maxHealth + 10;
 
-            UIHandler.instance.SetHealthValue(currentHealth / (float)maxHealth);
+            UIHandler.instance.SetHealthValue(currentHealth / maxHealth);
 
-            if (hitAudioSource != null && currentHealth != 0) hitAudioSource.Play();
+            maxHealth = currentHealth;
+
+            Debug.Log($"Health = {currentHealth}");
         }
     }
 }

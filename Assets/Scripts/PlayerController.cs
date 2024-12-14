@@ -24,16 +24,16 @@ public class PlayerController : MonoBehaviour
     public AudioSource attackAudioSource;
     public static float volume = 1.0f;
     private int kills;
-
-    // Player Stats
-    public float speed = 3.0f;
-    public float health = 3; // Vida do Player
     public float attackRange = 1.0f; // Alcance do ataque
-    public float attackDamage = 1;     // Dano do ataque
     private float attackCooldown = 1.0f; // Duração do ataque (igual ao HasExitTime)
 
 
-
+    // Player Stats
+    private float speed = 5.0f;
+    public float health = 100; // Vida do Player  
+    private float attackDamage = 10; // Dano do ataque
+    private float knockBack = 1.0f;      
+   
     void Start()
     {
         MoveAction.Enable();
@@ -129,19 +129,36 @@ public class PlayerController : MonoBehaviour
         Collider2D[] enemiesColliders = Physics2D.OverlapCircleAll(attackPoint.transform.position, attackRange, enemyLayer);
 
         if (enemiesColliders != null)
+    {
+        foreach (Collider2D enemyCollider in enemiesColliders)
         {
-            // Aplica dano aos inimigos detectados
-            foreach (Collider2D enemyCollider in enemiesColliders)
-            {
-                EnemiesHealth enemyHealth = enemyCollider.GetComponent<EnemiesHealth>();
-                if (enemyHealth != null)
-                {
-                    enemyHealth.TakeDamage(attackDamage);
+            EnemiesHealth enemyHealth = enemyCollider.GetComponent<EnemiesHealth>();
+            Rigidbody2D enemyRb = enemyCollider.GetComponent<Rigidbody2D>();
 
-                    enemyCollider.GetComponent<Animator>().SetTrigger("Hit");
+            if (enemyHealth != null)
+            {
+                // Aplica dano
+                enemyHealth.TakeDamage(attackDamage);
+
+                // Trigger da animação de Hit
+                enemyCollider.GetComponent<Animator>().SetTrigger("Hit");
+
+                // Aplica o push-back se o Rigidbody2D existir
+                if (enemyRb != null )
+                {
+                    Vector2 pushDirection = (enemyCollider.transform.position - transform.position).normalized;
+
+                    if (enemyRb.gameObject.name == "Goblin(Clone)"){
+                        enemyCollider.GetComponent<Goblin>().ApplyPush(pushDirection * knockBack);
+                    }else if (enemyRb.gameObject.name == "Soldier(Clone)"){
+                        enemyCollider.GetComponent<Soldier>().ApplyPush(pushDirection * knockBack);
+                    }
+                    
+                    
                 }
             }
         }
+    }
 
         StartCoroutine(ResetAttackState()); // Espera o cooldown antes de permitir outro ataque
     }
@@ -207,6 +224,21 @@ public class PlayerController : MonoBehaviour
     public int getKills()
     {
         return kills;
+    }
+
+    public void addStrength (float strength){
+        attackDamage = attackDamage + strength;
+        Debug.Log($"AttackDamage = {attackDamage}");
+    }
+
+    public void addKnockBack (float knockBack) {
+        knockBack = knockBack + knockBack;
+        Debug.Log($"Knockback = {knockBack}");
+    }
+
+    public void addSpeed ( float Speed ) {
+        speed = speed + Speed;
+        Debug.Log($"Speed = {speed}");
     }
 
 

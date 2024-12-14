@@ -45,7 +45,7 @@ public class Spawner : MonoBehaviour
 
             // Debug.Log(timer);
 
-            if (timer >= timeBetweenSpawns || horda == 0)
+            if (timer >= timeBetweenSpawns || horda == 0 && timer >= 5.0f)
 
             {
                 Debug.Log("Spawnando mais inimigos!");

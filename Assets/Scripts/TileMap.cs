@@ -211,7 +211,7 @@ public class TileMap : MonoBehaviour
     {
         float randomValue = UnityEngine.Random.Range(0f, 1f);
 
-        if (randomValue < density && !grid[x, y].isOccupied)
+        if (randomValue < density && !grid[x, y].isOccupied )
         {
             grid[x, y].setIsOccupied(true);
 

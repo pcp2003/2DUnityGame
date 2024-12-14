@@ -29,6 +29,8 @@ public class Goblin : MonoBehaviour
     private float attackInterval = 1.0f;
     private float health = 20; // Vida do Goblin
     private float attackDamage = 5; // Dano ao jogador
+    private bool isPushed = false;
+    public float pushDuration = 0.2f; // Tempo do empurrão
 
     public float getHealth (){
         return health;
@@ -133,11 +135,28 @@ public class Goblin : MonoBehaviour
         return direction;
     }
 
+    public void ApplyPush(Vector2 pushForce)
+    {
+        if (rigidbody2d != null)
+        {
+            rigidbody2d.linearVelocity = Vector2.zero; // Reseta a velocidade anterior
+            rigidbody2d.AddForce(pushForce, ForceMode2D.Impulse);
+            StartCoroutine(PushCooldown());
+        }
+    }
+
+    IEnumerator PushCooldown()
+    {
+        isPushed = true;
+        yield return new WaitForSeconds(pushDuration); // Aguarda o tempo do empurrão
+        isPushed = false;
+    }
+
     void FixedUpdate()
     {
         if (gameObject.GetComponent<Animator>().GetBool("isDead")) return;
 
-        if (!isAttacking)
+        if (!isAttacking && !isPushed)
         {
             Vector2 position = rigidbody2d.position + moveDirection * speed * Time.fixedDeltaTime;
             rigidbody2d.MovePosition(position);

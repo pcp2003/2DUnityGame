@@ -109,6 +109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1354849fb5487964989130e0205bc9a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canvas: {fileID: 0}
   MoveAction:
     m_Name: Move
     m_Type: 0
@@ -170,6 +171,7 @@ MonoBehaviour:
   health: 100
   attackRange: 1
   attackDamage: 10
+  knockBack: 1
 --- !u!50 &6197364295621610241
 Rigidbody2D:
   serializedVersion: 5
@@ -182,7 +184,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 0

@@ -51,7 +51,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1000000
+  m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 0
@@ -194,10 +194,7 @@ MonoBehaviour:
     m_Bits: 64
   destroyCooldown: 3
   chanceToDropKey: 100
-  speed: 2
-  attackInterval: 1
-  health: 20
-  attackDamage: 5
+  pushDuration: 0.2
 --- !u!95 &6543588547889030416
 Animator:
   serializedVersion: 7

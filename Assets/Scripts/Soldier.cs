@@ -18,18 +18,20 @@ public class Soldier : MonoBehaviour
     private float distance;
     private bool isAttacking;
     public float chanceToDropKey;
+    private float attackDistance = 1.0f;
+    private float attackRange = 1.0f;
+    private float attackInterval = 1.0f;
+    private float attackCooldown = 0.25f;
 
     // Soldier Stats
 
     private float scaleFactor;
     private float speed = 2.0f;
-    private float attackDistance = 1.0f;
-    private float attackRange = 1.0f;
-    private float attackInterval = 1.0f;
     private float health = 20; // Vida do Soldier
     private float attackDamage = 5; // Dano ao jogador
-    private float attackCooldown = 0.25f;
     private float nextAttackTime = 0f;
+    private bool isPushed;
+    private float pushDuration = 0.2f;
 
     public float getHealth () {
         return health;
@@ -139,7 +141,7 @@ public class Soldier : MonoBehaviour
     {
         if (gameObject.GetComponent<Animator>().GetBool("isDead")) return;
 
-        if (!isAttacking)
+        if (!isAttacking && !isPushed)
         {
             Vector2 position = rigidbody2d.position + moveDirection * speed * Time.fixedDeltaTime;
             rigidbody2d.MovePosition(position);
@@ -213,6 +215,22 @@ public class Soldier : MonoBehaviour
         }
     }
 
+    public void ApplyPush(Vector2 pushForce)
+    {
+        if (rigidbody2d != null)
+        {
+            rigidbody2d.linearVelocity = Vector2.zero; // Reseta a velocidade anterior
+            rigidbody2d.AddForce(pushForce, ForceMode2D.Impulse);
+            StartCoroutine(PushCooldown());
+        }
+    }
+
+    IEnumerator PushCooldown()
+    {
+        isPushed = true;
+        yield return new WaitForSeconds(pushDuration); // Aguarda o tempo do empurrão
+        isPushed = false;
+    }
 
     IEnumerator DestroyCooldown()
     {

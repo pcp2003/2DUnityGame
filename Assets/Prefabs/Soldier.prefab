@@ -51,7 +51,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1000000
+  m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 0
@@ -214,12 +214,6 @@ MonoBehaviour:
     m_Bits: 64
   destroyCooldown: 3
   chanceToDropKey: 1
-  speed: 2
-  attackDistance: 1
-  attackRange: 1
-  attackInterval: 1
-  health: 20
-  attackDamage: 5
 --- !u!114 &-513823339930840016
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -232,7 +226,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95ac1662254e8d14dbf4e3390162c380, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHealth: 2
   hitAudioSource: {fileID: 719668400241131998}
   deathAudioSource: {fileID: 6878100168255108745}
 --- !u!82 &719668400241131998
