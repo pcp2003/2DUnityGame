@@ -3,35 +3,36 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
 
 public class PlayerController : MonoBehaviour
 {
+    public CanvasUpdate canvas;
     public InputAction MoveAction;
     private Rigidbody2D rigidbody2d;
     private Vector2 move;
-    public float speed = 3.0f;
-    public int health = 3; // Vida do Player
-
-    // Variáveis relacionadas ao ataque
     private GameObject attackPoint;
-    public float attackRange = 1.0f; // Alcance do ataque
-    public int attackDamage = 1;     // Dano do ataque
     public LayerMask enemyLayer;     // Camada dos inimigos
-    private float attackCooldown = 1.0f; // Duração do ataque (igual ao HasExitTime)
-
     private bool isAttacking = false; // Controle se o jogador está atacando
-
     public int inventorySize;
     public List<Key> keys;
-
     public float destroyCooldown = 3.0f; // Tempo de cooldown em segundos
-
     private Animator animator;
     private Vector2 moveDirection = new Vector2(0, 0);
 
-    // AudioSources para diferentes eventos
     public AudioSource walkAudioSource;
     public AudioSource attackAudioSource;
+    public static float volume = 1.0f;
+    private int kills;
+
+    // Player Stats
+    public float speed = 3.0f;
+    public float health = 3; // Vida do Player
+    public float attackRange = 1.0f; // Alcance do ataque
+    public float attackDamage = 1;     // Dano do ataque
+    private float attackCooldown = 1.0f; // Duração do ataque (igual ao HasExitTime)
+
+
 
     void Start()
     {
@@ -40,11 +41,16 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
         gameObject.GetComponent<Animator>().SetBool("isDead", false);
         keys = new List<Key>(); // Inicializa a lista
-        
+
         // Criando o ponto de ataque
         attackPoint = new GameObject("AttackPoint");
         attackPoint.transform.parent = this.transform; // Define o Player como pai
         attackPoint.transform.localPosition = Vector3.zero; // Define a posição relativa ao Player como (0, 0, 0)
+
+        walkAudioSource.volume *= volume;
+        attackAudioSource.volume *= volume;
+
+        kills = 0;
     }
 
     void Update()
@@ -62,7 +68,7 @@ public class PlayerController : MonoBehaviour
         {
             moveDirection.Set(move.x, move.y);
             moveDirection.Normalize();
-            
+
             if (!walkAudioSource.isPlaying) walkAudioSource.Play(); // Toca o som de andar se o jogador estiver se movendo
         }
         else
@@ -77,7 +83,7 @@ public class PlayerController : MonoBehaviour
         // Detectar ataque
         if (Mouse.current.leftButton.wasPressedThisFrame && !isAttacking) // Apenas permite atacar se não estiver atacando
         {
-            Debug.Log("Mouse Left Button Pressed");
+            // Debug.Log("Mouse Left Button Pressed");
             Attack();
         }
     }
@@ -140,7 +146,7 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(ResetAttackState()); // Espera o cooldown antes de permitir outro ataque
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         health -= damage;
 
@@ -149,7 +155,6 @@ public class PlayerController : MonoBehaviour
     IEnumerator DestroyCooldown()
     {
         yield return new WaitForSeconds(destroyCooldown); // Aguarda o tempo especificado
-        Debug.Log("Destruindo objeto: " + gameObject.name);
         Destroy(gameObject); // Destrói o objeto após o tempo
     }
 
@@ -164,11 +169,12 @@ public class PlayerController : MonoBehaviour
         return keys.Count >= inventorySize;
     }
 
-    public void AddKeyToInventory(Key key)
+    public void AddKey(Key key)
     {
         if (!GetIsInventoryFull())
         {
             keys.Add(key);
+            canvas.UpdateSlotBars(keys.Count, keys);
             Debug.Log($"Chave {key.GetColor()} adicionada ao inventário. Total de chaves: {keys.Count}");
         }
     }
@@ -176,6 +182,7 @@ public class PlayerController : MonoBehaviour
     public void UseKey(Key key)
     {
         keys.Remove(key);
+        canvas.UpdateSlotBars(keys.Count, keys);
     }
 
     public Key GetKeyByColor(string Color)
@@ -183,15 +190,27 @@ public class PlayerController : MonoBehaviour
         foreach (Key key in keys)
         {
             if (string.Equals(key.GetColor(), Color, StringComparison.OrdinalIgnoreCase) || string.Equals(key.GetColor(), "Golden", StringComparison.OrdinalIgnoreCase)) // Ignora maiúsculas/minúsculas
-            {  
+            {
                 return key;
             }
         }
         return null;
     }
 
-    private void OnDrawGizmos()
+    public void addKill()
     {
-        Gizmos.DrawWireSphere(attackPoint.transform.position, attackRange);
+        
+        canvas.UpdateKillCounter(kills++);
+        
+    }
+
+    public int getKills()
+    {
+        return kills;
+    }
+
+
+    public void SetCanvas (CanvasUpdate canvasUpdate){
+        canvas = canvasUpdate;
     }
 }

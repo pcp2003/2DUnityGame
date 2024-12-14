@@ -4,17 +4,12 @@ using System.Collections.Generic;
 
 public class Goblin : MonoBehaviour
 {
-    private Transform playerReference;
-    public float speed = 2.0f;
+    private GameObject playerReference;
     public float attackDistance = 1.0f;
     public float attackRange = 1.0f;
-    public float attackInterval = 1.0f;
-    public int health = 3; // Vida do Goblin
-    public int attackDamage = 1; // Dano ao jogador
     private float raycastOffset = 0.5f;        // Offset do raycast para detectar obstáculos
     public float avoidObstacleDistance = 1.0f; // Distância para evitar obstáculos
     public List<GameObject> possibleKeys; // Lista de prefabs de chaves possíveis
-    private float attackCooldown = 0.25f;
     private GameObject attackPoint;
     public LayerMask enemyLayer;
     public float destroyCooldown = 3.0f; // Tempo de cooldown em segundos
@@ -23,9 +18,31 @@ public class Goblin : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private Vector2 moveDirection;
     private float distance;
-    private float nextAttackTime = 0f;
     private bool isAttacking;
     public float chanceToDropKey;
+
+    // Goblin Stats
+    private float scaleFactor;
+    private float attackCooldown = 0.25f;
+    private float nextAttackTime = 0f;
+    private float speed = 2.0f;
+    private float attackInterval = 1.0f;
+    private float health = 20; // Vida do Goblin
+    private float attackDamage = 5; // Dano ao jogador
+
+    public float getHealth (){
+        return health;
+    }
+
+    public void updateStats () {
+        this.health = health*scaleFactor;
+        this.speed = speed*scaleFactor;
+        this.attackDamage = attackDamage*scaleFactor;
+    }
+
+    public void setScaleFactor (float scaleFactor) {
+        this.scaleFactor = scaleFactor;
+    }
 
     void Start()
     {
@@ -43,16 +60,16 @@ public class Goblin : MonoBehaviour
     void Update()
     {
         if (gameObject.GetComponent<Animator>().GetBool("isDead"))
-        {   
+        {
             gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
-            StartCoroutine(DestroyCooldown()); 
+            StartCoroutine(DestroyCooldown());
 
             return;
         }
 
         if (playerReference != null)
         {
-            Vector2 direction = playerReference.position - transform.position;
+            Vector2 direction = playerReference.transform.position - transform.position;
 
             // Detectar e evitar obstáculos
             Vector2 adjustedDirection = AvoidObstacles(direction);
@@ -85,8 +102,9 @@ public class Goblin : MonoBehaviour
         }
     }
 
-    public void SetPlayerReference (GameObject player) {
-        playerReference = player.transform;
+    public void SetPlayerReference(GameObject player)
+    {
+        playerReference = player;
     }
 
     private Vector2 AvoidObstacles(Vector2 direction)
@@ -102,7 +120,7 @@ public class Goblin : MonoBehaviour
         // Se houver obstáculo à frente, ajusta a direção
         if (hitFront.collider != null)
         {
-            Debug.Log("Obstacle detected ahead: " + hitFront.collider.name);
+            // Debug.Log("Obstacle detected ahead: " + hitFront.collider.name);
 
             // Tenta desviar para a esquerda ou direita
             if (hitLeft.collider == null)
@@ -137,11 +155,11 @@ public class Goblin : MonoBehaviour
         if (randomChance > differentAttacksChance)
         {
             animator.SetTrigger("Attack01");
-        }else {
+        }
+        else
+        {
             animator.SetTrigger("Attack02");
         }
-
-        
 
         if (moveDirection.x < 0)
         {
@@ -171,43 +189,36 @@ public class Goblin : MonoBehaviour
 
         StartCoroutine(ResetAttackState()); // Espera o cooldown antes de permitir outro ataque
     }
-
-    void DropKey()
+    
+    // ProbComultative para dropar keys
+    public void DropKey()
     {
+        // Pesos dos Keys
+        float[] pesos = { 0.1f, 0.18f, 0.18f, 0.18f, 0.18f, 0.18f}; 
+        float random = UnityEngine.Random.Range(0f, 1.0f);
+        float acumulador = 0;
 
-        // Gera um número aleatório entre 0 e 100
-        float randomChance = UnityEngine.Random.Range(0f, 100f);
-
-        // Se a chance não for atingida, não dropa nenhuma chave
-        if (randomChance > chanceToDropKey)
+        for (int i = 0; i < pesos.Length; i++)
         {
-            Debug.Log("No key dropped. Chance: " + randomChance + "%");
-            return;
-        }
+            acumulador += pesos[i];
+            if (random < acumulador)
+            {
 
-        // Continua com o drop de uma chave aleatória
-        if (possibleKeys != null && possibleKeys.Count > 0)
-        {
-            // Escolhe uma chave aleatória da lista
-            int randomIndex = UnityEngine.Random.Range(0, possibleKeys.Count);
-            GameObject selectedKey = possibleKeys[randomIndex];
-
-            // Instancia a chave selecionada na posição do Goblin
-            Instantiate(selectedKey, transform.position, Quaternion.identity);
-            Debug.Log($"Key dropped: {selectedKey.name} at position: {transform.position}");
-        }
-        else
-        {
-            Debug.LogWarning("No possible keys assigned to Goblin.");
+                GameObject keySelected = possibleKeys[i];
+                Instantiate(keySelected, transform.position, Quaternion.identity);
+                break;
+            }
         }
     }
 
 
+
     IEnumerator DestroyCooldown()
-    {
+    {   
         yield return new WaitForSeconds(destroyCooldown); // Aguarda o tempo especificado
         Debug.Log("Destruindo objeto: " + gameObject.name);
         DropKey();
+        playerReference.GetComponent<PlayerController>().addKill();
         Destroy(gameObject); // Destrói o objeto após o tempo
     }
 
@@ -217,8 +228,10 @@ public class Goblin : MonoBehaviour
         isAttacking = false; // Permite um novo ataque
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawWireSphere(attackPoint.transform.position, attackRange);
-    }
+    // private void OnDrawGizmos()
+    // {
+    //     Gizmos.DrawWireSphere(attackPoint.transform.position, attackRange);
+    // }
+
+
 }

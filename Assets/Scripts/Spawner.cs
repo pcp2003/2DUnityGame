@@ -11,9 +11,13 @@ public class Spawner : MonoBehaviour
     private TileMap tilemap; 
     private float timer = 0.0f;
     public float timeBetweenSpawns = 60.0f; // 10 minuto
-    public int lambda = 3;
+    public int poissonLambda = 3;
+    public int exponencialLambda = 1;
     private GameObject playerReference;
     private int horda;
+    public int avarageSpawnDistanceFromPlayer;
+    public float scaleFactor; 
+    private CanvasUpdate canvas;
 
     void Start(){
 
@@ -31,60 +35,63 @@ public class Spawner : MonoBehaviour
     private void Update()
     {
 
-
         if (playerReference != null ){
 
              // Escreve as coordenadas do playerReference no console
             Vector3 playerPosition = playerReference.transform.position;
-            Debug.Log($"Player Position: ({playerPosition.x}, {playerPosition.y}, {playerPosition.z})");
 
 
             timer += Time.deltaTime;
 
-            Debug.Log(timer);
+            // Debug.Log(timer);
 
-            if (timer >= timeBetweenSpawns)
+            if (timer >= timeBetweenSpawns || horda == 0)
 
             {
                 Debug.Log("Spawnando mais inimigos!");
                 timer = 0.0f;
                 SpawnEntities();
+                horda++;
+                canvas.UpdateHordePanel(horda);
                 Debug.Log($"Horda: {horda}");
             }
         }
         
     }
 
+public float newScaleFactor() {
+
+    float scale = 1.0f + (horda * scaleFactor);
+    return scale;
+}
+
 
     void SpawnEntities()
     {
         
-        int numberOfEntities = GeneratePoisson(lambda);
+        int numberOfEntities = GeneratePoisson(poissonLambda);
 
         Debug.Log("Number of Entities to spawn: " + numberOfEntities);
 
         for (int i = 0; i != numberOfEntities; i++){
 
-            tilemap.SpawnEnemy(EntitiesToSpawn[UnityEngine.Random.Range(0, EntitiesToSpawn.Length)], playerReference);
+            int exp = Exponecial(exponencialLambda);
+
+            tilemap.SpawnEnemy(EntitiesToSpawn[UnityEngine.Random.Range(0, EntitiesToSpawn.Length)], playerReference, avarageSpawnDistanceFromPlayer - exp, newScaleFactor());
         }
 
-        horda++;
     }
 
-    public void SetPlayerReference ( GameObject player){
-        playerReference = player;
-    }   
-
-    public static int GeneratePoisson(double lambda)
+    public static int GeneratePoisson(double poissonLambda)
     {
         // Verifica se lambda é válido
-        if (lambda <= 0)
+        if (poissonLambda <= 0)
         {
             throw new ArgumentOutOfRangeException("Lambda deve ser maior que 0.");
         }
 
         // Método da soma cumulativa
-        double l = Math.Exp(-lambda);
+        double l = Math.Exp(-poissonLambda);
         double p = 1.0;
         int k = 0;
 
@@ -97,6 +104,24 @@ public class Spawner : MonoBehaviour
         return k - 1;
     }
 
+    private int Exponecial(float exponencialLambda)
+    {
+        // Generate U ~ [0,1]
+        float U = UnityEngine.Random.value;
+        // Generate X ~ Exp(lambda)
+        float X = -Mathf.Log(1 - U) / exponencialLambda;
+
+        // Debug.Log("Com a exponecial gerei: " + Mathf.RoundToInt(X));
+        return Mathf.RoundToInt(X);
+    }
+
+    public void SetPlayerReference ( GameObject player){
+        playerReference = player;
+    }
+
+    public void SetCanvas (CanvasUpdate canvasUpdate){
+        canvas = canvasUpdate;
+    }   
 
 
 }

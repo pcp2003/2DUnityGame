@@ -6,10 +6,12 @@ public class BackgroundMusicManager : MonoBehaviour
 {
     public List<AudioClip> musicClips; // Lista de clipes de música
     private AudioSource audioSource;
+    public static float volume = 1.0f;
 
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
+        audioSource.volume *= volume;
 
         if (musicClips == null || musicClips.Count == 0)
         {
