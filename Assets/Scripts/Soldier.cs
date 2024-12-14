@@ -26,8 +26,8 @@ public class Soldier : MonoBehaviour
     private float attackDistance = 1.0f;
     private float attackRange = 1.0f;
     private float attackInterval = 1.0f;
-    private float health = 3; // Vida do Soldier
-    private float attackDamage = 1; // Dano ao jogador
+    private float health = 20; // Vida do Soldier
+    private float attackDamage = 5; // Dano ao jogador
     private float attackCooldown = 0.25f;
     private float nextAttackTime = 0f;
 

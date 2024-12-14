@@ -17,6 +17,7 @@ public class Spawner : MonoBehaviour
     private int horda;
     public int avarageSpawnDistanceFromPlayer;
     public float scaleFactor; 
+    private CanvasUpdate canvas;
 
     void Start(){
 
@@ -44,12 +45,14 @@ public class Spawner : MonoBehaviour
 
             // Debug.Log(timer);
 
-            if (timer >= timeBetweenSpawns)
+            if (timer >= timeBetweenSpawns || horda == 0)
 
             {
                 Debug.Log("Spawnando mais inimigos!");
                 timer = 0.0f;
                 SpawnEntities();
+                horda++;
+                canvas.UpdateHordePanel(horda);
                 Debug.Log($"Horda: {horda}");
             }
         }
@@ -78,12 +81,7 @@ public float newScaleFactor() {
             tilemap.SpawnEnemy(EntitiesToSpawn[UnityEngine.Random.Range(0, EntitiesToSpawn.Length)], playerReference, avarageSpawnDistanceFromPlayer - exp, newScaleFactor());
         }
 
-        horda++;
     }
-
-    public void SetPlayerReference ( GameObject player){
-        playerReference = player;
-    }   
 
     public static int GeneratePoisson(double poissonLambda)
     {
@@ -117,6 +115,14 @@ public float newScaleFactor() {
         // Debug.Log("Com a exponecial gerei: " + Mathf.RoundToInt(X));
         return Mathf.RoundToInt(X);
     }
+
+    public void SetPlayerReference ( GameObject player){
+        playerReference = player;
+    }
+
+    public void SetCanvas (CanvasUpdate canvasUpdate){
+        canvas = canvasUpdate;
+    }   
 
 
 }

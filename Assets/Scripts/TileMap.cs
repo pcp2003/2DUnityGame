@@ -60,6 +60,7 @@ public class TileMap : MonoBehaviour
                 playerInstance.transform.position = new Vector3(x, y, 0) + new Vector3(0.5f, 0.5f, 0);
                 followCam.SetTarget(playerInstance);
                 spawner.SetPlayerReference(playerInstance);
+                spawner.SetCanvas(canvas);
                 playerInstance.GetComponent<PlayerController>().SetCanvas(canvas);
                 powerUpManager.SetPlayer(playerInstance);
                 powerUpManager.SetCanvas(canvas);

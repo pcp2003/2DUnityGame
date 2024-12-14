@@ -806,6 +806,7 @@ RectTransform:
   - {fileID: 554205325}
   - {fileID: 703268458}
   - {fileID: 741579851}
+  - {fileID: 1042024362}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -831,11 +832,13 @@ MonoBehaviour:
   speedPowerUps: {fileID: 967841975}
   attackSpeedPowerUps: {fileID: 807507170}
   criticalHitPowerUps: {fileID: 1563173828}
+  hordeCounter: {fileID: 1658943286}
   Slot1: {fileID: 4236172018869949542}
   Slot2: {fileID: 2762754359787034776}
   Slot3: {fileID: 179879772444862163}
   PowerUpImage: {fileID: 768932030}
   MessagePanel: {fileID: 741579850}
+  HordePanel: {fileID: 1042024359}
 --- !u!1 &741579850
 GameObject:
   m_ObjectHideFlags: 0
@@ -1010,6 +1013,82 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1042024359
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1042024362}
+  - component: {fileID: 1042024361}
+  - component: {fileID: 1042024360}
+  m_Layer: 5
+  m_Name: HordePanel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &1042024360
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1042024359}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 981439026007651082, guid: 5101efe9d45cdec439516467950f97d6, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1042024361
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1042024359}
+  m_CullTransparentMesh: 1
+--- !u!224 &1042024362
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1042024359}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.0000799, y: 1.0000799, z: 1.0000799}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1658943284}
+  m_Father: {fileID: 740436144}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 871.79, y: -495.07996}
+  m_SizeDelta: {x: -1780.27, y: -1031.37}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1069134344 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1028389925820266232, guid: 1829adc026e972c4a9772d25fdbb83f3, type: 3}
@@ -1335,6 +1414,85 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 256597051229158011, guid: da518c0b52a262e41a731561073b9c1d, type: 3}
   m_PrefabInstance: {fileID: 5076053653237444204}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1658943283
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1658943284}
+  - component: {fileID: 1658943285}
+  - component: {fileID: 1658943286}
+  m_Layer: 5
+  m_Name: Text (Legacy)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1658943284
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1658943283}
+  m_LocalRotation: {x: -0, y: -0, z: 0.0010357928, w: 0.99999946}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1042024362}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0.119}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -0.000030518, y: 1.5248}
+  m_SizeDelta: {x: 157.99, y: 72.43}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &1658943285
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1658943283}
+  m_CullTransparentMesh: 1
+--- !u!114 &1658943286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1658943283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: c7cf5bfbf3e7164429a29b4b4393f036, type: 3}
+    m_FontSize: 20
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 0
+    m_MaxSize: 300
+    m_Alignment: 4
+    m_AlignByGeometry: 1
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 'Horda: 1'
 --- !u!1 &1916435125
 GameObject:
   m_ObjectHideFlags: 0
@@ -1723,7 +1881,7 @@ MonoBehaviour:
   poissonLambda: 10
   exponencialLambda: 1
   avarageSpawnDistanceFromPlayer: 30
-  scaleFactor: 0.1
+  scaleFactor: 0.5
 --- !u!114 &2030159449 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1807925387606862216, guid: 0a72f0aa2dfe4b44296f00c569de98b4, type: 3}

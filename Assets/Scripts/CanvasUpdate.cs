@@ -14,11 +14,14 @@ public class CanvasUpdate : MonoBehaviour
     public TextMeshProUGUI speedPowerUps;
     public TextMeshProUGUI attackSpeedPowerUps;
     public TextMeshProUGUI criticalHitPowerUps;
+    public Text hordeCounter;
     public Image Slot1;
     public Image Slot2;
     public Image Slot3;
     public Image PowerUpImage;
     public GameObject MessagePanel;
+    public GameObject HordePanel;
+
 
     private Coroutine hidePanelCoroutine; // Referência à corrotina em execução
 
@@ -54,6 +57,14 @@ public class CanvasUpdate : MonoBehaviour
 
     }
 
+    public void UpdateHordePanel(int horda ){
+
+        HordePanel.SetActive(true);
+
+        hordeCounter.text = $"Horda: {horda}";
+
+    }
+
     public void ShowMessage(Image powerUpImage)
     {
         PowerUpImage.sprite = powerUpImage.sprite;
@@ -80,8 +91,6 @@ public class CanvasUpdate : MonoBehaviour
     {
         killCounterText.text = "" + kills;
     }
-
-
 
     public void UpdateSlotBars(int keysCount, List<Key> keys )
     {
