@@ -189,59 +189,25 @@ public class Goblin : MonoBehaviour
 
         StartCoroutine(ResetAttackState()); // Espera o cooldown antes de permitir outro ataque
     }
-
-    void DropKey()
+    
+    // ProbComultative para dropar keys
+    public void DropKey()
     {
-        // Gera um número aleatório entre 0 e 100
-        float randomChance = UnityEngine.Random.Range(0f, 100f);
+        // Pesos dos Keys
+        float[] pesos = { 0.1f, 0.18f, 0.18f, 0.18f, 0.18f, 0.18f}; 
+        float random = UnityEngine.Random.Range(0f, 1.0f);
+        float acumulador = 0;
 
-        // Se a chance não for atingida, não dropa nenhuma chave
-        if (randomChance > chanceToDropKey)
+        for (int i = 0; i < pesos.Length; i++)
         {
-            Debug.Log("No key dropped. Chance: " + randomChance + "%");
-            return;
-        }
-
-        // Configurar as probabilidades das chaves
-        List<(GameObject key, float probability)> keysWithProbabilities = new List<(GameObject, float)>();
-
-        if (possibleKeys != null && possibleKeys.Count > 0)
-        {
-            // Exemplo: atribuir manualmente as probabilidades
-            keysWithProbabilities.Add((possibleKeys[0], 5f)); // Chave dourada - 1%
-            float remainingProbability = (100f - 5f) / (possibleKeys.Count - 1); // Divide 99% igualmente entre as outras chaves
-
-            for (int i = 1; i < possibleKeys.Count; i++)
+            acumulador += pesos[i];
+            if (random < acumulador)
             {
-                keysWithProbabilities.Add((possibleKeys[i], remainingProbability));
-            }
 
-            // Normalizar para criar a CDF
-            float cumulativeProbability = 0f;
-            List<(GameObject key, float cdf)> keysWithCDF = new List<(GameObject, float)>();
-
-            foreach (var (key, probability) in keysWithProbabilities)
-            {
-                cumulativeProbability += probability;
-                keysWithCDF.Add((key, cumulativeProbability));
+                GameObject keySelected = possibleKeys[i];
+                Instantiate(keySelected, transform.position, Quaternion.identity);
+                break;
             }
-
-            // Selecionar a chave com base no número aleatório
-            float randomValue = UnityEngine.Random.Range(0f, 100f); // Número aleatório de 0 a 100
-            foreach (var (key, cdf) in keysWithCDF)
-            {
-                if (randomValue <= cdf)
-                {
-                    // Instanciar a chave selecionada
-                    Instantiate(key, transform.position, Quaternion.identity);
-                    Debug.Log($"Key dropped: {key.name} at position: {transform.position}");
-                    return;
-                }
-            }
-        }
-        else
-        {
-            Debug.LogWarning("No possible keys assigned to Goblin.");
         }
     }
 

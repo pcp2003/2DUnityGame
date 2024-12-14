@@ -269,8 +269,8 @@ public class TileMap : MonoBehaviour
                     // Ajuste da posição para o centro do tile
                     tree.transform.position = new Vector3(x, y, 0) + new Vector3(0.5f, 0.5f, 0);
 
-                    // Definindo uma escala aleatória para o tamanho de x e y entre 1 e 5
-                    float randomScale = UnityEngine.Random.Range(3f, 6f);
+                    // Utilizada uma normal para gerar altura das árvores
+                    float randomScale = GenerateNormal(5f, 2f);
                     tree.transform.localScale = new Vector3(randomScale, randomScale, tree.transform.localScale.z);
 
                     collider.size = new Vector2(originalSize.x, originalSize.y);
@@ -283,6 +283,22 @@ public class TileMap : MonoBehaviour
                 }
             }
         }
+    }
+
+    // Normal truncada através de loop
+    public static float GenerateNormal(double mean, double stdDev)
+    {   
+        float result = 0;
+
+        while(result <= 3 || result >= 8){
+            float U1 = UnityEngine.Random.value; 
+            float U2 = UnityEngine.Random.value;
+            double z0 = Math.Sqrt(-2.0 * Math.Log(U1)) * Math.Cos(2.0 * Math.PI * U2);
+            result = (float)(mean + z0 * stdDev);
+        }
+
+        return result; 
+        
     }
 
 

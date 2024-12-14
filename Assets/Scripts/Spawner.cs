@@ -62,7 +62,6 @@ public class Spawner : MonoBehaviour
 public float newScaleFactor() {
 
     float scale = 1.0f + (horda * scaleFactor);
-    Debug.Log($"ScaleFactor: {scale}");
     return scale;
 }
 
