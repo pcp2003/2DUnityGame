@@ -5,10 +5,12 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
+using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour
 {
 
+    public InputAction attack;
     private GameOverScreen gameOverScreen;
     private CanvasUpdate canvas;
     public InputAction MoveAction;
@@ -45,6 +47,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         MoveAction.Enable();
+        attack.Enable();
         rigidbody2d = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         gameObject.GetComponent<Animator>().SetBool("isDead", false);
@@ -90,7 +93,7 @@ public class PlayerController : MonoBehaviour
         animator.SetFloat("Speed", move.magnitude);
 
         // Detectar ataque
-        if (Mouse.current.leftButton.wasPressedThisFrame && !isAttacking) // Apenas permite atacar se não estiver atacando
+        if ((Mouse.current.leftButton.wasPressedThisFrame || attack.WasPressedThisFrame()) && !isAttacking) // Apenas permite atacar se não estiver atacando
         {
             // Debug.Log("Mouse Left Button Pressed");
             Attack();

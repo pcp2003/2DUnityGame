@@ -109,7 +109,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1354849fb5487964989130e0205bc9a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvas: {fileID: 0}
+  attack:
+    m_Name: Attack
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 7655188e-92e1-4c8f-a472-f60f3133642c
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: dd7697e3-6053-4d4d-b8aa-fa7d37156ac0
+      m_Path: <Gamepad>/buttonWest
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Attack
+      m_Flags: 0
+    m_Flags: 0
   MoveAction:
     m_Name: Move
     m_Type: 0
@@ -158,6 +174,86 @@ MonoBehaviour:
       m_Groups: 
       m_Action: Move
       m_Flags: 8
+    - m_Name: 2D Vector
+      m_Id: 7ad34598-37ae-4866-a147-4b5ed66b2ac3
+      m_Path: 2DVector
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Move
+      m_Flags: 4
+    - m_Name: up
+      m_Id: 18e13d8b-83b7-486c-8870-020b127dd4d6
+      m_Path: <Gamepad>/dpad/up
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Move
+      m_Flags: 8
+    - m_Name: down
+      m_Id: 3724403b-fe24-483b-8ff3-cab8373a7beb
+      m_Path: <Gamepad>/dpad/down
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Move
+      m_Flags: 8
+    - m_Name: left
+      m_Id: a05373a1-39fd-4624-a0e7-85f2ee630ce5
+      m_Path: <Gamepad>/dpad/left
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Move
+      m_Flags: 8
+    - m_Name: right
+      m_Id: f558e406-7aee-4603-8c6a-b90f80239329
+      m_Path: <Gamepad>/dpad/right
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Move
+      m_Flags: 8
+    - m_Name: 2D Vector
+      m_Id: 1c5469bd-a090-4cb5-95ed-e80fb0910232
+      m_Path: 2DVector
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Move
+      m_Flags: 4
+    - m_Name: up
+      m_Id: 0eb18ad7-8337-4e6d-8c36-fb081fd8075d
+      m_Path: <Gamepad>/leftStick/up
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Move
+      m_Flags: 8
+    - m_Name: down
+      m_Id: 938d95e5-bfff-4972-bc42-751e6b04bdf3
+      m_Path: <Gamepad>/leftStick/down
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Move
+      m_Flags: 8
+    - m_Name: left
+      m_Id: 26863741-69ff-4c46-80c8-6a933f475793
+      m_Path: <Gamepad>/leftStick/left
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Move
+      m_Flags: 8
+    - m_Name: right
+      m_Id: 861b61ef-8d74-4db8-aeee-f8d83352ed61
+      m_Path: <Gamepad>/leftStick/right
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Move
+      m_Flags: 8
     m_Flags: 0
   enemyLayer:
     serializedVersion: 2
@@ -167,11 +263,8 @@ MonoBehaviour:
   destroyCooldown: 3
   walkAudioSource: {fileID: 7105837857125231664}
   attackAudioSource: {fileID: 6021109766232172784}
-  speed: 5
-  health: 100
   attackRange: 1
-  attackDamage: 10
-  knockBack: 1
+  health: 100
 --- !u!50 &6197364295621610241
 Rigidbody2D:
   serializedVersion: 5
