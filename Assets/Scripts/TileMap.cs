@@ -32,6 +32,7 @@ public class TileMap : MonoBehaviour
     public PowerUpManager powerUpManager;
     private Spawner spawner;
     public Cell[,] grid;                        // Matriz para representar o terreno e características de cada célula
+    public GameOverScreen gameOverScreen;
 
     void Start()
     {
@@ -62,8 +63,10 @@ public class TileMap : MonoBehaviour
                 spawner.SetPlayerReference(playerInstance);
                 spawner.SetCanvas(canvas);
                 playerInstance.GetComponent<PlayerController>().SetCanvas(canvas);
+                playerInstance.GetComponent<PlayerController>().SetGameOverScreen(gameOverScreen);
                 powerUpManager.SetPlayer(playerInstance);
                 powerUpManager.SetCanvas(canvas);
+                gameOverScreen.SetCanvas(canvas);
                 Debug.Log($"Player spawned at: ({x}, {y})");
                 break;
             }

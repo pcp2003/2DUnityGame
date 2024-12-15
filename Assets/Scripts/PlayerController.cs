@@ -8,7 +8,9 @@ using UnityEngine.Rendering;
 
 public class PlayerController : MonoBehaviour
 {
-    public CanvasUpdate canvas;
+
+    private GameOverScreen gameOverScreen;
+    private CanvasUpdate canvas;
     public InputAction MoveAction;
     private Rigidbody2D rigidbody2d;
     private Vector2 move;
@@ -65,6 +67,7 @@ public class PlayerController : MonoBehaviour
         {
             gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
             StartCoroutine(DestroyCooldown());
+            gameOverScreen.Setup();
             return;
         }
 
@@ -267,6 +270,10 @@ public class PlayerController : MonoBehaviour
 
     public void SetCanvas (CanvasUpdate canvasUpdate){
         canvas = canvasUpdate;
+    }
+
+    public void SetGameOverScreen(GameOverScreen gameOverScreen) {
+        this.gameOverScreen = gameOverScreen;
     }
 
     // Normal truncada através de loop
