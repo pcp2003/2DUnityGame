@@ -252,7 +252,7 @@ public class PlayerController : MonoBehaviour
     }
 
     public void addKnockBack (float knockBack) {
-        knockBack = knockBack + knockBack;
+        this.knockBack = this.knockBack + knockBack;
         Debug.Log($"Knockback = {knockBack}");
     }
 
