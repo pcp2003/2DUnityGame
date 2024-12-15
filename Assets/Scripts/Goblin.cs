@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 
 public class Goblin : MonoBehaviour
 {
@@ -25,9 +26,9 @@ public class Goblin : MonoBehaviour
     private float scaleFactor;
     private float attackCooldown = 0.25f;
     private float nextAttackTime = 0f;
-    private float speed = 2.0f;
+    private float speed = 3.0f;
     private float attackInterval = 1.0f;
-    private float health = 20; // Vida do Goblin
+    private float health = 15; // Vida do Goblin
     private float attackDamage = 5; // Dano ao jogador
     private bool isPushed = false;
     public float pushDuration = 0.2f; // Tempo do empurrão
@@ -37,9 +38,11 @@ public class Goblin : MonoBehaviour
     }
 
     public void updateStats () {
-        this.health = health*scaleFactor;
-        this.speed = speed*scaleFactor;
-        this.attackDamage = attackDamage*scaleFactor;
+
+        health = health*scaleFactor;
+        if ( speed*scaleFactor <= playerReference.GetComponent<PlayerController>().getSpeed() )
+            speed = speed*scaleFactor;
+        attackDamage = attackDamage*scaleFactor;
     }
 
     public void setScaleFactor (float scaleFactor) {
@@ -198,7 +201,7 @@ public class Goblin : MonoBehaviour
 
             foreach (Collider2D playerCollider in playersColliders)
             {
-
+                
                 playerCollider.GetComponent<PlayerHealth>().TakeDamage(attackDamage);
 
                 playerCollider.GetComponent<Animator>().SetTrigger("Hit");

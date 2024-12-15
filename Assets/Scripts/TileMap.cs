@@ -175,7 +175,7 @@ public class TileMap : MonoBehaviour
                     // Gera pedra e arbustos em locais que não sejam borda do mapa.
                     if (countAdjWater == 0)
                     {
-                        GenerateObjectOnLayerSpecified(x, y, bushesAndRocksDensity, bushesAndRocks);
+                        GenerateObjects(x, y, bushesAndRocksDensity, bushesAndRocks);
                         GenerateChests(x, y, chanceToSpawnChest);
                     }
 
@@ -207,7 +207,7 @@ public class TileMap : MonoBehaviour
 
 
     // Gera ativos como arbustos ou pedras no layer especificado
-    public void GenerateObjectOnLayerSpecified(int x, int y, float density, GameObject[] prefabs)
+    public void GenerateObjects(int x, int y, float density, GameObject[] prefabs)
     {
         float randomValue = UnityEngine.Random.Range(0f, 1f);
 
@@ -229,7 +229,7 @@ public class TileMap : MonoBehaviour
 
             // Definindo uma escala aleatória para o tamanho de x e y entre 1 e 5
 
-            float randomScale = UnityEngine.Random.Range(1f, 3f);
+            float randomScale = GenerateNormal(3f, 2f, 1, 6);
             prefab.transform.localScale = new Vector3(randomScale, randomScale, prefab.transform.localScale.z);
 
 
@@ -270,7 +270,7 @@ public class TileMap : MonoBehaviour
                     tree.transform.position = new Vector3(x, y, 0) + new Vector3(0.5f, 0.5f, 0);
 
                     // Utilizada uma normal para gerar altura das árvores
-                    float randomScale = GenerateNormal(5f, 2f);
+                    float randomScale = GenerateNormal(5f, 2f, 3, 8);
                     tree.transform.localScale = new Vector3(randomScale, randomScale, tree.transform.localScale.z);
 
                     collider.size = new Vector2(originalSize.x, originalSize.y);
@@ -286,11 +286,11 @@ public class TileMap : MonoBehaviour
     }
 
     // Normal truncada através de loop
-    public static float GenerateNormal(double mean, double stdDev)
+    public static float GenerateNormal(double mean, double stdDev, float min, float max)
     {   
         float result = 0;
 
-        while(result <= 3 || result >= 8){
+        while(result <= min || result >= max){
             float U1 = UnityEngine.Random.value; 
             float U2 = UnityEngine.Random.value;
             double z0 = Math.Sqrt(-2.0 * Math.Log(U1)) * Math.Cos(2.0 * Math.PI * U2);

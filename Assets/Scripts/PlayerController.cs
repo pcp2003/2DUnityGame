@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
@@ -31,8 +32,13 @@ public class PlayerController : MonoBehaviour
     // Player Stats
     private float speed = 5.0f;
     public float health = 100; // Vida do Player  
-    private float attackDamage = 10; // Dano do ataque
-    private float knockBack = 1.0f;      
+    private float attackDamage = 15; // Dano do ataque
+    private float knockBack = 3.0f;   
+    private float criticalHitChance = 0.2f;
+
+    public float getSpeed() {
+        return speed;
+    }
    
     void Start()
     {
@@ -138,7 +144,7 @@ public class PlayerController : MonoBehaviour
             if (enemyHealth != null)
             {
                 // Aplica dano
-                enemyHealth.TakeDamage(attackDamage);
+                enemyHealth.TakeDamage(GenerateAttack());
 
                 // Trigger da animação de Hit
                 enemyCollider.GetComponent<Animator>().SetTrigger("Hit");
@@ -161,6 +167,17 @@ public class PlayerController : MonoBehaviour
     }
 
         StartCoroutine(ResetAttackState()); // Espera o cooldown antes de permitir outro ataque
+    }
+
+    public float GenerateAttack () {
+
+        float randomValue = UnityEngine.Random.Range(0f, 1f);
+    
+        if (criticalHitChance >= randomValue){
+            return GenerateNormal(attackDamage, attackDamage, attackDamage, attackDamage*4);
+        }
+
+        return attackDamage;
     }
 
     public void TakeDamage(float damage)
@@ -241,8 +258,30 @@ public class PlayerController : MonoBehaviour
         Debug.Log($"Speed = {speed}");
     }
 
+    public void addCriticalHitChance (float criticalHitChanceToAdd) {
+        if (criticalHitChance + criticalHitChanceToAdd < 1.0 )
+            criticalHitChance = criticalHitChance + criticalHitChanceToAdd;
+        Debug.Log($"CriticalHitChance = {criticalHitChance}");
+    }
+
 
     public void SetCanvas (CanvasUpdate canvasUpdate){
         canvas = canvasUpdate;
+    }
+
+    // Normal truncada através de loop
+    public static float GenerateNormal(double mean, double stdDev, float min, float max)
+    {   
+        float result = 0;
+
+        while(result <= min || result >= max){
+            float U1 = UnityEngine.Random.value; 
+            float U2 = UnityEngine.Random.value;
+            double z0 = Math.Sqrt(-2.0 * Math.Log(U1)) * Math.Cos(2.0 * Math.PI * U2);
+            result = (float)(mean + z0 * stdDev);
+        }
+
+        return result; 
+        
     }
 }

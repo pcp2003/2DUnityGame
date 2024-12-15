@@ -29,7 +29,6 @@ public class EnemiesHealth : MonoBehaviour
         {
             if (deathAudioSource != null) deathAudioSource.Play();
             isDying = true; // Marca que o objeto está em processo de destruição
-            Debug.Log("Iniciando cooldown para destruir " + gameObject.name);
             GetComponent<Animator>().SetBool("isDead", true);
              
         }
@@ -38,6 +37,8 @@ public class EnemiesHealth : MonoBehaviour
     public void TakeDamage(float damage)
     {
         currentHealth -= damage;
+
+        Debug.Log( $" Damage taken by enemy: {damage}");
 
         if (hitAudioSource != null && currentHealth != 0) hitAudioSource.Play();
     }

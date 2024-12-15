@@ -6,8 +6,8 @@ public class PowerUpManager : MonoBehaviour
 {
     private GameObject player; 
     public Image [] powerUps;
-
     private CanvasUpdate canvas;
+    public AudioSource getPowerUp;
 
     // Player PowerUps
     private int healthPowerUps = 0;
@@ -22,6 +22,7 @@ public class PowerUpManager : MonoBehaviour
         float[] pesos = { 0.4f, 0.2f, 0.2f, 0.1f, 0.1f}; // Certifique-se de que somam 1.0
         float random = UnityEngine.Random.Range(0f, 1.0f);
         float acumulador = 0;
+        getPowerUp.Play();
 
         for (int i = 0; i < pesos.Length; i++)
         {
@@ -56,7 +57,7 @@ public class PowerUpManager : MonoBehaviour
                         // Aumenta a chance de Crítico
                         criticalHitPowerUps++;
                         canvas.UpdatePowerUps(i, criticalHitPowerUps);
-                        // IncreaseCriticalChance();
+                        IncreaseCriticalChance();
                         return powerUps[4];
 
                     case 4:
@@ -86,7 +87,7 @@ public class PowerUpManager : MonoBehaviour
 
     private void IncreaseCriticalChance()
     {
-        throw new NotImplementedException();
+        player.GetComponent<PlayerController>().addCriticalHitChance(0.05f);
     }
 
     private void IncreaseSpeed()
@@ -103,26 +104,6 @@ public class PowerUpManager : MonoBehaviour
     {
         player.GetComponent<PlayerHealth>().addHealth(10);
 
-    }
-
-    public int GetHealthPowerUps(){
-        return healthPowerUps;
-    }
-
-    public int GetstrengthPowerUps(){
-        return strengthPowerUps;
-    }
-
-    public int getSpeedPowerUps(){
-        return speedPowerUps;
-    }
-
-    public int getKnockBackPowerUps(){
-        return knockBackPowerUps;
-    }
-
-    public int getCriticalHitPowerUps(){
-        return criticalHitPowerUps;
     }
 
     public void SetPlayer (GameObject playerInstance){

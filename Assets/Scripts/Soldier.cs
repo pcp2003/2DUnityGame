@@ -26,9 +26,9 @@ public class Soldier : MonoBehaviour
     // Soldier Stats
 
     private float scaleFactor;
-    private float speed = 2.0f;
-    private float health = 20; // Vida do Soldier
-    private float attackDamage = 5; // Dano ao jogador
+    private float speed = 1.5f;
+    private float health = 40; // Vida do Soldier
+    private float attackDamage = 20; // Dano ao jogador
     private float nextAttackTime = 0f;
     private bool isPushed;
     private float pushDuration = 0.2f;
@@ -43,9 +43,11 @@ public class Soldier : MonoBehaviour
     }
 
     public void updateStats () {
-        this.health = health*scaleFactor;
-        this.speed = speed*scaleFactor;
-        this.attackDamage = attackDamage*scaleFactor;
+
+        health = health*scaleFactor;
+        if ( speed*scaleFactor <= playerReference.GetComponent<PlayerController>().getSpeed() )
+            speed = speed*scaleFactor;
+        attackDamage = attackDamage*scaleFactor;
     }
     
     void Start()

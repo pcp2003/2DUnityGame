@@ -12,7 +12,7 @@ public class Key : MonoBehaviour
     void Start()
     {
         // Definir o tempo de vida da arca quando ela for criada
-        lifetime = Weibull(1);
+        lifetime = Weibull(10);  // 25 s 
         color = gameObject.name.Split(' ')[0];
     }
 
@@ -67,8 +67,7 @@ public class Key : MonoBehaviour
 
 
         // Usando a fórmula da distribuição Weibull: X = λ * (-ln(1-U))^(1/k)
-        double lifetimeMinutes = lambda * Math.Pow(-Math.Log(1 - U), 1 / k);
-        double lifetimeSeconds = lifetimeMinutes * 60; // passar a segundos
+        double lifetimeSeconds = lambda * Math.Pow(-Math.Log(1 - U), 1 / k);
         
         return (float)lifetimeSeconds;
     }

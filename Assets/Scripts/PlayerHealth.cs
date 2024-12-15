@@ -14,6 +14,10 @@ public class PlayerHealth : MonoBehaviour
     public AudioSource deathAudioSource;
 
     public static float volume = 1.0f;
+
+    public bool getIsDying () {
+        return isDying;
+    }
     
 
     void Start(){
@@ -45,8 +49,9 @@ public class PlayerHealth : MonoBehaviour
             Debug.Log($"Health = {currentHealth}, Damage = {damage}");
             currentHealth -= damage;
 
-            UIHandler.instance.SetHealthValue(currentHealth / (float)maxHealth);
-
+            if (currentHealth != 0){
+                UIHandler.instance.SetHealthValue(currentHealth / (float)maxHealth);
+            }
             if (hitAudioSource != null && currentHealth != 0) hitAudioSource.Play();
         }
         

@@ -13,6 +13,7 @@ public class Chest : MonoBehaviour
     void Start(){
 
         color = gameObject.name.Split(' ')[0];
+
     }
 
     void OnCollisionEnter2D(Collision2D other)
