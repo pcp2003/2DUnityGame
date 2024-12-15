@@ -26,7 +26,7 @@ public class Goblin : MonoBehaviour
     private float scaleFactor;
     private float attackCooldown = 0.25f;
     private float nextAttackTime = 0f;
-    private float speed = 2.5f;
+    private float speed = 3.0f;
     private float attackInterval = 1.0f;
     private float health = 15; // Vida do Goblin
     private float attackDamage = 5; // Dano ao jogador

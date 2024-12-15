@@ -286,7 +286,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.023
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -2880,7 +2880,7 @@ MonoBehaviour:
   treeDensity: 0.2
   bushesAndRocksDensity: 0.01
   rocksInWaterDensity: 0.02
-  chanceToSpawnChest: 0.005
+  chanceToSpawnChest: 0.01
   followCam: {fileID: 519420033}
   canvas: {fileID: 740436145}
   powerUpManager: {fileID: 1200656745}
@@ -3148,11 +3148,11 @@ MonoBehaviour:
   EntitiesToSpawn:
   - {fileID: 3674475951122706009, guid: 3de45d18be259e1409f67453b05ac580, type: 3}
   - {fileID: 3674475951122706009, guid: 80e3d80071916614f89a38d84b6c81ea, type: 3}
-  timeBetweenSpawns: 30
-  poissonLambda: 10
+  timeBetweenSpawns: 45
+  poissonLambda: 15
   exponencialLambda: 1
   avarageSpawnDistanceFromPlayer: 30
-  scaleFactor: 0.5
+  scaleFactor: 0.2
 --- !u!1 &1945660775
 GameObject:
   m_ObjectHideFlags: 0

@@ -4,7 +4,6 @@ using System.Collections;
 public class PlayerHealth : MonoBehaviour
 {
     private float currentHealth;
-
     private float maxHealth;
 
     private bool isDying; // Controle para evitar múltiplas chamadas
@@ -50,7 +49,7 @@ public class PlayerHealth : MonoBehaviour
             currentHealth -= damage;
 
             if (currentHealth != 0){
-                UIHandler.instance.SetHealthValue(currentHealth / (float)maxHealth);
+                UIHandler.instance.SetHealthValue(currentHealth / maxHealth);
             }
             if (hitAudioSource != null && currentHealth != 0) hitAudioSource.Play();
         }
@@ -62,11 +61,8 @@ public class PlayerHealth : MonoBehaviour
     {
         if (!isDying) {
             
-            currentHealth = maxHealth + 10;
-
+            currentHealth = currentHealth + 10;
             UIHandler.instance.SetHealthValue(currentHealth / maxHealth);
-
-            maxHealth = currentHealth;
 
             Debug.Log($"Health = {currentHealth}");
         }
