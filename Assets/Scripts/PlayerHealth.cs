@@ -61,7 +61,7 @@ public class PlayerHealth : MonoBehaviour
     {
         if (!isDying) {
             
-            currentHealth = currentHealth + 10;
+            currentHealth = currentHealth + healthToAdd;
             UIHandler.instance.SetHealthValue(currentHealth / maxHealth);
 
             Debug.Log($"Health = {currentHealth}");
