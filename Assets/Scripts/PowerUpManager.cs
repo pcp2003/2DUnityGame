@@ -19,7 +19,7 @@ public class PowerUpManager : MonoBehaviour
     public Image GenerateRandomPowerUp()
     {
         // Pesos dos PowerUps
-        float[] pesos = { 0.4f, 0.2f, 0.2f, 0.1f, 0.1f}; // Certifique-se de que somam 1.0
+        float[] pesos = { 0.4f, 0.1f, 0.2f, 0.1f, 0.2f}; // Certifique-se de que somam 1.0
         float random = UnityEngine.Random.Range(0f, 1.0f);
         float acumulador = 0;
         getPowerUp.Play();
@@ -102,7 +102,7 @@ public class PowerUpManager : MonoBehaviour
 
     private void IncreaseHealth()
     {
-        player.GetComponent<PlayerHealth>().addHealth(10);
+        player.GetComponent<PlayerHealth>().addHealth(30);
 
     }
 
