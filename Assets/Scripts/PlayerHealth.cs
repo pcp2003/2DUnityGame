@@ -5,7 +5,7 @@ public class PlayerHealth : MonoBehaviour
 {
     private float currentHealth;
     private float maxHealth;
-
+    private float fullHealth;
     private bool isDying; // Controle para evitar múltiplas chamadas
 
     public AudioSource hitAudioSource;
@@ -23,6 +23,7 @@ public class PlayerHealth : MonoBehaviour
          
         maxHealth = GetComponent<PlayerController>().health;
         currentHealth = maxHealth;
+        fullHealth = maxHealth;
         isDying = false;
 
         deathAudioSource.volume *= volume;
@@ -60,10 +61,9 @@ public class PlayerHealth : MonoBehaviour
     public void addHealth (float healthToAdd)
     {
         if (!isDying) {
-            
-            currentHealth = currentHealth + healthToAdd;
+            fullHealth = fullHealth + healthToAdd;
+            currentHealth = fullHealth;
             UIHandler.instance.SetHealthValue(currentHealth / maxHealth);
-
             Debug.Log($"Health = {currentHealth}");
         }
     }

@@ -8,12 +8,15 @@ public class GameOverScreen : MonoBehaviour{
     public TextMeshProUGUI HordasText;
     public TextMeshProUGUI EliminacoesText;
     public TextMeshProUGUI PowerUpsText;
+    public GameObject redBackground;
     private CanvasUpdate Canvas;
     
 
     public void Setup() {
-
+        
         gameObject.SetActive(true);
+        UIHandler.instance.gameObject.SetActive(false);
+        redBackground.SetActive(true);
         HordasText.text = "Hordas sobrevividas: " + Canvas.hordeCounter.text.Split(" ")[1];
         EliminacoesText.text = "Eliminações: " + Canvas.killCounterText.text;
         PowerUpsText.text = "Powerups Conseguidos: " + getAllPowerUps();
