@@ -1749,9 +1749,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   powerUps:
   - {fileID: 1433535192}
-  - {fileID: 1273739854}
-  - {fileID: 1069134344}
   - {fileID: 1482430819}
+  - {fileID: 1069134344}
+  - {fileID: 1273739854}
   - {fileID: 47012635}
   getPowerUp: {fileID: 1200656746}
 --- !u!82 &1200656746
