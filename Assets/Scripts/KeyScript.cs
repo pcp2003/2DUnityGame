@@ -1,7 +1,5 @@
 using System;
-using UnityEditor.UIElements;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class Key : MonoBehaviour
 {

@@ -1,11 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Unity.Burst.Intrinsics;
-using Unity.Collections;
-using Unity.VisualScripting;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-using UnityEngine.Rendering;
 using UnityEngine.Tilemaps;
 
 public class TileMap : MonoBehaviour
