@@ -1,12 +1,7 @@
 # 2D Unity Game
 
-<<<<<<< HEAD
-## Main Menu
-![Main Menu](https://raw.githubusercontent.com/pcp2003/2DUnityGame/main/docs/screenshots/gameplay.png)
-=======
 ## 🎮 Main Menu
 ![Main Menu](https://raw.githubusercontent.com/pcp2003/2DUnityGame/main/docs/screenshots/mainMenu.png)
->>>>>>> 35a1fe07a4b128fb7d965aea224bc13b72e166f9
 
 ## Gameplay
 ![Game Gameplay](https://raw.githubusercontent.com/pcp2003/2DUnityGame/main/docs/gifs/gameplay.gif)
