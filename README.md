@@ -1,31 +1,16 @@
 # 2D Unity Game
 
-## 🎮 Main Menu
+## Main Menu
 ![Main Menu](https://raw.githubusercontent.com/pcp2003/2DUnityGame/main/docs/screenshots/gameplay.png)
 
-## 🎬 Gameplay
+## Gameplay
 ![Game Gameplay](https://raw.githubusercontent.com/pcp2003/2DUnityGame/main/docs/gifs/gameplay.gif)
 
 ---
 
-## 📋 Table of Contents
+## Overview
 
-- [Overview](#overview)
-- [Features](#features)
-- [Gameplay Mechanics](#gameplay-mechanics)
-- [Project Structure](#project-structure)
-- [Requirements](#requirements)
-- [Installation](#installation)
-- [Controls](#controls)
-- [Game Elements](#game-elements)
-- [Contributing](#contributing)
-- [License](#license)
-
----
-
-## 🎮 Overview
-
-**2D Unity Game** is an action-adventure 2D game developed in **Unity 6 (6000.0.23f1)**. The player must navigate through a dungeon-like environment, defeat enemies, collect keys of different colors, open chests to gain power-ups, and survive waves of increasingly challenging encounters.
+**2D Unity Game** is an action-adventure 2D game developed in **Unity 6 (6000.0.23f1)**. The player must navigate through an island, defeat enemies, collect keys of different colors, open chests to gain power-ups, and survive waves of increasingly challenging encounters.
 
 This project demonstrates core game development concepts including:
 - Top-down character movement and combat
@@ -178,7 +163,7 @@ Assets/
 
 ---
 
-## 🎮 Controls
+## Controls
 
 ### Keyboard & Mouse
 | Action | Input | Notes |
@@ -199,7 +184,7 @@ Assets/
 
 ---
 
-## 🎮 Game Elements
+## Game Elements
 
 ### Power-Ups
 Power-ups are randomly generated when opening chests. Potential effects include:
@@ -306,20 +291,6 @@ Contributions are welcome! To contribute:
 ## 📝 License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
-
----
-
-## 👨‍💻 Author
-
-**Pedro** - [@pcp2003](https://github.com/pcp2003)
-
----
-
-## 📞 Support
-
-For issues, questions, or suggestions:
-- Open an [Issue](https://github.com/pcp2003/2DUnityGame/issues)
-- Check existing [Discussions](https://github.com/pcp2003/2DUnityGame/discussions)
 
 ---
 
