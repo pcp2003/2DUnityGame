@@ -4,7 +4,7 @@
 ![Main Menu](https://raw.githubusercontent.com/pcp2003/2DUnityGame/main/docs/screenshots/mainMenu.png)
 
 ## Gameplay
-![Game Gameplay](https://raw.githubusercontent.com/pcp2003/2DUnityGame/main/docs/gifs/gameplay.gif)
+![Game Gameplay](https://raw.githubusercontent.com/pcp2003/2DUnityGame/main/docs/gifs/ChestHunter.gif)
 
 ---
 
